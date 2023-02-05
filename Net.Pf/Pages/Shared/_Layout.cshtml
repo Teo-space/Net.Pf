@@ -1,0 +1,258 @@
+﻿@inject IHostEnvironment hostEnvironment
+
+@{
+    string AppName = "iTeo.space";
+    int NavBarLogoSIze = 55;
+    bool SideBarEnabled = true;
+}
+
+@{
+    SideBar
+    .AddSubmenu("SubMenu 1")
+    //.SetShow()
+    .Addlink("Link1", "/Index")
+    .Addlink("Link2", "/Index")
+    .Addlink("Link3", "/Index")
+    .Addlink("Link4", "/Index")
+    .Addlink("Link5", "/Index")
+    .Addlink("Link6", "/Index")
+    .Addlink("Link7", "/Index")
+    ;
+
+    SideBar
+        .AddSubmenu("SubMenu 2")
+        //.SetShow()
+        .Addlink("Link 1", "/Index")
+        .Addlink("Link 2", "/Index")
+        .Addlink("Link 3", "/Index")
+        .Addlink("Link 4", "/Index")
+        .Addlink("Link 5", "/Index")
+        .Addlink("Link 6", "/Index")
+        .Addlink("Link 7", "/Index")
+
+        ;
+
+
+
+
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Site">
+    <title>@AppName</title>
+     <link rel="icon" href="/logo.png">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Net.Pf.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Colors.css" />
+    <link rel="stylesheet" href="~/css/index.css" />
+
+    <link rel="stylesheet" href=" https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+    <link href="https://unpkg.com/bootstrap-table@1.21.2/dist/extensions/fixed-columns/bootstrap-table-fixed-columns.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cyrilic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
+    <style>
+        .font-Tangerine {
+            font-family: 'Tangerine', serif;
+            font-size: 44px;
+        }
+
+        .font-Tangerine-20 {
+            font-family: 'Tangerine', serif;
+            font-size: 24px;
+        }
+
+        .font-Cyrilic {
+            font-family: 'Cyrilic', serif;
+            font-size: 24px;
+        }
+
+        .font-Merriweather {
+            font-family: 'Merriweather', serif;
+            font-size: 24px;
+        }
+
+    </style>
+
+
+
+
+</head>
+
+
+
+<body class="mh-100 h-100 w-100 mw-100 overflow-hidden">
+
+
+
+    <header class="sticky-top">
+
+        <nav class="container-fluid navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark shadow border-dark border-bottom p-1 mb-3">
+
+            <div class="container-fluid m-0 p-0">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="row justify-content-start  m-0 p-0">
+                    <a class="navbar-brand  col m-0 p-0" asp-area="" asp-page="/Index">
+                        <img src="/logo.png" width=@NavBarLogoSIze height=@NavBarLogoSIze class="d-inline-block align-top m-0 p-0" alt="">
+                    </a>
+                </div>
+
+                <div class="container-fluid row justify-content-start col-sm-2">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">   . . .</li>
+                        <li class="nav-item">
+                            <a class="navbar-brand " asp-area="" asp-page="/Index">@AppName</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="container-fluid offset-2 justify-content-center  row navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
+
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link navbar-text" asp-area="" asp-page="/SupportRequest/Create">Create</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navbar-text" asp-area="" asp-page="/SupportRequest/ShowAll">ShowAll</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navbar-text" asp-area="" asp-page="/SupportRequest/ShowCreatedByMe">ShowCreatedByMe</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <partial name="_LoginPartial" />
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-------------------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------------------->
+    <!--Spacing Container-->
+    <div class="container-fluid mt-4 ml-0">
+
+        <!--Position Container-->
+        <div class="d-flex flex-row position-static border-1 border-dark">
+
+            @if (SideBarEnabled)
+            {
+                <!--Sidebar     border border-1 border-dark -->
+                <div class="col-sm-2">
+
+                    <nav class="nav position-fixed overflow-hidden col-sm-2  bg-light" style="max-height:82vh;">
+                        <div class="container-fluid overflow-scroll h-100 vh-100 mh-100 p-2">
+
+                            @foreach (var subMenu in SideBar.SubMenus.Values)
+                            {
+                                var GeneratedId = $"{subMenu.GetHashCode()}";
+
+                                <div class="accordion  bg-light" id="SubmenuContainer_@GeneratedId">
+
+                                    <div class="accordion-item bg-light border-0">
+
+                                        <h2 class="accordion-header"
+                                    id="SubmenuHeading_@GeneratedId">
+                                            <button class="accordion-button bg-light text-black font-monospace "
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#SubmenuCollapse_@GeneratedId"
+                                            aria-expanded="true"
+                                            aria-controls="SubmenuCollapse @GeneratedId">
+                                                @subMenu.Name
+                                            </button>
+                                        </h2>
+
+                                        <div id="SubmenuCollapse_@GeneratedId"
+                                     class="accordion-collapse collapse @(subMenu.Show ? "show" : "")"
+                                     aria-labelledby="SubmenuHeading_@GeneratedId"
+                                     data-bs-parent="#SubmenuContainer_@GeneratedId">
+                                            <div class="accordion-body">
+                                                <ul class="flex-grow-1 text-dark">
+                                                    @foreach (var link in subMenu.GetLinks())
+                                                    {
+                                                        <li class="nav-item">
+                                                            <a class="text-dark text-decoration-none" asp-area="" asp-page="@link.Url">@link.Name</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="container-fluid h-25">
+                            </div>
+                        </div>
+                    </nav>
+
+
+                </div>
+
+            }
+
+
+
+            <!--Body-->
+            <div class="@(SideBarEnabled ? "col-sm-10" : "col-sm-12") no-gutters">
+                <main class="page-content">
+                    <div class="container border-1">
+                        @RenderBody()
+                    </div>
+                </main>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-------------------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------------------->
+    @{
+        string year = DateTime.Now.Year != 2023 ? @DateTime.Now.Year.ToString() : string.Empty;
+    }
+    <footer class="border-top fixed-bottom">
+        <div class="container-fluid text-muted text-secondary font-Tangerine-20">
+            &copy; 2023 @year - iTeo
+        </div>
+    </footer>
+    <!-------------------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------------------->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/Scripts.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.21.2/dist/extensions/fixed-columns/bootstrap-table-fixed-columns.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
