@@ -3,9 +3,13 @@
 
 public static class Configuration
 {
-    public static void ConfigureAll(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder ConfigureAll(this WebApplicationBuilder builder)
     {
         ConfigurationIdentity.Configure(builder);
 
+
+        ConfigurationPages.Configure(builder);
+
+        return builder;
     }
 }
