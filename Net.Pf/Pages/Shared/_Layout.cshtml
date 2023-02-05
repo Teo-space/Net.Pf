@@ -240,9 +240,41 @@
     @{
         string year = DateTime.Now.Year != 2023 ? @DateTime.Now.Year.ToString() : string.Empty;
     }
+
+
     <footer class="border-top fixed-bottom">
-        <div class="container-fluid text-muted text-secondary font-Tangerine-20">
-            &copy; 2023 @year - iTeo
+        <div class="container-fluid row ">
+            <div class="col justify-content-start text-muted text-secondary font-Tangerine-20">
+                &copy; 2023 @year - Teo
+            </div>
+            <div class="col justify-content-center text-muted text-secondary">
+                @if (hostEnvironment.IsDevelopment())
+                {
+                    @Html.Link("Claims", "/Infrastructure/Claims", LinkTarget._blank).AddClass("text-muted text-dark")
+                    @Html.Link("ErrrorHandle", "/Infrastructure/ErrrorHandle", LinkTarget._blank).AddClass("text-muted text-dark")
+                }
+            </div>
+
+            <div class="col justify-content-between text-muted text-secondary">
+                @if (hostEnvironment.IsDevelopment())
+                {
+                    @Html.Link("Counters", "/Infrastructure/Counters", LinkTarget._blank).AddClass("text-muted text-dark")
+                    @Html.Link("metrics", "/metrics", LinkTarget._parent).AddClass("text-muted text-dark")
+
+                    @Html.Link("profiler.index", "/profiler/results-index", LinkTarget._self).AddClass("text-muted text-dark")
+                    @Html.Link("profiler.results", "/profiler/results", LinkTarget._top).AddClass("text-muted text-dark")
+
+
+                    @Html.Link("Health", "/health", LinkTarget._blank).AddClass("text-muted text-dark")
+                }
+            </div>
+            <div class="col justify-content-end text-dark">
+                @if (hostEnvironment.IsDevelopment())
+                {
+                    @Html.Link("Swagger", "/swagger", LinkTarget._blank).AddClass("text-muted text-dark")
+                }
+            </div>
+
         </div>
     </footer>
     <!-------------------------------------------------------------------------------------------------------------->
