@@ -22,20 +22,6 @@ namespace Net.Pf
 
         static void Configure(WebApplicationBuilder builder, IServiceCollection services)
         {
-            /*
-            // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-                ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            */
             Configuration.Configuration.ConfigureAll(builder);
 
 
