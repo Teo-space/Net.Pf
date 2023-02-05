@@ -119,6 +119,9 @@
                         <li class="nav-item">
                             <a class="navbar-brand " asp-area="" asp-page="/Index">@AppName</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand " asp-area="" asp-page="/Index">AdminPanel</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -126,6 +129,10 @@
                 <div class="container-fluid offset-2 justify-content-center  row navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
 
                     <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link navbar-text" asp-area="" asp-page="/AdminPanel/UsersShow">UsersShow</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link navbar-text" asp-area="" asp-page="/SupportRequest/Create">Create</a>
                         </li>
