@@ -5,73 +5,85 @@
 
 
 
+<h3>Users:</h3>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">UserName</th>
+            <th scope="col">Detailing</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Claims</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < @Model.OnGetUsers.Count; i++)
+        {
+            <tr>
+                @{
+                    var row = @Model.OnGetUsers[i];
+                    <th scope="row">@i</th>
+                    <td>@row.UserName</td>
+
+                    <td><a asp-page="/AdminPanel/UserProfile" asp-route-UserId=@row.Id>Detailing</a></td>
+
+                    <td>
+
+                        <div class="dropdown">
+
+                            <button class="btn btn-primary dropdown-toggle"
+                                type="button"
+                                id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Roles
+                            </button>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                @foreach (var roleName in Enum.GetNames(typeof(UserRoles))
+                                .Where(x => x != UserRoles.Administrator.ToString())
+                                .ToList())
+                                {
+                                    <li>
+                                        <a class="dropdown-item"
+                               asp-page="/AdminPanel/UserAddRole"
+                               asp-route-UserId="@row.Id"
+                               asp-route-role="@roleName"
+                               asp-route-returnUrl="@Model.Request.Path">@roleName</a>
+                                    </li>
+                                }
+                            </ul>
+
+                        </div>
+
+                    </td>
+
+                    <td><a asp-page="/SupportRequest/Detailing" asp-route-Id=@row.Id>Claims</a></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
 
 @{
-    //UserRoles
+    //async Task<IList<string>> GetRolesAsync(TUser user)
 
-    <h3>Users:</h3>
+    /*
+    @foreach(var x in Model.Roles)
+        {
+    <h3>@x</h3>
+    }
+    */
 
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">#</th>
-
-                <th scope="col">Id</th>
-                <th scope="col">UserName</th>
-                <th scope="col">Email</th>
-
-                <th scope="col">Detailing</th>
-                <th scope="col">Roles</th>
-                <th scope="col">Claims</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < @Model.OnGetUsers.Count; i++)
-            {
-                <tr>
-                    @{
-                        var row = @Model.OnGetUsers[i];
-                        <th scope="row">@i</th>
-                        <td>@row.Id</td>
-                        <td>@row.UserName</td>
-                        <td>@row.Email</td>
-
-                        <td><a asp-page="/SupportRequest/Detailing" asp-route-Id=@row.Id>Detailing</a></td>
-                        <td>
-                        
-                            <div class="dropdown">
-
-                                <button class="btn btn-primary dropdown-toggle" 
-                                        type="button" 
-                                        id="dropdownMenuButton1" 
-                                        data-bs-toggle="dropdown" 
-                                        aria-expanded="false">Roles</button>
-
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    @foreach (var roleName in Enum.GetNames(typeof(UserRoles))
-                                                .Where(x => x != UserRoles.Administrator.ToString())
-                                                .ToList())
-                                    {
-                                        <li>
-                                            <a class="dropdown-item"
-                                            asp-page="/AdminPanel/UserAddRole" 
-                                            asp-route-UserId="@row.Id" 
-                                            asp-route-role="@roleName"
-                                            asp-route-returnUrl="@Model.Request.Path">@roleName</a>
-                                        </li>
-                                    }
-                                </ul>
-
-                            </div>
-                        
-                        </td>
-
-                        <td><a asp-page="/SupportRequest/Detailing" asp-route-Id=@row.Id>Claims</a></td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
 
 
 }
+
+
+
+
+
+
+
+

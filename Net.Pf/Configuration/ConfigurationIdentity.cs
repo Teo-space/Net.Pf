@@ -21,6 +21,7 @@ public static class ConfigurationIdentity
             ;//IdentityDb.db
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
         builder.Services
         .Configure<IdentityOptions>(options =>
         {
@@ -43,28 +44,31 @@ public static class ConfigurationIdentity
         {
 
         })
+        //.AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<AppIdentityDbContext>()
+        //.AddDefaultTokenProviders()
         ;
 
-        /*
-        builder.Services.ConfigureApplicationCookie(options =>
-        {
-            // Cookie settings
-            options.Cookie.HttpOnly = true;
-            options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        //builder.Services.AddScoped<RoleManager<IdentityRole>>();
 
-            options.LoginPath = "/Identity/Account/Login";
-            options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-            options.SlidingExpiration = true;
-        })
-         ;
-        */
+
 
         builder.Services.AddAuthentication(options =>
         {
             options.RequireAuthenticatedSignIn = true;
-        })
-        ;
+            //options.AddPolicy("Founders", policy => policy.RequireClaim("EmployeeNumber", "1", "2", "3", "4", "5"));
+        });
+
+        builder.Services.AddAuthorization(options =>
+        {
+            //options.AddPolicy("Founders", policy => policy.RequireClaim("EmployeeNumber", "1", "2", "3", "4", "5"));
+            //options.AddPolicy("Testers", policy => policy.RequireClaim("Test", "Value"));
+            options.AddPolicy("Testers", policy => policy.RequireClaim("Test"));
+
+        });
+
+
     }
+
 
 }

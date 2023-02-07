@@ -20,11 +20,21 @@ namespace Net.Pf.Pages.AdminPanel
         public Guid UserId { get; private set; }
         public UserRoles role { get; private set; }
 
-        public RedirectResult OnGet(Guid UserId, UserRoles role, string returnUrl)
+        public async Task//<RedirectResult>
+            OnGet(Guid UserId, UserRoles role, string returnUrl)
         {
             this.UserId = UserId;
             this.role = role;
-            return Redirect(returnUrl);
+
+            var user = await UserManager?.FindByIdAsync(UserId.ToString());
+
+
+
+
+            this.UserManager.AddToRoleAsync(user, role.ToString());
+
+
+            //return Redirect(returnUrl);
             //RedirectToPage
 
             //Возврат - успешно

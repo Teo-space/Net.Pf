@@ -27,6 +27,9 @@ public static class ConfigurationUse
 
         app.MapRazorPages();
 
+
+
+
         return app;
     }
 

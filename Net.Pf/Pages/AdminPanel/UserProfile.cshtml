@@ -1,0 +1,45 @@
+﻿@page
+@model Net.Pf.Pages.AdminPanel.UserProfileModel
+@{
+			//@Model.UserModel.UserName
+}
+
+
+
+<div class="d-flex align-items-center justify-content-center">
+
+	<form class="form-group col-sm-6" method="post">
+
+		<div class="form-group m-2">
+			<input type="text" class="form-control" name="UserModel.UserId" id="UserModel.UserId" value=@Model.UserModel.UserId hidden>
+		</div>
+
+		<div class="form-group m-2">
+			<label for="UserModel.UserName">UserName</label>
+			<input type="text" class="form-control"
+				   name="UserModel.UserName"
+				   id="UserModel.UserName"
+				   value=@Model.UserModel.UserName disabled>
+			<span asp-validation-for="UserModel.UserName" class="text-danger"></span>
+		</div>
+
+		<div class="form-group m-2">
+			<button type="button" class="btn-close" disabled aria-label="Close">123456</button>
+		</div>
+
+
+	</form>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
