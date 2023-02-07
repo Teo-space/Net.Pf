@@ -70,4 +70,8 @@
 	  
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Forum\" />
+  </ItemGroup>
+
 </Project>
