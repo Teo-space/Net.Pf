@@ -17,8 +17,7 @@ public static class ConfigurationIdentity
             //options.UseSqlServer(connectionString)
             //options.UseInMemoryDatabase("IdentityDb");
             options.UseSqlite($"Data Source=Identity/IdentityDb.db");
-        })
-            ;//IdentityDb.db
+        });
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -46,11 +45,8 @@ public static class ConfigurationIdentity
         })
         //.AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<AppIdentityDbContext>()
-        //.AddDefaultTokenProviders()
+        .AddDefaultTokenProviders()
         ;
-
-        //builder.Services.AddScoped<RoleManager<IdentityRole>>();
-
 
 
         builder.Services.AddAuthentication(options =>
@@ -63,7 +59,11 @@ public static class ConfigurationIdentity
         {
             //options.AddPolicy("Founders", policy => policy.RequireClaim("EmployeeNumber", "1", "2", "3", "4", "5"));
             //options.AddPolicy("Testers", policy => policy.RequireClaim("Test", "Value"));
-            options.AddPolicy("Testers", policy => policy.RequireClaim("Test"));
+            //options.AddPolicy("Testers", policy => policy.RequireClaim("Test", "Value"));
+            //options.AddPolicy("Access", policy => policy.RequireClaim("AccessRights", UserRoles.Administrator.ToString()));
+
+            //options.AddPolicy("Access2", policy => policy.RequireClaim("Access2"));
+            options.AddPolicy("AccessRights", policy => policy.RequireClaim("AccessRights"));
 
         });
 
@@ -71,4 +71,15 @@ public static class ConfigurationIdentity
     }
 
 
+
 }
+
+
+class Policies
+{
+    public const string TestPolicy = "TestPolicy";
+
+
+}
+
+

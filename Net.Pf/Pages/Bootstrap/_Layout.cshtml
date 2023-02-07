@@ -4,17 +4,23 @@
     string AppName = "iTeo.space";
     int NavBarLogoSIze = 55;
     bool SideBarEnabled = true;
-}
 
+}
 @{
-    SideBar SideBar = new("Main");
+    SideBar SideBar = new("Bootstrap");
 
     SideBar
-    .AddSubmenu("Main")
+    .AddSubmenu("NavBars")
     .SetShow()
-    .Addlink("Link1", "/Index")
-    .Addlink("Link2", "/Index")
-    .Addlink("Link3", "/Index")
+    .Addlink("Navs", "/Bootstrap/Navs")
+    .Addlink("NavBar1", "/Bootstrap/NavBar1")
+    ;
+
+    SideBar
+    .AddSubmenu("Forms")
+    .SetShow()
+    .Addlink("Forms1", "/Bootstrap/Forms1")
+    .Addlink("Forms2", "/Bootstrap/Forms2")
     ;
 
 
@@ -40,7 +46,6 @@
 
     <link rel="stylesheet" href=" https://use.fontawesome.com/releases/v5.0.6/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-
 
 </head>
 
@@ -178,8 +183,10 @@
                                 </div>
                             }
 
+
                             <div class="container-fluid h-25">
                             </div>
+
                         </div>
                     </nav>
 
@@ -203,12 +210,6 @@
 
     </div>
 
-
-
-
-
-
-
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
@@ -216,40 +217,9 @@
         string year = DateTime.Now.Year != 2023 ? @DateTime.Now.Year.ToString() : string.Empty;
     }
 
-
     <footer class="border-top fixed-bottom">
         <div class="container-fluid row ">
-            <div class="col justify-content-start text-muted text-secondary font-Tangerine-20">
-                &copy; 2023 @year - Teo
-            </div>
-            <div class="col justify-content-center text-muted text-secondary">
-                @if (hostEnvironment.IsDevelopment())
-                {
-                    @Html.Link("Claims", "/Infrastructure/Claims", LinkTarget._blank).AddClass("text-muted text-dark")
-                    @Html.Link("ErrrorHandle", "/Infrastructure/ErrrorHandle", LinkTarget._blank).AddClass("text-muted text-dark")
-                }
-            </div>
-
-            <div class="col justify-content-between text-muted text-secondary">
-                @if (hostEnvironment.IsDevelopment())
-                {
-                    @Html.Link("Counters", "/Infrastructure/Counters", LinkTarget._blank).AddClass("text-muted text-dark")
-                    @Html.Link("metrics", "/metrics", LinkTarget._parent).AddClass("text-muted text-dark")
-
-                    @Html.Link("profiler.index", "/profiler/results-index", LinkTarget._self).AddClass("text-muted text-dark")
-                    @Html.Link("profiler.results", "/profiler/results", LinkTarget._top).AddClass("text-muted text-dark")
-
-
-                    @Html.Link("Health", "/health", LinkTarget._blank).AddClass("text-muted text-dark")
-                }
-            </div>
-            <div class="col justify-content-end text-dark">
-                @if (hostEnvironment.IsDevelopment())
-                {
-                    @Html.Link("Swagger", "/swagger", LinkTarget._blank).AddClass("text-muted text-dark")
-                }
-            </div>
-
+            <div class="col justify-content-start text-muted text-secondary font-Tangerine-20">&copy; 2023 @year - Teo</div>
         </div>
     </footer>
     <!-------------------------------------------------------------------------------------------------------------->

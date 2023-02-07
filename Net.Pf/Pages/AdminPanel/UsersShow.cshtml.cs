@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Net.Pf.Pages.AdminPanel;
 
-[Authorize(Policy = "Testers")]
+[Authorize(Policy = "AccessRights")]
 public class UsersShowModel : PageModel
 {
 	SignInManager<AppIdentityUser> SignInManager;
@@ -46,18 +46,18 @@ public class UsersShowModel : PageModel
 
         //await roleManager.CreateAsync(new IdentityRole(UserRoles.Administrator.ToString()));
 
-        //var self = await UserManager.FindByIdAsync(User.ClaimNameIdentifier());
-
-		//await UserManager.AddClaimAsync(self, new System.Security.Claims.Claim("Test", "Value"));
-
-
         //await UserManager.AddToRoleAsync(self, "Test");
+        //var self = await UserManager.FindByIdAsync(User.ClaimNameIdentifier());
+        //await UserManager.AddClaimAsync(self, new System.Security.Claims.Claim("AccessRights", UserRoles.Administrator.ToString()));
+
+
+
 
 
     }
-	
 
-	
+
+
 
 
 
