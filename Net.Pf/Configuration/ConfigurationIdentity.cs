@@ -52,7 +52,6 @@ public static class ConfigurationIdentity
         builder.Services.AddAuthentication(options =>
         {
             options.RequireAuthenticatedSignIn = true;
-            //options.AddPolicy("Founders", policy => policy.RequireClaim("EmployeeNumber", "1", "2", "3", "4", "5"));
         });
 
         builder.Services.AddAuthorization(options =>
@@ -64,6 +63,7 @@ public static class ConfigurationIdentity
 
             //options.AddPolicy("Access2", policy => policy.RequireClaim("Access2"));
             options.AddPolicy("AccessRights", policy => policy.RequireClaim("AccessRights"));
+
 
         });
 

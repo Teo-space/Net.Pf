@@ -27,6 +27,11 @@ public static class ConfigurationPages
             //AllowAnonymousToAreaFolder
             //options.Conventions.AuthorizePage("/Contact");
             //options.Conventions.AuthorizeFolder("/Private");
+
+            //options.AddPolicy("AccessRights", policy => policy.RequireClaim("AccessRights"));
+            //options.Conventions.AuthorizeFolder("/SupportRequest");
+
+            options.Conventions.AuthorizeFolder("/AdminPanel", "AccessRights");
         })
         .AddMvcOptions(options =>
         {
