@@ -32,7 +32,6 @@
     .Addlink("Breadcrumb", "/Bootstrap/Breadcrumb")
     .Addlink("Accordion", "/Bootstrap/Accordion")
     .Addlink("Alerts", "/Bootstrap/Alerts")
-
     .Addlink("ListGroup", "/Bootstrap/ListGroup")
     .Addlink("FormsRange", "/Bootstrap/FormsRange")
     .Addlink("FormsLists", "/Bootstrap/FormsLists")
@@ -41,8 +40,11 @@
     .Addlink("Pagination", "/Bootstrap/Pagination")
     ;
 
-
-
+    SideBar
+        .AddSubmenu("Table")
+        .SetShow()
+        .Addlink("Table", "/Bootstrap/Table")
+        ;
 
 
 }
@@ -141,7 +143,7 @@
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
     <!--Spacing Container-->
-    <div class="container-fluid mt-4 ml-0">
+    <div class="container-fluid mt-3 ml-0">
 
         <!--Position Container-->
         <div class="d-flex flex-row position-static border-1 border-dark">
@@ -150,11 +152,10 @@
             {
                 <!--Sidebar     border border-1 border-dark -->
                 <div class="col-sm-2">
-
-                    <h3>@SideBar.Name</h3>
-
-                    <nav class="nav position-fixed overflow-hidden col-sm-2  bg-light" style="max-height:82vh;">
+                    <nav class="nav position-fixed overflow-hidden col-sm-2  bg-light" style="max-height:86vh;">
                         <div class="container-fluid overflow-scroll h-100 vh-100 mh-100 p-2">
+
+                            <h3>@SideBar.Name</h3>
 
                             @foreach (var subMenu in SideBar.SubMenus)
                             {
@@ -207,16 +208,21 @@
 
             }
 
+            <div class="@(SideBarEnabled ? "col-sm-10" : "col-sm-12") no-guttersrow overflow-auto ">
 
+                <div class="mh-100 overflow-auto">
+                    <main>
+                        <div class="container-fluid m-2" style="max-height:84vh; max-width:164vh;">
+                            @RenderBody()
+                        </div>
+                    </main>
 
-            <!--Body-->
-            <div class="@(SideBarEnabled ? "col-sm-10" : "col-sm-12") no-gutters">
-                <main class="page-content">
-                    <div class="container border-1">
-                        @RenderBody()
-                    </div>
-                </main>
+                </div>
+
             </div>
+
+
+
         </div>
 
 

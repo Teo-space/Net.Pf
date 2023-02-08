@@ -1,0 +1,37 @@
+﻿@page
+@model Net.Pf.Pages.Bootstrap.TableModel
+
+
+<table class="table caption-top table-bordered table-hover table-striped table-responsive" style="line-height: 0.7">
+
+    <caption>@Model.dataTable.TableName</caption>
+    <thead class="table-dark position-static">
+        <tr>
+            <th scope="col">#</th>
+            @foreach (DataColumn column in @Model.dataTable.Columns)
+            {
+                <th scope="col">@column.ToString()</th>
+            }
+        </tr>
+    </thead>
+
+
+
+    <tbody>
+        @for (int i = 0; i < @Model.dataTable.Rows.Count; i++)
+        {
+            var row = @Model.dataTable.Rows[i];
+            <tr>
+                <th scope="row">@i</th>
+                @foreach (DataColumn column in @Model.dataTable.Columns)
+                {
+
+                    <td>@row[column]</td>
+
+                }
+            </tr>
+        }
+
+    </tbody>
+
+</table>
