@@ -2,7 +2,7 @@
 
 @{
     string AppName = "iTeo.space";
-    int NavBarLogoSIze = 55;
+    int NavBarLogoSIze = 46;
     bool SideBarEnabled = true;
 
 }
@@ -42,6 +42,7 @@
         .AddSubmenu("Table").SetShow()
         .Addlink("Table", "/Bootstrap/Tables/Table")
         .Addlink("TablePagination", "/Bootstrap/Tables/TablePagination")
+        .Addlink("TableScrollableBody", "/Bootstrap/Tables/TableScrollableBody")
         ;
 
 
@@ -85,7 +86,7 @@
                 </button>
 
 
-                <div class="row justify-content-start  m-1 p-1">
+                <div class="row justify-content-start pt-1 pb-1 ps-3 pe-4">
                     <a class="navbar-brand  col m-0 p-0" asp-area="" asp-page="/Index">
                         <img src="/logo.png" width=@NavBarLogoSIze height=@NavBarLogoSIze class="d-inline-block align-top m-0 p-0" alt="">
                     </a>
@@ -208,9 +209,10 @@
 
             <div class="@(SideBarEnabled ? "col-sm-10" : "col-sm-12") no-guttersrow overflow-auto ">
 
-                <div class="mh-100 overflow-auto">
+                <div class="mh-100 mw-100 overflow-auto  m-2">
                     <main>
-                        <div class="container-fluid m-2" style="max-height:84vh; max-width:164vh;">
+                        <!--<div class="container-fluid m-2" style="max-height:84vh; max-width:164vh;">-->
+                        <div class="container-fluid" style="max-height:83vh; max-width:170vh;">
                             @RenderBody()
                         </div>
                     </main>

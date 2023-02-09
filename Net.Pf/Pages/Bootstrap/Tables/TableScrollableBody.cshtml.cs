@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Net.Pf.Pages.Bootstrap.Tables
 {
-    public class TableModel : PageModel
+    public class TableScrollableBodyModel : PageModel
     {
         public DataTable dataTable = new();
+
         public void OnGet()
         {
             dataTable.Columns.Add("Name");
@@ -38,7 +39,7 @@ namespace Net.Pf.Pages.Bootstrap.Tables
             {
                 var row = dataTable.NewRow();
 
-                foreach(DataColumn column in dataTable.Columns)
+                foreach (DataColumn column in dataTable.Columns)
                 {
                     row[column] = $"{i}";
                 }
@@ -46,5 +47,8 @@ namespace Net.Pf.Pages.Bootstrap.Tables
             }
 
         }
+
     }
+
+
 }

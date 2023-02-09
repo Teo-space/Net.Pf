@@ -18,12 +18,22 @@ public static class ConfigurationUse
         }
 
         app.UseHttpsRedirection();
+
+
+
         app.UseStaticFiles();
+        app.UseSession();
+
+
+
+
 
         app.UseRouting();
 
         app.UseAuthentication();
         app.UseAuthorization();
+
+
 
         app.MapRazorPages();
 

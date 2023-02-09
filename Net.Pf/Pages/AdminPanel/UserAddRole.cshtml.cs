@@ -38,6 +38,33 @@ namespace Net.Pf.Pages.AdminPanel
             //RedirectToPage
 
             //Возврат - успешно
+
+            handlerName = "Get";
+        }
+
+        public string handlerName = string.Empty;
+
+
+        public async Task//<RedirectResult>
+            OnGetAddRole(Guid UserId, UserRoles role, string returnUrl)
+        {
+            handlerName = "Get AddRole";
+
+            this.UserId = UserId;
+            this.role = role;
+
+            var user = await UserManager?.FindByIdAsync(UserId.ToString());
+
+
+
+
+            this.UserManager.AddToRoleAsync(user, role.ToString());
+
+
+            //return Redirect(returnUrl);
+            //RedirectToPage
+
+            //Возврат - успешно
         }
 
 

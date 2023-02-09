@@ -46,11 +46,15 @@
                                 .ToList())
                                 {
                                     <li>
+
                                         <a class="dropdown-item"
-                               asp-page="/AdminPanel/UserAddRole"
+                               asp-page="/AdminPanel/UserAddRole" 
+                               asp-page-handler="AddRole"
+                               
                                asp-route-UserId="@row.Id"
                                asp-route-role="@roleName"
                                asp-route-returnUrl="@Model.Request.Path">@roleName</a>
+
                                     </li>
                                 }
                             </ul>

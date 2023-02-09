@@ -8,6 +8,10 @@ public static class Configuration
         ConfigurationIdentity.Configure(builder);
 
 
+
+        ConfigurationServices.Configure(builder);
+
+
         ConfigurationPages.Configure(builder);
 
         return builder;
