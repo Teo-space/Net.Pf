@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Net.Pf.Pages.Bootstrap
+namespace Net.Pf.Pages.Bootstrap.Navs
 {
-    public class BreadcrumbModel : PageModel
+    public class NavsModel : PageModel
     {
         public void OnGet()
         {
