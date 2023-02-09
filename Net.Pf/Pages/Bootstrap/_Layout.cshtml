@@ -10,40 +10,38 @@
     SideBar SideBar = new("Bootstrap");
 
     SideBar
-    .AddSubmenu("NavBars")
-    .SetShow()
+    .AddSubmenu("NavBars")//.SetShow()
     .Addlink("Navs", "/Bootstrap/Navs")
     .Addlink("NavBar1", "/Bootstrap/NavBar1")
     ;
 
     SideBar
-    .AddSubmenu("Forms")
-    .SetShow()
-    .Addlink("Forms1", "/Bootstrap/Forms1")
-    .Addlink("Forms2", "/Bootstrap/Forms2")
-    .Addlink("Forms3", "/Bootstrap/Forms3")
+    .AddSubmenu("Forms")//.SetShow()
+    .Addlink("Forms1", "/Bootstrap/Forms/Forms1")
+    .Addlink("Forms2", "/Bootstrap/Forms/Forms2")
+    .Addlink("Forms3", "/Bootstrap/Forms/Forms3")
+    .Addlink("FormsRange", "/Bootstrap/Forms/FormsRange")
+    .Addlink("FormsLists", "/Bootstrap/Forms/FormsLists")
+    .Addlink("FormsCheckbox", "/Bootstrap/Forms/FormsCheckbox")
 
     ;
 
     SideBar
-    .AddSubmenu("Elements")
-    .SetShow()
+    .AddSubmenu("Elements")//.SetShow()
     .Addlink("Card", "/Bootstrap/Card")
     .Addlink("Breadcrumb", "/Bootstrap/Breadcrumb")
     .Addlink("Accordion", "/Bootstrap/Accordion")
     .Addlink("Alerts", "/Bootstrap/Alerts")
     .Addlink("ListGroup", "/Bootstrap/ListGroup")
-    .Addlink("FormsRange", "/Bootstrap/FormsRange")
-    .Addlink("FormsLists", "/Bootstrap/FormsLists")
-    .Addlink("FormsCheckbox", "/Bootstrap/FormsCheckbox")
     .Addlink("DropDowns", "/Bootstrap/DropDowns")
     .Addlink("Pagination", "/Bootstrap/Pagination")
     ;
 
+
     SideBar
-        .AddSubmenu("Table")
-        .SetShow()
-        .Addlink("Table", "/Bootstrap/Table")
+        .AddSubmenu("Table").SetShow()
+        .Addlink("Table", "/Bootstrap/Tables/Table")
+        .Addlink("TablePagination", "/Bootstrap/Tables/TablePagination")
         ;
 
 

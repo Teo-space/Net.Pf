@@ -51,7 +51,7 @@ public class UsersShowModel : PageModel
         //await UserManager.AddClaimAsync(self, new System.Security.Claims.Claim("AccessRights", UserRoles.Administrator.ToString()));
 
 
-
+        //UserManager.GetClaimsAsync
 
 
     }

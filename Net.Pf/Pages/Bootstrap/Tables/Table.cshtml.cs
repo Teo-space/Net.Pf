@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Net.Pf.Pages.Bootstrap
+namespace Net.Pf.Pages.Bootstrap.Tables
 {
     public class TableModel : PageModel
     {
@@ -12,7 +12,7 @@ namespace Net.Pf.Pages.Bootstrap
             dataTable.Columns.Add("Value");
 
 
-            for(int i = 0; i < 30; i++)
+            for(int i = 0; i < 60; i++)
             {
                 var row = dataTable.NewRow();
 

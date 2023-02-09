@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Net.Pf.Pages.Bootstrap
+namespace Net.Pf.Pages.Bootstrap.Forms
 {
     public class Forms2Model : PageModel
     {
