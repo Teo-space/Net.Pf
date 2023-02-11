@@ -1,0 +1,33 @@
+﻿@page
+
+<p>@Model.Url.ActionLink()</p>
+<p>@Model.Url.Action()</p>
+
+
+
+
+@foreach (var item in CounterAttribute.Cashe)
+{
+	<div class="row">
+		<div class="col">
+			@item.Key
+		</div>
+		<div class="col">
+			@item.Value
+		</div>
+	</div>
+}
+
+@foreach (var item in CounterPageFilter.GetCache())
+{
+	<div class="row">
+		<div class="col">
+			@item.Key
+		</div>
+		<div class="col">
+			@item.Value
+		</div>
+	</div>
+}
+
+

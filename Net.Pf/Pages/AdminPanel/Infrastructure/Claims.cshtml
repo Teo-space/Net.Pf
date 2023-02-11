@@ -1,0 +1,36 @@
+﻿@page
+@model ClaimsModel
+
+@inject SignInManager<AppIdentityUser> SignInManager
+@inject UserManager<AppIdentityUser> UserManager
+
+
+
+<h1>GetUserId: @UserManager.GetUserId(@User)</h1>
+<h1>GetUserName: @UserManager.GetUserName(@User)</h1>
+<br />
+<h3>ClaimTypes.Name : @User.ClaimName()</h3>
+<h3>ClaimTypes.Email : @User.ClaimEmail()</h3>
+<h3>ClaimTypes.NameIdentifier : @User.ClaimNameIdentifier()</h3>
+<br />
+
+<h1>claims</h1>
+@foreach(var claim in User.Claims)
+{
+    <h5>claim: @claim</h5>
+}
+<br />
+<br />
+
+@{
+    var u = await UserManager.GetUserAsync(User);
+
+    <h3>Id @u?.Id</h3>
+    <h3>UserName  @u?.UserName</h3>
+    <h3>Email @u?.Email</h3>
+
+}
+
+
+
+
