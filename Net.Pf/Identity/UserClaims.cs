@@ -1,4 +1,7 @@
-﻿namespace Net.Pf.Identity;
+﻿using System.Collections.Immutable;
+using System.Collections.ObjectModel;
+
+namespace Net.Pf.Identity;
 
 public enum UserClaims
 {
@@ -15,10 +18,15 @@ public enum UserClaims
 
 
 
+}
 
 
+public static class UserClaimList
+{
+    static readonly ReadOnlyCollection<string> userClaimList = 
+        Enum.GetNames<UserClaims>().Select(x => x.ToString()).ToList().AsReadOnly();
 
-
+    public static ReadOnlyCollection<string> Get() => userClaimList;
 
 
 

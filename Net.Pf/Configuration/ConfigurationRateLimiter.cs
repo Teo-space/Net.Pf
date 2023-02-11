@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.CodeAnalysis.Options;
 using System.Threading.RateLimiting;
 
 
@@ -7,16 +8,22 @@ namespace Net.Pf.Configuration;
 
 public static class ConfigurationRateLimiter
 {
-    //[EnableRateLimiting("fixed")]
-    //[EnableRateLimiting("sliding")]
+
+    /// <summary>
+    /// [EnableRateLimiting("fixed")]
+    /// [EnableRateLimiting("sliding")]
+    /// app.MapRazorPages().RequireRateLimiting(slidingPolicy);
+    /// app.MapDefaultControllerRoute().RequireRateLimiting(fixedPolicy);
+    /// </summary>
+    /// <param name="builder"></param>
     public static void Configure(this WebApplicationBuilder builder)
     {
         var myOptions = new RateLimitOptions();
         builder.Configuration.GetSection(RateLimitOptions.RateLimit).Bind(myOptions);
-        var fixedPolicy = "fixed";
 
-        builder.Services.AddRateLimiter(_ => _
-            .AddFixedWindowLimiter(policyName: fixedPolicy, options =>
+
+        builder.Services.AddRateLimiter(options => options
+            .AddFixedWindowLimiter(policyName: RateLimiterPolicy.Fixed.ToString(), options =>
             {
                 options.PermitLimit = myOptions.PermitLimit;
                 options.Window = TimeSpan.FromSeconds(myOptions.Window);
@@ -25,9 +32,9 @@ public static class ConfigurationRateLimiter
             }));
 
 
-        var slidingPolicy = "sliding";
-        builder.Services.AddRateLimiter(_ => _
-            .AddSlidingWindowLimiter(policyName: slidingPolicy, options =>
+
+        builder.Services.AddRateLimiter(options => options
+            .AddSlidingWindowLimiter(policyName: RateLimiterPolicy.Sliding.ToString(), options =>
             {
                 options.PermitLimit = myOptions.PermitLimit;
                 options.Window = TimeSpan.FromSeconds(myOptions.Window);
@@ -36,15 +43,25 @@ public static class ConfigurationRateLimiter
                 options.QueueLimit = myOptions.QueueLimit;
             }));
 
-        var concurrencyPolicy = "Concurrency";
-        builder.Services.AddRateLimiter(_ => _
-            .AddConcurrencyLimiter(policyName: concurrencyPolicy, options =>
+
+        builder.Services.AddRateLimiter(options => options
+            .AddConcurrencyLimiter(policyName: RateLimiterPolicy.Concurrency.ToString(), options =>
             {
                 options.PermitLimit = myOptions.PermitLimit;
                 options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
                 options.QueueLimit = myOptions.QueueLimit;
             }));
+
+
     }
+
+    public enum RateLimiterPolicy
+    {
+        Fixed,
+        Sliding,
+        Concurrency
+    }
+
 
     public class RateLimitOptions
     {

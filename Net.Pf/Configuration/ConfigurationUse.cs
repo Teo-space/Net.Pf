@@ -1,4 +1,6 @@
-﻿namespace Net.Pf.Configuration;
+﻿using static Net.Pf.Configuration.ConfigurationRateLimiter;
+
+namespace Net.Pf.Configuration;
 
 
 public static class ConfigurationUse
@@ -44,8 +46,17 @@ public static class ConfigurationUse
 
 
 
-        app.MapRazorPages();
-        app.MapDefaultControllerRoute();
+
+        app.MapRazorPages()
+            .RequireRateLimiting(RateLimiterPolicy.Sliding.ToString())
+            ;
+
+        app.MapDefaultControllerRoute()
+            .RequireRateLimiting(RateLimiterPolicy.Fixed.ToString())
+            ;
+
+        //app.MapControllers();
+
 
         return app;
     }
