@@ -158,7 +158,7 @@
 
                             <h3>@SideBar.Name</h3>
 
-                            @foreach (var subMenu in SideBar.SubMenus)
+                            @foreach (var subMenu in SideBar.SubMenus())
                             {
                                 var GeneratedId = $"{subMenu.GetHashCode()}";
 

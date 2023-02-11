@@ -47,6 +47,7 @@
 
 <body class="mh-100 h-100 w-100 mw-100 overflow-hidden">
 
+    <mini-profiler />
 
 
     <header class="sticky-top">
@@ -132,7 +133,7 @@
 
                             <h3>@SideBar.Name</h3>
 
-                            @foreach (var subMenu in SideBar.SubMenus)
+                            @foreach (var subMenu in SideBar.SubMenus())
                             {
                                 var GeneratedId = $"{subMenu.GetHashCode()}";
 

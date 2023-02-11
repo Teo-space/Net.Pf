@@ -12,6 +12,6 @@ public class ErrrorHandleModel : PageModel
     {
         await Task.Delay(1);
 
-        throw new Exception("ErrrorHandleModel Test");
+        throw new Exception("Testing Exception");
     }
 }
