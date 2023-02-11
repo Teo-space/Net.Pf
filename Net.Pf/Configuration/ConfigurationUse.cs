@@ -21,7 +21,7 @@ public static class ConfigurationUse
             app.UseHsts();
         }
 
-        app.UseMiniProfiler();
+        //app.UseMiniProfiler();
 
 
 

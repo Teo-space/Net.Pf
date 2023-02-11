@@ -12,18 +12,23 @@ public static class ConfigurationPages
         builder.Services.AddControllersWithViews(options =>
         {
             options.Filters.Add(typeof(CounterAttribute));
-            //options.Filters.Add(typeof(CustomExceptionFilterAttribute));
+            options.Filters.Add(typeof(CustomExceptionFilterAttribute));
         });
+
 
         builder.Services.AddRazorPages(options =>
         {
             options.Conventions.ConfigureFilter(new ValidatorPageFilter());
             options.Conventions.ConfigureFilter(new CounterPageFilter());
 
-            //options.Conventions.AuthorizeFolder("/AdminPanel", UserClaims.Administrator.ToString());
+            options.Conventions.AuthorizeFolder("/AdminPanel", UserClaims.Administrator.ToString());
+			options.Conventions.AuthorizeFolder("/Infrastructure", UserClaims.Administrator.ToString());
+
+			options.Conventions.AuthorizeFolder("/Bootstrap", UserClaims.Moderator.ToString());
 
 
-        })
+
+		})
         .AddMvcOptions(options =>
         {
             options.Filters.Add(typeof(CounterAttribute));

@@ -58,7 +58,7 @@ public static class ConfigurationIdentity
         {
             foreach(var userClaim in UserClaimList.Get())
             {
-                options.AddPolicy(userClaim, policy => policy.RequireClaim(userClaim));
+                options.AddPolicy(userClaim, policy => policy.RequireClaim(userClaim, userClaim));
             }
 
         });

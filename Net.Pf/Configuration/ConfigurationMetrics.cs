@@ -5,7 +5,7 @@
         public static void Configure(this WebApplicationBuilder builder)
         {
 
-            ConfigureMiniProfiler(builder);
+            //ConfigureMiniProfiler(builder);
 
 
 
