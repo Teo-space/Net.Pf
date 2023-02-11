@@ -14,6 +14,9 @@ public static class Configuration
 
         ConfigurationPages.Configure(builder);
 
+        ConfigurationRateLimiter.Configure(builder);
+
+
         return builder;
     }
 }

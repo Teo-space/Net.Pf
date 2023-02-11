@@ -28,6 +28,10 @@ public static class ConfigurationServices
 
         builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
+
+        builder.Services.AddSwaggerGen();
+
+
     }
 
 

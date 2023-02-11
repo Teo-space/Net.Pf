@@ -56,28 +56,16 @@ public static class ConfigurationIdentity
 
         builder.Services.AddAuthorization(options =>
         {
-            //options.AddPolicy("Founders", policy => policy.RequireClaim("EmployeeNumber", "1", "2", "3", "4", "5"));
-            //options.AddPolicy("Testers", policy => policy.RequireClaim("Test", "Value"));
-            //options.AddPolicy("Testers", policy => policy.RequireClaim("Test", "Value"));
-            //options.AddPolicy("Access", policy => policy.RequireClaim("AccessRights", UserRoles.Administrator.ToString()));
-
-            //options.AddPolicy("Access2", policy => policy.RequireClaim("Access2"));
-            options.AddPolicy("AccessRights", policy => policy.RequireClaim("AccessRights"));
-
+            foreach(var userClaim in UserClaimList.Get())
+            {
+                options.AddPolicy(userClaim, policy => policy.RequireClaim(userClaim));
+            }
 
         });
 
 
     }
 
-
-
-}
-
-
-class Policies
-{
-    public const string TestPolicy = "TestPolicy";
 
 
 }
