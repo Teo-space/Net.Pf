@@ -1,46 +1,42 @@
 ﻿@page
 @model Net.Pf.Pages.Bootstrap.Tables.TablePaginationModel
 @{
+    var dataTable = @Model.dataTable;
 
     int PageSize = Math.Clamp(@Model.PageSize, 20, 100);
+    int PageNumber = @Model.PageNumber;
 
+    int max = dataTable.Rows.Count / PageSize;
 
-    int max = (@Model.dataTable.Rows.Count / PageSize) * PageSize;
-    int PageNumber = Math.Clamp(@Model.PageNumber, 0, max);
-    
+    var PageNumbers = Net.Pf.Infrastructure.Helpers.PaginationHelper.PageNumbers(PageNumber, max);
 
 }
 
 
 
-
+<!--Page Size-->
 <div class="container-fluid row m-0">
 
     <div class="col col-6 justify-content-start">
-        <h3>TableName @Model.PageSize (@PageNumber)  -   Count @Model.dataTable.Rows.Count    -      @(Model.dataTable.Rows.Count / Math.Clamp(@Model.PageSize, 20, 100))</h3>
+        <h4>TableName.</h4>
     </div>
 
     <div class="col col-6 justify-content-end justify-content-end text-end">
 
         <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Page Size @Model.PageSize</button>
+            
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li>
-                    <a class="dropdown-item" asp-page="/Bootstrap/Tables/TablePagination" asp-page-handler="SetPageSize" asp-route-PageSize="20">20</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" asp-page="/Bootstrap/Tables/TablePagination" asp-page-handler="SetPageSize" asp-route-PageSize="40">40</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" asp-page="/Bootstrap/Tables/TablePagination" asp-page-handler="SetPageSize" asp-route-PageSize="60">60</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" asp-page="/Bootstrap/Tables/TablePagination" asp-page-handler="SetPageSize" asp-route-PageSize="80">80</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" asp-page="/Bootstrap/Tables/TablePagination" asp-page-handler="SetPageSize" asp-route-PageSize="100">100</a>
-                </li>
-
+                @for(int i = 20; i <= 100; i += 20)
+                {
+                     <li>
+                        <a class="dropdown-item" 
+                            asp-page="/Bootstrap/Tables/TablePagination"
+                           asp-page-handler="OpenPageNumber"
+                            asp-route-PageNumber="0"
+                       asp-route-PageSize="@i">@i</a>
+                    </li>
+                }
             </ul>
         </div>
 
@@ -49,7 +45,9 @@
 </div>
 
 
-<div class="overflow-auto" style="max-height:78vh; max-width:250vh;">
+
+<!--Table-->
+<div class="overflow-auto" style="max-height:73vh; max-width:250vh;">
 
     <table class="table caption-top table-bordered table-hover table-striped table-responsive" style="line-height: 0.7">
 
@@ -64,17 +62,17 @@
         </thead>
 
         <tbody>
-            @for (int i = Math.Clamp(PageSize * PageNumber, 0, (@Model.dataTable.Rows.Count / PageSize) * PageSize), p = 0;
-            i < @Model.dataTable.Rows.Count && p < PageSize; 
+            @for (int i = Math.Clamp(PageSize * PageNumber, 0, (dataTable.Rows.Count / PageSize) * PageSize), p = 0;
+            i < dataTable.Rows.Count && p < PageSize; 
             i++, p++)
             {
                 var row = @Model.dataTable.Rows[i];
                     <tr>
                         <th scope="row">@i</th>
-                    @foreach (DataColumn column in @Model.dataTable.Columns)
-                    {
-                        <td>@row[column]</td>
-                    }
+                        @foreach (DataColumn column in dataTable.Columns)
+                        {
+                            <td>@row[column]</td>
+                        }
                     </tr>
             }
         </tbody>
@@ -82,23 +80,64 @@
     </table>
 </div>
 
-//SetPageNumber(int PageNumber)
 
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-end">
 
-    <li class="page-item">
-            <a class="page-link" asp-page="/Bootstrap/Tables/TablePagination" asp-page-handler="FirstPage">FirstPage</a>
-    </li>
-        <li class="page-item">
-            <a class="page-link" asp-page="/Bootstrap/Tables/TablePagination" asp-page-handler="PreviousPage">PreviousPage</a>
+<!--Pagination-->
+<nav aria-label="Pagination">
+    <ul class="pagination justify-content-end m-2">
+        <!--First Page-->
+        <li class="page-item @(PageNumber==0 ? "disabled" : "" )">
+            <a class="page-link"
+               asp-page="/Bootstrap/Tables/TablePagination"
+               asp-page-handler="OpenPageNumber"
+               asp-route-PageNumber="0"
+               asp-route-PageSize="@PageSize">⯇⯇</a>
         </li>
-    <li class="page-item">
-            <a class="page-link" asp-page="/Bootstrap/Tables/TablePagination" asp-page-handler="NextPage">NextPage</a>
-    </li>
-    <li class="page-item">
-            <a class="page-link" asp-page="/Bootstrap/Tables/TablePagination" asp-page-handler="LastPage">Last</a>
-    </li>
+        <!--Prev Page-->
+        <li class="page-item  @(PageNumber==0 ? "disabled" : "" )">
+            <a class="page-link"
+               asp-page="/Bootstrap/Tables/TablePagination"
+               asp-page-handler="OpenPageNumber"
+               asp-route-PageNumber="@Math.Max(PageNumber-1, 0)"
+               asp-route-PageSize="@PageSize">⯇</a>
+        </li>
+
+        @foreach (var pn in @PageNumbers)
+        {
+            if (PageNumber == pn)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">@(pn+1)</span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                        asp-page="/Bootstrap/Tables/TablePagination" 
+                        asp-page-handler="OpenPageNumber" 
+                        asp-route-PageNumber="@pn"
+                    asp-route-PageSize="@PageSize">@(pn+1)</a>
+                </li>
+            }
+        }
+
+        <!--Next Page-->
+        <li class="page-item  @(PageNumber>=max ? "disabled" : "" )">
+            <a class="page-link"
+               asp-page="/Bootstrap/Tables/TablePagination"
+               asp-page-handler="OpenPageNumber"
+               asp-route-PageNumber="@Math.Min(PageNumber+1, max)"
+               asp-route-PageSize="@PageSize">⯈</a>
+        </li>
+        <!--Last Page-->
+        <li class="page-item  @(PageNumber>=max ? "disabled" : "" )">
+            <a class="page-link"
+               asp-page="/Bootstrap/Tables/TablePagination"
+               asp-page-handler="OpenPageNumber"
+               asp-route-PageNumber="@max"
+               asp-route-PageSize="@PageSize">⯈⯈</a>
+        </li>
 
   </ul>
 </nav>

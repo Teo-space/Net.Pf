@@ -13,7 +13,6 @@
             <th scope="col">#</th>
             <th scope="col">UserName</th>
             <th scope="col">Detailing</th>
-            <th scope="col">Roles</th>
             <th scope="col">Add Claims</th>
         </tr>
     </thead>
@@ -27,43 +26,6 @@
                     <td>@row.UserName</td>
 
                     <td><a asp-page="/AdminPanel/UserProfile" asp-route-UserId=@row.Id>Detailing</a></td>
-
-                    <td>
-
-                        <div class="dropdown">
-
-                            <button class="btn btn-primary dropdown-toggle"
-                                type="button"
-                                id="dropdownMenuButton1"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Roles
-                            </button>
-
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                @foreach (var roleName in Enum.GetNames(typeof(UserRoles))
-                                .Where(x => x != UserRoles.Administrator.ToString())
-                                .ToList())
-                                {
-                                    <li>
-
-                                        <a class="dropdown-item"
-                               asp-page="/AdminPanel/UserAddRole" 
-                               asp-page-handler="AddRole"
-                               
-                               asp-route-UserId="@row.Id"
-                               asp-route-role="@roleName"
-                               asp-route-returnUrl="@Model.Request.Path">@roleName</a>
-
-                                    </li>
-                                }
-                            </ul>
-
-                        </div>
-
-                    </td>
-
-
 
                     <td>
 

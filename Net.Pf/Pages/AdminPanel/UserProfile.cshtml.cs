@@ -2,23 +2,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Net.Pf.Identity;
+using System.Security.Claims;
 
 namespace Net.Pf.Pages.AdminPanel
 {
     public class UserProfileModel : PageModel
     {
-        SignInManager<AppIdentityUser> SignInManager;
         UserManager<AppIdentityUser> UserManager;
-        public UserProfileModel(
-            SignInManager<AppIdentityUser> SignInManager,
-            UserManager<AppIdentityUser> UserManager)
+        public UserProfileModel(UserManager<AppIdentityUser> UserManager)
         {
-            this.SignInManager = SignInManager;
             this.UserManager = UserManager;
         }
-
-
-
 
 		public record Query(Guid UserId)
         {
@@ -33,12 +27,17 @@ namespace Net.Pf.Pages.AdminPanel
 
         public async Task OnGet(Query query)
         {
-            UserModel = (await UserManager?.FindByIdAsync(query.UserId.ToString()))
-                ?.Adapt<UserDto>();
+            var user = await UserManager.FindByIdAsync(query.UserId.ToString());
+            var claims = (await UserManager.GetClaimsAsync(user)).ToList();
+
+
+
+
+            UserModel = new UserDto(user.Id, user.UserName, claims);
         }
 
         public UserDto UserModel { get; set; }
-        public record UserDto(Guid UserId, string UserName);
+        public record UserDto(Guid UserId, string UserName, List<Claim> Claims);
 
 
 
