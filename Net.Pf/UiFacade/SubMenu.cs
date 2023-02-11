@@ -6,24 +6,17 @@ namespace Net.Pf.UiFacade;
 
 public record SubMenu(string Name = "SubMenu")
 {
-    ConcurrentDictionary<string, string> links { get; } = new();
+    public record Link(string Name, string Url, bool blank);
 
-    public SubMenu Addlink(string Name, string url)
+    public ConcurrentDictionary<string, Link> links2 { get; } = new();
 
+    public SubMenu Addlink(string Name, string url, bool blank = false)
     {
-
-        links[Name] = url;
+        links2[Name] = new Link(Name, url, blank);
 
         return this;
-
     }
-
-
-
-    public record Link(string Name, string Url);
-
-    public IEnumerable<Link> GetLinks() => links.Select(x => new Link(x.Key, x.Value)).OrderBy(x => x.Name);
-
+    public IEnumerable<Link> GetLinks() => links2.Values.OrderBy(x => x.Name);
 
 
 
@@ -31,11 +24,8 @@ public record SubMenu(string Name = "SubMenu")
 
     public SubMenu SetShow()
     {
-
         this.Show = true;
-
         return this;
-
     }
 
 }
