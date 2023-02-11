@@ -13,9 +13,13 @@
     .AddSubmenu("Metrics")
     .SetShow()
     .Addlink(Name: "Swagger", url: "/swagger", blank: true)
-    .Addlink(Name: "ErrrorHandle", url: "Infrastructure/ErrrorHandle", blank: true)
+    .Addlink(Name: "ErrrorHandle", url: "/AdminPanelInfrastructure/ErrrorHandle", blank: true)
+    .Addlink(Name: "claims", url: "/AdminPanel/Infrastructure/claims", blank: true)
+    .Addlink(Name: "counters", url: "/AdminPanel/Infrastructure/counters", blank: true)
+
     .Addlink(Name: "profiler-results-index", url: "/profiler/results-index", blank: true)
     .Addlink(Name: "profiler-results", url: "/profiler/results", blank: true)
+    
     ;
 
 
@@ -24,7 +28,7 @@
     .SetShow()
     .Addlink("Users", "/AdminPanel/Users/Index")
     ;
-
+    https://localhost:7277/infrastructure/claims
 
 
 }

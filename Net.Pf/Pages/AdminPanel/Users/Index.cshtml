@@ -46,11 +46,11 @@
                             {
                                 <li>
                                     <a class="dropdown-item"
-                               asp-page="/AdminPanel/Users/ClaimsAdd"
-                               asp-page-handler="AddClaim"
-                               asp-route-UserId="@row.Id"
-                               asp-route-userClaims="@claim"
-                               asp-route-returnUrl="@Model.Request.Path">@claim</a>
+                                           asp-page="/AdminPanel/Users/ClaimsAdd"
+                                           asp-page-handler="AddClaim"
+                                           asp-route-UserId="@row.Id"
+                                           asp-route-userClaims="@claim"
+                                           asp-route-returnUrl="@Model.Request.Path">@claim</a>
                                 </li>
                             }
                         </ul>
@@ -70,11 +70,11 @@
                             {
                                 <li>
                                     <a class="dropdown-item"
-                               asp-page="/AdminPanel/Users/ClaimsDelete"
-                               asp-page-handler="DeleteClaim"
-                               asp-route-UserId="@row.Id"
-                               asp-route-userClaims="@claim"
-                               asp-route-returnUrl="@Model.Request.Path">@claim</a>
+                                           asp-page="/AdminPanel/Users/ClaimsDelete"
+                                           asp-page-handler="DeleteClaim"
+                                           asp-route-UserId="@row.Id"
+                                           asp-route-userClaims="@claim"
+                                           asp-route-returnUrl="@Model.Request.Path">@claim</a>
                                 </li>
                             }
                         </ul>

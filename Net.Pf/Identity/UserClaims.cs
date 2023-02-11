@@ -10,11 +10,15 @@ public enum UserClaims
     Premium = 1000,
     Moderator = 10000,
 
-    Administrator = 1000000,
+
+	SoftBootstrap = 100000,
+
+
+	Administrator = 1000000,
 
 
 
-    SoftBootstrap = 5000000
+    
 
 
 

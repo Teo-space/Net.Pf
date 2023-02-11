@@ -50,7 +50,6 @@ public class ProfileModel : PageModel
 
 
 
-
     public record AddClaimCommand(Guid UserId, UserClaims userClaims, string returnUrl)
     {
         public class Validator : AbstractValidator<AddClaimCommand>
@@ -80,7 +79,7 @@ public class ProfileModel : PageModel
         {
             var claim = new Claim(command.userClaims.ToString(), command.userClaims.ToString());
 
-            var userClaims = (await UserManager.GetClaimsAsync(user)).Select(claim => claim.Type).ToList();
+            var userClaims = (await UserManager.GetClaimsAsync(user)).Select(x => x.ToString()).ToList();
 
             if (!userClaims.Contains(claim.ToString()))
             {
@@ -97,6 +96,46 @@ public class ProfileModel : PageModel
 
 
 
+
+
+    public record DeleteClaimCommand(Guid UserId, UserClaims userClaims, string returnUrl)
+    {
+        public class Validator : AbstractValidator<DeleteClaimCommand>
+        {
+            public Validator()
+            {
+                RuleFor(x => x.UserId).NotNull().NotEmpty();
+
+                RuleFor(x => x.userClaims)
+                    .Must(x => Enum
+                    .GetNames(typeof(UserClaims))
+                    .Where(x => x != UserClaims.Administrator.ToString())
+                    .ToList()
+                    .Contains(x.ToString()));
+
+                RuleFor(x => x.returnUrl).NotNull().NotEmpty();
+
+            }
+        }
+    }
+
+
+    public async Task<RedirectResult> OnGetDeleteClaim(DeleteClaimCommand command)
+    {
+        var user = await UserManager.FindByIdAsync(command.UserId.ToString());
+        if (user != null)
+        {
+            var claim = new Claim(command.userClaims.ToString(), command.userClaims.ToString());
+
+            var userClaims = (await UserManager.GetClaimsAsync(user)).Where(c => c.ToString() == claim.ToString()).ToList();
+            if (userClaims.Count() > 0)
+            {
+                await UserManager.RemoveClaimsAsync(user, userClaims);
+            }
+        }
+
+        return Redirect(command.returnUrl);
+    }
 
 
 
