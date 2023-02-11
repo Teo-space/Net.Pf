@@ -1,0 +1,84 @@
+﻿@page
+@model Net.Pf.Pages.AdminPanel.Users.ProfileModel
+
+<div class="row">
+
+	<div class="col col-6">
+		@if (@Model.UserModel != null)
+		{
+			<form class="form-group" method="post">
+
+				<div class="form-group m-2">
+					<input type="text" class="form-control" 
+						name="UserModel.UserId" 
+						id="UserModel.UserId" 
+						value=@Model.UserModel.UserId hidden>
+				</div>
+
+				<div class="form-group m-2">
+					<label for="UserModel.UserName">UserName</label>
+					<input type="text" class="form-control"
+						   name="UserModel.UserName"
+						   id="UserModel.UserName"
+						   value=@Model.UserModel.UserName disabled>
+					<span asp-validation-for="UserModel.UserName" class="text-danger"></span>
+				</div>
+
+			</form>
+		}
+	</div>
+
+
+
+	<div class="col col-6">
+
+		<h3>User Claims</h3>
+
+		<table class="table caption-top table-bordered table-hover table-striped table-responsive" style="line-height: 0.7">
+
+			<thead class="table-dark" style="position: sticky;top: 0">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Claim</th>
+					<th scope="col">Delete</th>
+				</tr>
+			</thead>
+
+			<tbody style="max-height:30vh;">
+				@foreach (var claim in @Model.UserModel.Claims)
+				{
+					<tr>
+						<th scope="row">1</th>
+						<td>@claim</td>
+						<td scope="col">
+							<a
+								asp-page="/AdminPanel/Users/ClaimsDelete"
+								asp-page-handler="DeleteClaim"
+								asp-route-UserId="@Model.UserModel.UserId"
+								asp-route-userClaims="@claim"
+								asp-route-returnUrl="@Model.Request.Path">delete</a>
+						</td>
+
+					</tr>
+				}
+			</tbody>
+
+		</table>
+
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

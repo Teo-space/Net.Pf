@@ -10,10 +10,21 @@
     SideBar SideBar = new("AdminPanel");
 
     SideBar
+    .AddSubmenu("Metrics")
+    .SetShow()
+    .Addlink(Name: "Swagger", url: "/swagger", blank: true)
+    .Addlink(Name: "ErrrorHandle", url: "Infrastructure/ErrrorHandle", blank: true)
+    .Addlink(Name: "profiler-results-index", url: "/profiler/results-index", blank: true)
+    .Addlink(Name: "profiler-results", url: "/profiler/results", blank: true)
+    ;
+
+
+    SideBar
     .AddSubmenu("User Management")
     .SetShow()
-    .Addlink("UsersShow", "/AdminPanel/UsersShow")
+    .Addlink("Users", "/AdminPanel/Users/Index")
     ;
+
 
 
 }
@@ -22,6 +33,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,6 +56,7 @@
 
 <body class="mh-100 h-100 w-100 mw-100 overflow-hidden">
 
+    <mini-profiler />
 
 
     <header class="sticky-top">
@@ -122,13 +136,14 @@
             @if (SideBarEnabled)
             {
                 <!--Sidebar     border border-1 border-dark -->
-                <div class="col-sm-2">
+                <div class="col-sm-2  text-muted text-secondary font-Tangerine-20">
+
                     <nav class="nav position-fixed overflow-hidden col-sm-2  bg-light" style="max-height:86vh;">
                         <div class="container-fluid overflow-scroll h-100 vh-100 mh-100 p-2">
 
-                            <h3>@SideBar.Name</h3>
+                            <h4 class="text-muted text-secondary font-Tangerine-20">@SideBar.Name</h4>
 
-                            @foreach (var subMenu in SideBar.SubMenus)
+                            @foreach (var subMenu in SideBar.SubMenus())
                             {
                                 var GeneratedId = $"{subMenu.GetHashCode()}";
 
@@ -157,7 +172,9 @@
                                                     @foreach (var link in subMenu.GetLinks())
                                                     {
                                                         <li class="nav-item">
-                                                            <a class="text-dark text-decoration-none" asp-area="" asp-page="@link.Url">@link.Name</a>
+                                                            <a class="text-dark text-decoration-none" 
+                                                            href="@link.Url" 
+                                                            target=@(@link.blank?"_blank":"")>@link.Name</a>
                                                         </li>
                                                     }
                                                 </ul>
