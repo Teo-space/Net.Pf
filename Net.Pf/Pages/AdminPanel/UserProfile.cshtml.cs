@@ -28,7 +28,7 @@ namespace Net.Pf.Pages.AdminPanel
         public async Task OnGet(Query query)
         {
             var user = await UserManager.FindByIdAsync(query.UserId.ToString());
-            var claims = (await UserManager.GetClaimsAsync(user)).ToList();
+            var claims = (await UserManager.GetClaimsAsync(user)).Select(claim => claim.ToString()).ToList();
 
 
 
@@ -37,7 +37,7 @@ namespace Net.Pf.Pages.AdminPanel
         }
 
         public UserDto UserModel { get; set; }
-        public record UserDto(Guid UserId, string UserName, List<Claim> Claims);
+        public record UserDto(Guid UserId, string UserName, List<string> Claims);
 
 
 

@@ -1,8 +1,5 @@
 ﻿@page
 @model Net.Pf.Pages.AdminPanel.UserProfileModel
-@{
-			//@Model.UserModel.UserName
-}
 
 <div class="row">
 
@@ -21,13 +18,6 @@
 					   value=@Model.UserModel.UserName disabled>
 				<span asp-validation-for="UserModel.UserName" class="text-danger"></span>
 			</div>
-
-			@foreach (var claim in @Model.UserModel.Claims)
-			{
-				<div class="alert alert-dark m-4" role="alert">@claim</div>
-			}
-
-
 
 		</form>
 	</div>
