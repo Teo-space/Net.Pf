@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Net.Pf.Identity;
 
 
-public partial class AppIdentityDbContext : IdentityDbContext<AppIdentityUser, IdentityRole<Guid>, Guid>
+public partial class AppIdentityDbContext : IdentityDbContext<AppIdentityUser, AppIdentityRole, Guid>
 {
     public DbSet<AppIdentityUser> Users { get; set; }
 
