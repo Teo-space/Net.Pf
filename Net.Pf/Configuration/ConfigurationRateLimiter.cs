@@ -66,6 +66,20 @@ public static class ConfigurationRateLimiter
     public class RateLimitOptions
     {
         public const string RateLimit = "RateLimit";
+        public int PermitLimit { get; set; } = 1;
+        public int Window { get; set; } = 1;
+        public int ReplenishmentPeriod { get; set; } = 1;
+        public int QueueLimit { get; set; } = 1;
+        public int SegmentsPerWindow { get; set; } = 1;
+        public int TokenLimit { get; set; } = 1;
+        public int TokenLimit2 { get; set; } = 1;
+        public int TokensPerPeriod { get; set; } = 1;
+        public bool AutoReplenishment { get; set; } = false;
+    }
+
+    public class RateLimitOptions1
+    {
+        public const string RateLimit = "RateLimit";
         public int PermitLimit { get; set; } = 100;
         public int Window { get; set; } = 10;
         public int ReplenishmentPeriod { get; set; } = 2;
@@ -76,6 +90,4 @@ public static class ConfigurationRateLimiter
         public int TokensPerPeriod { get; set; } = 4;
         public bool AutoReplenishment { get; set; } = false;
     }
-
-
 }

@@ -4,10 +4,6 @@
 namespace Net.Pf.Identity;
 
 
-
-public class AppIdentityUser : IdentityUser<Guid>
+public class AppIdentityRole : IdentityRole<Guid>
 {
 }
-
-
-

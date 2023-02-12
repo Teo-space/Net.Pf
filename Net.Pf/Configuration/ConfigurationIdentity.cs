@@ -39,11 +39,16 @@ public static class ConfigurationIdentity
             options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
             options.User.RequireUniqueEmail = true;
         })
+        //Тут должен соблюдатся Constraint
+        //IdentityUser<Guid>, IdentityRole<Guid>
+
+        //IdentityUser<Guid>
         .AddDefaultIdentity<AppIdentityUser>(options =>
         {
 
         })
-        //.AddRoles<IdentityRole>()
+        //IdentityRole<Guid>
+        .AddRoles<AppIdentityRole>()
         .AddEntityFrameworkStores<AppIdentityDbContext>()
         .AddDefaultTokenProviders()
         ;
