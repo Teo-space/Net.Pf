@@ -54,16 +54,17 @@ public class ProfileModel : PageModel
     {
         public class Validator : AbstractValidator<AddClaimCommand>
         {
+            static readonly List<string> UserClaimsList = 
+                Enum
+                .GetNames(typeof(UserClaims))
+                .Where(x => x != UserClaims.Administrator.ToString())
+                .ToList();
+
             public Validator()
             {
                 RuleFor(x => x.UserId).NotNull().NotEmpty();
 
-                RuleFor(x => x.userClaims)
-                    .Must(x => Enum
-                    .GetNames(typeof(UserClaims))
-                    .Where(x => x != UserClaims.Administrator.ToString())
-                    .ToList()
-                    .Contains(x.ToString()));
+                RuleFor(x => x.userClaims).Must(x => UserClaimsList.Contains(x.ToString()));
 
                 RuleFor(x => x.returnUrl).NotNull().NotEmpty();
 

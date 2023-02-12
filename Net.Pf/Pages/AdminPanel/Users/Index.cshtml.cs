@@ -12,7 +12,7 @@ namespace Net.Pf.Pages.AdminPanel.Users;
 public class IndexModel : PageModel
 {
     UserManager<AppIdentityUser> UserManager;
-    public IndexModel(UserManager<AppIdentityUser> UserManager)
+    public IndexModel(UserManager<AppIdentityUser> UserManager, RoleManager<AppIdentityRole> roleManager)
     {
         this.UserManager = UserManager;
     }
@@ -38,16 +38,18 @@ public class IndexModel : PageModel
     {
         public class Validator : AbstractValidator<AddClaimCommand>
         {
+            static readonly List<string> UserClaimsList =
+                    Enum
+                        .GetNames(typeof(UserClaims))
+                        .Where(x => x != UserClaims.Administrator.ToString())
+                        .ToList();
+
+
             public Validator()
             {
                 RuleFor(x => x.UserId).NotNull().NotEmpty();
 
-                RuleFor(x => x.userClaims)
-                    .Must(x => Enum
-                    .GetNames(typeof(UserClaims))
-                    .Where(x => x != UserClaims.Administrator.ToString())
-                    .ToList()
-                    .Contains(x.ToString()));
+                RuleFor(x => x.userClaims).Must(x => UserClaimsList.Contains(x.ToString()));
             }
         }
     }

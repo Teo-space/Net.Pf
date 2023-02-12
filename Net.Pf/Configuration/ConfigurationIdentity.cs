@@ -41,7 +41,6 @@ public static class ConfigurationIdentity
         })
         //Тут должен соблюдатся Constraint
         //IdentityUser<Guid>, IdentityRole<Guid>
-
         //IdentityUser<Guid>
         .AddDefaultIdentity<AppIdentityUser>(options =>
         {
