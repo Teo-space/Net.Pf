@@ -12,7 +12,7 @@ namespace Net.Pf.Pages.AdminPanel.Users
         readonly UserManager<AppIdentityUser> UserManager;
         readonly RoleManager<AppIdentityRole> roleManager;
 
-        public PageRoleManagerModel(UserManager<AppIdentityUser> UserManager,
+        public RoleManagerModel(UserManager<AppIdentityUser> UserManager,
             RoleManager<AppIdentityRole> roleManager)
         {
             this.UserManager = UserManager;
