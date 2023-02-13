@@ -18,6 +18,8 @@ namespace Net.Pf.Pages.AdminPanel.Users
         {
         }
 
+
+
         public record AddClaimCommand(Guid UserId, 
             string claimType, string claimValue,
             string returnUrl)
@@ -38,27 +40,45 @@ namespace Net.Pf.Pages.AdminPanel.Users
                         .Must(x => UserClaimsList.Contains(x.ToString()))
                         ;
                     RuleFor(x => x.claimValue).NotNull().NotEmpty();
-
- 
                     RuleFor(x => x.returnUrl).NotNull().NotEmpty();
-
                 }
             }
         }
 
-        public async Task<RedirectResult> OnGetAddClaim(AddClaimCommand command)
+
+        public async Task<ActionResult> OnGetAddClaim(AddClaimCommand command)
         {
             var user = await UserManager.FindByIdAsync(command.UserId.ToString());
-            if (user != null)
+            if (user == null)
             {
-                var claim = new Claim(command.claimType, command.claimValue);
-
-                var userClaims = (await UserManager.GetClaimsAsync(user)).Select(x => x.ToString()).ToList();
-
-                if (!userClaims.Contains(claim.ToString()))
+                return BadRequest(new
                 {
-                    await UserManager.AddClaimAsync(user, claim);
-                }
+                    error = "user does not exists"
+                });
+            }
+
+            var claim = new Claim(command.claimType, command.claimValue);
+
+            var userClaims = (await UserManager.GetClaimsAsync(user))
+                .Select(x => x.ToString())
+                .ToList();
+
+            if (userClaims.Contains(claim.ToString()))
+            {
+                return BadRequest(new
+                {
+                    error = $"user has claim {claim.ToString()}"
+                });
+            }
+
+            var result = await UserManager.AddClaimAsync(user, claim);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(new
+                {
+                    error = $"Add Claim {claim.ToString()} Failed"
+                });
             }
 
             return Redirect(command.returnUrl);
@@ -94,17 +114,31 @@ namespace Net.Pf.Pages.AdminPanel.Users
         }
 
 
-        public async Task<RedirectResult> OnGetDeleteClaim(DeleteClaimCommand command)
+        public async Task<ActionResult> OnGetDeleteClaim(DeleteClaimCommand command)
         {
             var user = await UserManager.FindByIdAsync(command.UserId.ToString());
-            if (user != null)
+            if (user == null)
             {
-                var userClaims = (await UserManager.GetClaimsAsync(user))
-                    .Where(claim => claim.Type == command.claimType).ToList();
-                if (userClaims.Count() > 0)
+                return BadRequest(new
                 {
-                    await UserManager.RemoveClaimsAsync(user, userClaims);
-                }
+                    error = "user does not exists"
+                });
+            }
+
+            var userClaims = (await UserManager.GetClaimsAsync(user))
+                .Where(claim => claim.Type == command.claimType)
+                .ToList();
+
+            if (userClaims.Count() == 0)
+            {
+                return BadRequest(new
+                {
+                    error = "The user has no such claims"
+                });
+            }
+            else
+            {
+                await UserManager.RemoveClaimsAsync(user, userClaims);
             }
 
             return Redirect(command.returnUrl);

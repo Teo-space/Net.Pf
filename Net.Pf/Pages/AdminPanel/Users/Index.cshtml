@@ -16,6 +16,7 @@
             <th scope="col">Detailing</th>
             <th scope="col">Add Claims</th>
             <th scope="col">Delete Claims</th>
+            <th scope="col">Add Claims2</th>
         </tr>
     </thead>
 
@@ -52,7 +53,8 @@
                                            asp-page-handler="AddClaim"
                                            asp-route-UserId="@row.Id"
                                            asp-route-userClaims="@claim"
-                                           asp-route-returnUrl="@Model.Request.Path">@claim</a>
+                                           asp-route-returnUrl="@Model.Request.Path"
+                                            target="_blank">@claim</a>
                                 </li>
                             }
                         </ul>
@@ -78,7 +80,8 @@
                                            asp-page-handler="DeleteClaim"
                                            asp-route-UserId="@row.Id"
                                            asp-route-userClaims="@claim"
-                                           asp-route-returnUrl="@Model.Request.Path">@claim</a>
+                                           asp-route-returnUrl="@Model.Request.Path"
+                                            target="_blank">@claim</a>
                                 </li>
                             }
                         </ul>
@@ -86,6 +89,34 @@
                     </div>
 
                 </td>
+
+                <td>
+                    <div class="dropdown">
+
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Add Claims 2</button>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            @foreach (var claim in Enum.GetNames(typeof(UserClaims))
+                           //.Where(x => x != UserClaims.Administrator.ToString())
+                           .ToList())
+                            {
+                                <li>
+                                    <a class="dropdown-item"
+                                                asp-page="/AdminPanel/Users/ClaimsManager"
+                                                asp-page-handler="AddClaim"
+                                                asp-route-UserId="@row.Id"
+                                                asp-route-claimType="@claim"
+                                                asp-route-claimValue="@claim"
+                                                asp-route-returnUrl="@Model.Request.Path"
+                                                target="_blank">@claim</a>
+                                </li>
+                            }
+                        </ul>
+
+                    </div>
+
+                </td>
+
             </tr>
         }
     </tbody>
