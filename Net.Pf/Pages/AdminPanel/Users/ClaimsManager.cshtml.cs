@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Net.Pf.Exceptions;
 using Net.Pf.Identity;
 using System.Security.Claims;
 
@@ -51,11 +52,8 @@ namespace Net.Pf.Pages.AdminPanel.Users
             var user = await UserManager.FindByIdAsync(command.UserId.ToString());
             if (user == null)
             {
-                return BadRequest(new
-                {
-                    error = "user does not exists"
-                });
-            }
+				Throw.UserNotExists(command.UserId);
+			}
 
             var claim = new Claim(command.claimType, command.claimValue);
 
@@ -65,6 +63,8 @@ namespace Net.Pf.Pages.AdminPanel.Users
 
             if (userClaims.Contains(claim.ToString()))
             {
+
+
                 return BadRequest(new
                 {
                     error = $"user has claim {claim.ToString()}"

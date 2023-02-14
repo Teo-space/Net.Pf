@@ -23,12 +23,39 @@ namespace Net.Pf.Pages.AdminPanel.Users
         {
         }
 
-		public record AddRoleCommand(Guid UserId,
+
+        public record CreateRoleCommand(string RoleName)
+        {
+            public class Validator : AbstractValidator<CreateRoleCommand>
+            {
+                public Validator()
+                {
+                    RuleFor(x => x.RoleName).NotNull().NotEmpty();
+                }
+            }
+        }
+
+        public async Task OnGetCreateRoleRole(CreateRoleCommand command)
+        {
+            if(!await roleManager.RoleExistsAsync(command.RoleName))
+			{
+				var role = new AppIdentityRole(command.RoleName);
+
+				await roleManager.CreateAsync(role);
+            }
+        }
+
+
+
+
+
+
+        public record AddToRoleCommand(Guid UserId,
 			string RoleName,
 			string returnUrl)
 
 		{
-			public class Validator : AbstractValidator<AddRoleCommand>
+			public class Validator : AbstractValidator<AddToRoleCommand>
 			{
 				public Validator()
 				{
@@ -39,7 +66,7 @@ namespace Net.Pf.Pages.AdminPanel.Users
 			}
 		}
 
-		public async Task<ActionResult> OnGetAddClaim(AddRoleCommand command)
+		public async Task<ActionResult> OnGetAddToRole(AddToRoleCommand command)
 		{
 			var user = await UserManager.FindByIdAsync(command.UserId.ToString());
 			if (user == null)
