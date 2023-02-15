@@ -1,3 +1,5 @@
+using Mapster;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,9 +21,19 @@ namespace Net.Pf.Pages.AdminPanel.Users
             this.roleManager = roleManager;
         }
 
-        public void OnGet()
+
+		//public List<AppIdentityRole> Roles;
+
+		public record RoleDto(Guid RoleId, string Name);
+		public List<RoleDto> Roles { get; set; }
+
+        public async Task OnGet()
         {
+            Roles = await roleManager.Roles.ProjectToType<RoleDto>().ToListAsync();
         }
+
+
+
 
 
         public record CreateRoleCommand(string RoleName)
@@ -30,27 +42,73 @@ namespace Net.Pf.Pages.AdminPanel.Users
             {
                 public Validator()
                 {
-                    RuleFor(x => x.RoleName).NotNull().NotEmpty();
+                    RuleFor(x => x.RoleName).NotNull().NotEmpty().MaximumLength(40);
                 }
             }
         }
 
-        public async Task OnGetCreateRoleRole(CreateRoleCommand command)
-        {
-            if(!await roleManager.RoleExistsAsync(command.RoleName))
+		public async Task<ActionResult> OnPostCreateRole(CreateRoleCommand command)
+		{
+			if (!await roleManager.RoleExistsAsync(command.RoleName))
 			{
 				var role = new AppIdentityRole(command.RoleName);
 
 				await roleManager.CreateAsync(role);
-            }
-        }
+			}
+			//return new OkObjectResult("Success");
+			return Redirect("RoleManager");
+		}
+
+
+
+
+		public record DeleteRoleCommand(string RoleName)
+		{
+			public class Validator : AbstractValidator<DeleteRoleCommand>
+			{
+				public Validator()
+				{
+					RuleFor(x => x.RoleName).NotNull().NotEmpty().MaximumLength(40);
+				}
+			}
+		}
+
+		public async Task<ActionResult> OnPostDeleteRole(DeleteRoleCommand command)
+		{
+			if (await roleManager.RoleExistsAsync(command.RoleName))
+			{
+				var role = await roleManager.FindByNameAsync(command.RoleName);
+
+				var result = await roleManager.DeleteAsync(role);
+				if (result.Succeeded)
+				{
+					//return new OkObjectResult("Success");
+					return Redirect("RoleManager");
+				}
+				else
+				{
+					throw new Exception($"Delete Failed: {result.ToString()}");
+				}
+			}
+			else
+			{
+				throw new Exception("Role not exists");
+			}
+
+			
+		}
 
 
 
 
 
 
-        public record AddToRoleCommand(Guid UserId,
+
+
+
+
+
+		public record AddToRoleCommand(Guid UserId,
 			string RoleName,
 			string returnUrl)
 

@@ -1,4 +1,106 @@
 ﻿@page
 @model Net.Pf.Pages.AdminPanel.Users.RoleManagerModel
-@{
-}
+@inject RoleManager<AppIdentityRole> roleManager
+
+
+
+
+<div class="row">
+
+	<div class="col col-6">
+
+		<h3>Roles</h3>
+
+		<table class="table caption-top table-bordered table-hover table-striped table-responsive" style="line-height: 0.7">
+
+			<thead class="table-dark" style="position: sticky;top: 0">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">RoleName</th>
+					<th scope="col">Delete</th>
+				</tr>
+			</thead>
+
+			<tbody style="max-height:30vh;">
+				@{
+					int i = 0;
+				}
+				@foreach (var roleDto in @Model.Roles)
+				{
+					<tr>
+						<th scope="row">@(i++)</th>
+
+						<td>@roleDto.Name</td>
+						<td scope="col">
+							<form class="form-group" method="post" asp-page-handler="DeleteRole">
+								<input type="text" class="form-control" name="RoleName" id="RoleName" value="@roleDto.Name" hidden>
+								<button class="btn btn-primary" type="submit">X</button>
+							</form>
+						</td>
+					</tr>
+				}
+			</tbody>
+
+		</table>
+
+	</div>
+
+
+	
+
+	<div class="col col-6">
+
+		<h3>CreateRole</h3>
+
+		<h4>Manual</h4>
+		<!--Manual Add Custom-->
+		<form class="form-group" method="post" asp-page-handler="CreateRole">
+			<label for="RoleName">RoleName</label>
+			<input type="text" class="form-control" name="RoleName" id="RoleName">
+		</form>
+
+		<h4>From list</h4>
+		<!--Add From Enum UserRoles-->
+		<form class="form-group" method="post" asp-page-handler="CreateRole">
+			<label for="RoleName">RoleName</label>
+
+			<select class="form-select" name="RoleName" id="RoleName">
+
+				@foreach (var roleName in Enum.GetNames(typeof(UserRoles))
+				//.Where(x => x != UserClaims.Administrator.ToString())
+				.ToList())
+				{
+					<option value="@roleName">@roleName</option>
+				}
+
+			</select>
+			<div class="col-12 mt-2">
+				<button class="btn btn-primary" type="submit">Send</button>
+			</div>
+
+		</form>
+
+
+	</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
