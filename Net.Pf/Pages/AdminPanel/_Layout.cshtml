@@ -1,6 +1,10 @@
 ﻿@inject IHostEnvironment hostEnvironment
 
 @{
+    DateTime starts = DateTime.Now;
+}
+
+@{
     string AppName = "iTeo.space";
     int NavBarLogoSIze = 46;
     bool SideBarEnabled = true;
@@ -11,7 +15,7 @@
 
     SideBar
     .AddSubmenu("Metrics")
-    .SetShow()
+    //.SetShow()
     .Addlink(Name: "Swagger", url: "/swagger", blank: true)
     .Addlink(Name: "ErrrorHandle", url: "/AdminPanelInfrastructure/ErrrorHandle", blank: true)
     .Addlink(Name: "claims", url: "/AdminPanel/Infrastructure/claims", blank: true)
@@ -232,6 +236,11 @@
     <footer class="border-top fixed-bottom">
         <div class="container-fluid row ">
             <div class="col justify-content-start text-muted text-secondary font-Tangerine-20">&copy; 2023 @year - Teo</div>
+
+            <div class="col col-1 offset-6 justify-content-end text-muted text-secondary font-Tangerine-20">
+                @((DateTime.Now - starts).TotalMicroseconds) m/s
+            </div>
+
         </div>
     </footer>
     <!-------------------------------------------------------------------------------------------------------------->

@@ -32,6 +32,8 @@
 
 	<div class="col col-6">
 
+
+
 		<h3>User Claims</h3>
 
 		<table class="table caption-top table-bordered table-hover table-striped table-responsive" style="line-height: 0.7">
@@ -40,6 +42,7 @@
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Claim</th>
+					<th scope="col">Value</th>
 					<th scope="col">Delete</th>
 				</tr>
 			</thead>
@@ -49,14 +52,16 @@
 				{
 					<tr>
 						<th scope="row">1</th>
-						<td>@claim</td>
+						<td>@claim.Type</td>
+						<td>@claim.Value</td>
 						<td scope="col">
-							<a asp-page="/AdminPanel/Users/Profile"
-								asp-page-handler="DeleteClaim"
-								asp-route-UserId="@Model.UserModel.UserId"
-								asp-route-userClaims="@claim"
-								asp-route-returnUrl="@Model.Request.Path"
-								target="_blank">delete</a>
+
+							<form class="form-group" method="post" asp-page="ClaimsManager" asp-page-handler="DeleteClaimFromUser">
+								<input type="text" class="form-control" name="UserId" id="UserId" value="@Model.UserModel.UserId" hidden>
+								<input type="text" class="form-control" name="claimType" id="claimType" value="@claim.Type" hidden>
+								<input type="text" class="form-control" name="claimValue" id="claimValue" value="@claim.Value" hidden>
+								<button class="btn btn-primary" type="submit">X</button>
+							</form>
 						</td>
 
 					</tr>
@@ -64,6 +69,46 @@
 			</tbody>
 
 		</table>
+
+
+
+
+
+		<h3>User Roles</h3>
+
+		<table class="table caption-top table-bordered table-hover table-striped table-responsive" style="line-height: 0.7">
+
+			<thead class="table-dark" style="position: sticky;top: 0">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Role</th>
+					<th scope="col">Delete</th>
+				</tr>
+			</thead>
+
+			<tbody style="max-height:30vh;">
+				@foreach (var role in @Model.UserModel.Roles)
+				{
+					<tr>
+						<th scope="row">1</th>
+						<td>@role</td>
+						<td>
+							<form method="post" asp-page="RoleManager" asp-page-handler="DeleteUserFromRole"
+								asp-antiforgery="true">
+								<input type="text" class="form-control" name="UserId" id="UserId" value="@Model.UserModel.UserId" hidden>
+								<input type="text" class="form-control" name="RoleName" id="RoleName" value="@role" hidden>
+								<button class="btn btn-primary" type="submit">X</button>
+							</form>
+						</td>
+					</tr>
+				}
+
+			</tbody>
+
+		</table>
+
+
+
 
 	</div>
 

@@ -4,15 +4,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Net.Pf.Exceptions;
 using Net.Pf.Identity;
 using System.Security.Claims;
+using static Net.Pf.Pages.AdminPanel.Users.RoleManagerModel;
 
 namespace Net.Pf.Pages.AdminPanel.Users
 {
-    public class PageClaimsManagerModel : PageModel
+    public class ClaimsManagerModel : PageModel
     {
         UserManager<AppIdentityUser> UserManager;
-        public PageClaimsManagerModel(UserManager<AppIdentityUser> UserManager)
+
+        readonly IMediator mediator;
+
+        public ClaimsManagerModel(
+            UserManager<AppIdentityUser> UserManager
+            ,IMediator mediator)
         {
             this.UserManager = UserManager;
+            this.mediator = mediator;
         }
 
         public void OnGet()
@@ -21,12 +28,27 @@ namespace Net.Pf.Pages.AdminPanel.Users
 
 
 
-        public record AddClaimCommand(Guid UserId, 
-            string claimType, string claimValue,
-            string returnUrl)
+
+
+        public async Task<ActionResult> OnGetAddClaimToUser(AddClaimToUserCommand command)
+        {
+			await mediator.Send(command);
+            return RedirectToPage("Profile", new { UserId = command.UserId });
+        }
+        public async Task<ActionResult> OnPostAddClaimToUser(AddClaimToUserCommand command)
+        {
+			await mediator.Send(command);
+            return RedirectToPage("Profile", new { UserId = command.UserId });
+        }
+
+
+        public record AddClaimToUserCommand(Guid UserId, 
+            string claimType, string claimValue) 
+            
+            : IRequest<string>
 
         {
-            public class Validator : AbstractValidator<AddClaimCommand>
+            public class Validator : AbstractValidator<AddClaimToUserCommand>
             {
                 static readonly List<string> UserClaimsList =
                     Enum
@@ -41,61 +63,78 @@ namespace Net.Pf.Pages.AdminPanel.Users
                         .Must(x => UserClaimsList.Contains(x.ToString()))
                         ;
                     RuleFor(x => x.claimValue).NotNull().NotEmpty();
-                    RuleFor(x => x.returnUrl).NotNull().NotEmpty();
                 }
             }
+
+
+            public record Handler(
+                     UserManager<AppIdentityUser> UserManager,
+                     RoleManager<AppIdentityRole> roleManager)
+
+                     : IRequestHandler<AddClaimToUserCommand, string>
+            {
+
+                public async Task<string> Handle(AddClaimToUserCommand command, CancellationToken cancellationToken)
+                {
+                    var user = await UserManager.FindByIdAsync(command.UserId.ToString());
+                    if (user == null)
+                    {
+                        Throw.UserNotExists(command.UserId);
+                    }
+                    var claim = new Claim(command.claimType, command.claimValue);
+
+                    var userClaims = (await UserManager.GetClaimsAsync(user))
+                                        .Select(x => x.ToString())
+                                        .ToList();
+
+                    if (userClaims.Contains(claim.ToString()))
+                    {
+                        throw new Exception($"AddClaim {claim.ToString()}");
+                    }
+
+                    var result = await UserManager.AddClaimAsync(user, claim);
+
+                    if (result.Succeeded)
+                    {
+                        return claim.ToString();
+                    }
+                    else
+                    {
+                        throw new Exception($"AddClaim {claim.ToString()} command failed");
+                    }
+                }
+
+
+            }
+
         }
 
 
-        public async Task<ActionResult> OnGetAddClaim(AddClaimCommand command)
+
+
+
+
+
+
+
+
+
+        public async Task<ActionResult> OnGetDeleteClaimFromUser(DeleteClaimFromUserCommand command)
         {
-            var user = await UserManager.FindByIdAsync(command.UserId.ToString());
-            if (user == null)
-            {
-				Throw.UserNotExists(command.UserId);
-			}
-
-            var claim = new Claim(command.claimType, command.claimValue);
-
-            var userClaims = (await UserManager.GetClaimsAsync(user))
-                .Select(x => x.ToString())
-                .ToList();
-
-            if (userClaims.Contains(claim.ToString()))
-            {
-
-
-                return BadRequest(new
-                {
-                    error = $"user has claim {claim.ToString()}"
-                });
-            }
-
-            var result = await UserManager.AddClaimAsync(user, claim);
-
-            if (!result.Succeeded)
-            {
-                return BadRequest(new
-                {
-                    error = $"Add Claim {claim.ToString()} Failed"
-                });
-            }
-
-            return Redirect(command.returnUrl);
+			await mediator.Send(command);
+            return RedirectToPage("Profile", new { UserId = command.UserId });
+        }
+        public async Task<ActionResult> OnPostDeleteClaimFromUser(DeleteClaimFromUserCommand command)
+        {
+            await mediator.Send(command);
+            return RedirectToPage("Profile", new { UserId = command.UserId });
         }
 
 
-
-
-
-
-
-
-        public record DeleteClaimCommand(Guid UserId,
-            string claimType, 
-            string returnUrl)
+        public record DeleteClaimFromUserCommand(Guid UserId, string claimType) 
+            : IRequest<string>
         {
-            public class Validator : AbstractValidator<DeleteClaimCommand>
+            public class Validator : AbstractValidator<DeleteClaimFromUserCommand>
             {
                 static readonly List<string> UserClaimsList =
                     Enum
@@ -107,45 +146,50 @@ namespace Net.Pf.Pages.AdminPanel.Users
                 {
                     RuleFor(x => x.UserId).NotNull().NotEmpty();
                     RuleFor(x => x.claimType).NotNull().NotEmpty()
-                        .Must(x => UserClaimsList.Contains(x.ToString()));
-                    RuleFor(x => x.returnUrl).NotNull().NotEmpty();
+                        //.Must(x => UserClaimsList.Contains(x.ToString()))
+                        ;
                 }
             }
-        }
 
 
-        public async Task<ActionResult> OnGetDeleteClaim(DeleteClaimCommand command)
-        {
-            var user = await UserManager.FindByIdAsync(command.UserId.ToString());
-            if (user == null)
+            public record Handler(
+                     UserManager<AppIdentityUser> UserManager,
+                     RoleManager<AppIdentityRole> roleManager)
+
+                     : IRequestHandler<DeleteClaimFromUserCommand, string>
             {
-                return BadRequest(new
+
+                public async Task<string> Handle(DeleteClaimFromUserCommand command, CancellationToken cancellationToken)
                 {
-                    error = "user does not exists"
-                });
+					var user = await UserManager.FindByIdAsync(command.UserId.ToString());
+                    if (user == null)
+                    {
+                        Throw.UserNotExists(command.UserId);
+                    }
+
+                    var userClaims = (await UserManager.GetClaimsAsync(user))
+                                    .Where(claim => claim.Type == command.claimType)
+                                    .ToList();
+                    if (userClaims.Count() == 0)
+                    {
+                        throw new Exception($"The user has no such claims {command.claimType}");
+                    }
+
+                    var result = await UserManager.RemoveClaimsAsync(user, userClaims);
+                    if (result.Succeeded)
+                    {
+						return command.claimType;
+                    }
+                    else
+                    {
+                        throw new Exception($"Delete Claim {command.claimType} command failed");
+                    }
+                }
+
+
             }
 
-            var userClaims = (await UserManager.GetClaimsAsync(user))
-                .Where(claim => claim.Type == command.claimType)
-                .ToList();
-
-            if (userClaims.Count() == 0)
-            {
-                return BadRequest(new
-                {
-                    error = "The user has no such claims"
-                });
-            }
-            else
-            {
-                await UserManager.RemoveClaimsAsync(user, userClaims);
-            }
-
-            return Redirect(command.returnUrl);
         }
-
-
-
 
 
     }

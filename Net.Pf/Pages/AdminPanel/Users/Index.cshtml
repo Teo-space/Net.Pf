@@ -9,17 +9,23 @@
 
 <table class="table table-bordered table-striped table-hover">
 
+
     <thead class="table-dark">
         <tr>
             <th scope="col">#</th>
             <th scope="col">UserName</th>
             <th scope="col">Detailing</th>
+
             <th scope="col">Add Claims</th>
-            <th scope="col">Delete Claims</th>
-            <th scope="col">Add Claims2</th>
+            <th scope="col">Delete</th>
+
             <th scope="col">Add ToRole</th>
+            <th scope="col">Delete ToRole</th>
+
         </tr>
     </thead>
+
+
 
     <tbody>
         @for (int i = 0; i < @Model.OnGetUsers.Count; i++)
@@ -32,69 +38,12 @@
 
                 <td><a asp-page="/AdminPanel/Users/Profile" asp-route-UserId=@row.Id target="_blank">Detailing</a></td>
 
-                <td>
 
-                    <div class="dropdown">
-
-                        <button class="btn btn-primary dropdown-toggle"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Add Claims
-                        </button>
-
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            @foreach (var claim in Enum.GetNames(typeof(UserClaims))
-                            //.Where(x => x != UserClaims.Administrator.ToString())
-                            .ToList())
-                            {
-                                <li>
-                                    <a class="dropdown-item"
-                                           asp-page="/AdminPanel/Users/ClaimsAdd"
-                                           asp-page-handler="AddClaim"
-                                           asp-route-UserId="@row.Id"
-                                           asp-route-userClaims="@claim"
-                                           asp-route-returnUrl="@Model.Request.Path"
-                                            target="_blank">@claim</a>
-                                </li>
-                            }
-                        </ul>
-
-                    </div>
-
-                </td>
-
-                <td>
-
-                    <div class="dropdown">
-
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Delete Claims</button>
-
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            @foreach (var claim in Enum.GetNames(typeof(UserClaims))
-                            //.Where(x => x != UserClaims.Administrator.ToString())
-                            .ToList())
-                            {
-                                <li>
-                                    <a class="dropdown-item"
-                                           asp-page="/AdminPanel/Users/ClaimsDelete"
-                                           asp-page-handler="DeleteClaim"
-                                           asp-route-UserId="@row.Id"
-                                           asp-route-userClaims="@claim"
-                                           asp-route-returnUrl="@Model.Request.Path"
-                                            target="_blank">@claim</a>
-                                </li>
-                            }
-                        </ul>
-
-                    </div>
-
-                </td>
 
                 <td>
                     <div class="dropdown">
 
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Add Claims 2</button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Add Claims</button>
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             @foreach (var claim in Enum.GetNames(typeof(UserClaims))
@@ -102,14 +51,12 @@
                            .ToList())
                             {
                                 <li>
-                                    <a class="dropdown-item"
-                                                asp-page="/AdminPanel/Users/ClaimsManager"
-                                                asp-page-handler="AddClaim"
-                                                asp-route-UserId="@row.Id"
-                                                asp-route-claimType="@claim"
-                                                asp-route-claimValue="@claim"
-                                                asp-route-returnUrl="@Model.Request.Path"
-                                                target="_blank">@claim</a>
+                                    <form class="form-group" method="post" asp-page="ClaimsManager" asp-page-handler="AddClaimToUser">
+                                        <input type="text" class="form-control" name="UserId" id="UserId" value="@row.Id" hidden>
+                                        <input type="text" class="form-control" name="claimType" id="claimType" value="@claim" hidden>
+                                        <input type="text" class="form-control" name="claimValue" id="claimValue" value="@claim" hidden>
+                                        <button class="btn btn-primary" type="submit">@claim</button>
+                                    </form>
                                 </li>
                             }
                         </ul>
@@ -117,6 +64,35 @@
                     </div>
 
                 </td>
+
+
+
+                <td>
+                    <div class="dropdown">
+
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Delete</button>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            @foreach (var claim in Enum.GetNames(typeof(UserClaims))
+                           //.Where(x => x != UserClaims.Administrator.ToString())
+                           .ToList())
+                            {
+                                <li>
+                                    <form class="form-group" method="post" asp-page="ClaimsManager" asp-page-handler="DeleteClaimFromUser">
+                                        <input type="text" class="form-control" name="UserId" id="UserId" value="@row.Id" hidden>
+                                        <input type="text" class="form-control" name="claimType" id="claimType" value="@claim" hidden>
+                                        <button class="btn btn-primary" type="submit">@claim</button>
+                                    </form>
+                                </li>
+                            }
+                        </ul>
+
+                    </div>
+
+                </td>
+
+
+
 
                 <td>
                     <div class="dropdown">
@@ -129,14 +105,11 @@
                            .ToList())
                             {
                                 <li>
-                                    <a class="dropdown-item"
-                                                asp-page="/AdminPanel/Users/RoleManager"
-                                                asp-page-handler="AddToRole"
-                                                asp-route-UserId="@row.Id"
-                                               asp-route-RoleName="@role"
-
-                                                asp-route-returnUrl="@Model.Request.Path"
-                                                target="_blank">@role</a>
+                                    <form class="form-group" method="post" asp-page="RoleManager" asp-page-handler="AddUserToRole">
+                                        <input type="text" class="form-control" name="UserId" id="UserId" value="@row.Id" hidden>
+                                        <input type="text" class="form-control" name="RoleName" id="RoleName" value="@role" hidden>
+                                        <button class="btn btn-primary" type="submit">@role</button>
+                                    </form>
                                 </li>
                             }
                         </ul>
@@ -146,6 +119,30 @@
                 </td>
 
 
+
+                <td>
+                    <div class="dropdown">
+
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Delete</button>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            @foreach (var role in Enum.GetNames(typeof(UserRoles))
+                           //.Where(x => x != UserClaims.Administrator.ToString())
+                           .ToList())
+                            {
+                                <li>
+                                    <form class="form-group" method="post" asp-page="RoleManager" asp-page-handler="DeleteUserFromRole">
+                                        <input type="text" class="form-control" name="UserId" id="UserId" value="@row.Id" hidden>
+                                        <input type="text" class="form-control" name="RoleName" id="RoleName" value="@role" hidden>
+                                        <button class="btn btn-primary" type="submit">@role</button>
+                                    </form>
+                                </li>
+                            }
+                        </ul>
+
+                    </div>
+
+                </td>
 
 
             </tr>
