@@ -55,7 +55,7 @@
                                         <input type="text" class="form-control" name="UserId" id="UserId" value="@row.Id" hidden>
                                         <input type="text" class="form-control" name="claimType" id="claimType" value="@claim" hidden>
                                         <input type="text" class="form-control" name="claimValue" id="claimValue" value="@claim" hidden>
-                                        <button class="btn btn-primary" type="submit">@claim</button>
+                                        <button class="btn btn-link dropdown-item" type="submit">@claim</button>
                                     </form>
                                 </li>
                             }
@@ -81,7 +81,7 @@
                                     <form class="form-group" method="post" asp-page="ClaimsManager" asp-page-handler="DeleteClaimFromUser">
                                         <input type="text" class="form-control" name="UserId" id="UserId" value="@row.Id" hidden>
                                         <input type="text" class="form-control" name="claimType" id="claimType" value="@claim" hidden>
-                                        <button class="btn btn-primary" type="submit">@claim</button>
+                                        <button class="btn btn-link dropdown-item" type="submit">@claim</button>
                                     </form>
                                 </li>
                             }
@@ -108,7 +108,7 @@
                                     <form class="form-group" method="post" asp-page="RoleManager" asp-page-handler="AddUserToRole">
                                         <input type="text" class="form-control" name="UserId" id="UserId" value="@row.Id" hidden>
                                         <input type="text" class="form-control" name="RoleName" id="RoleName" value="@role" hidden>
-                                        <button class="btn btn-primary" type="submit">@role</button>
+                                        <button class="btn btn-link dropdown-item" type="submit">@role</button>
                                     </form>
                                 </li>
                             }
@@ -134,7 +134,7 @@
                                     <form class="form-group" method="post" asp-page="RoleManager" asp-page-handler="DeleteUserFromRole">
                                         <input type="text" class="form-control" name="UserId" id="UserId" value="@row.Id" hidden>
                                         <input type="text" class="form-control" name="RoleName" id="RoleName" value="@role" hidden>
-                                        <button class="btn btn-primary" type="submit">@role</button>
+                                        <button class="btn btn-link dropdown-item" type="submit">@role</button>
                                     </form>
                                 </li>
                             }
