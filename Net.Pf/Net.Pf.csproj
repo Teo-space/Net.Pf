@@ -72,7 +72,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\AdminPanel\Forum\" />
-    <Folder Include="Pages\Forum\" />
   </ItemGroup>
 
 </Project>

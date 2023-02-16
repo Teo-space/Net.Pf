@@ -16,7 +16,7 @@ public record SideBar(string Name = "SideBar")
         return subMenu;
     }
 
-    public List<SubMenu> SubMenus() => __SubMenus.Values.ToList();
+    public List<SubMenu> SubMenus() => __SubMenus.Values.OrderBy(x => x.Name).ToList();
 
 
 }
