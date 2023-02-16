@@ -6,22 +6,22 @@ namespace Net.Pf.Configuration;
 public static class ConfigurationIdentity
 {
     //sad23rtfS!As23
-    public static void Configure(this WebApplicationBuilder builder)
+    public static void AddIdentity(this IServiceCollection services)
     {
         // Add services to the container.
         //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection:IdentityDb")
         ///                      ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-        builder.Services.AddDbContext<AppIdentityDbContext>(options =>
+        services.AddDbContext<AppIdentityDbContext>(options =>
         {
             //options.UseSqlServer(connectionString)
             //options.UseInMemoryDatabase("IdentityDb");
             options.UseSqlite($"Data Source=Identity/IdentityDb.db");
         });
 
-        builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+        services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder.Services
+        services
         .Configure<IdentityOptions>(options =>
         {
             // Password settings.
@@ -53,12 +53,12 @@ public static class ConfigurationIdentity
         ;
 
 
-        builder.Services.AddAuthentication(options =>
+        services.AddAuthentication(options =>
         {
             options.RequireAuthenticatedSignIn = true;
         });
 
-        builder.Services.AddAuthorization(options =>
+        services.AddAuthorization(options =>
         {
             foreach(var userClaim in UserClaimList.Get())
             {

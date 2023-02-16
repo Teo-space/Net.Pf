@@ -16,11 +16,11 @@
             <th scope="col">UserName</th>
             <th scope="col">Detailing</th>
 
-            <th scope="col">Add Claims</th>
-            <th scope="col">Delete</th>
+            <th scope="col">Add Claim</th>
+            <th scope="col">Delete Claim</th>
 
-            <th scope="col">Add ToRole</th>
-            <th scope="col">Delete ToRole</th>
+            <th scope="col">Add to Role</th>
+            <th scope="col">Delete From Role</th>
 
         </tr>
     </thead>
@@ -43,9 +43,9 @@
                 <td>
                     <div class="dropdown">
 
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Add Claims</button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Add Claim</button>
 
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ul class="dropdown-menu">
                             @foreach (var claim in Enum.GetNames(typeof(UserClaims))
                            //.Where(x => x != UserClaims.Administrator.ToString())
                            .ToList())
@@ -70,9 +70,9 @@
                 <td>
                     <div class="dropdown">
 
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Delete</button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Delete Claim</button>
 
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ul class="dropdown-menu">
                             @foreach (var claim in Enum.GetNames(typeof(UserClaims))
                            //.Where(x => x != UserClaims.Administrator.ToString())
                            .ToList())
@@ -97,9 +97,9 @@
                 <td>
                     <div class="dropdown">
 
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Add Role</button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Add To Role</button>
 
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ul class="dropdown-menu">
                             @foreach (var role in Enum.GetNames(typeof(UserRoles))
                            //.Where(x => x != UserClaims.Administrator.ToString())
                            .ToList())
@@ -123,9 +123,9 @@
                 <td>
                     <div class="dropdown">
 
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Delete</button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Delete from Role</button>
 
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ul class="dropdown-menu">
                             @foreach (var role in Enum.GetNames(typeof(UserRoles))
                            //.Where(x => x != UserClaims.Administrator.ToString())
                            .ToList())

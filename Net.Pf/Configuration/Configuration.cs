@@ -5,7 +5,9 @@ public static class Configuration
 {
     public static WebApplicationBuilder ConfigureAll(this WebApplicationBuilder builder)
     {
-        ConfigurationIdentity.Configure(builder);
+        builder.Services.AddIdentity();
+        builder.Services.AddDbContexts();
+
 
 
 

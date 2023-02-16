@@ -71,7 +71,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\DataBases\Forum\" />
+    <Folder Include="Pages\AdminPanel\Forum\" />
     <Folder Include="Pages\Forum\" />
   </ItemGroup>
 

@@ -32,6 +32,12 @@ public static class ConfigurationServices
         builder.Services.AddSwaggerGen();
 
 
+
+
+
+
+
+
     }
 
 
