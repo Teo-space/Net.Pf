@@ -31,6 +31,9 @@ public class IndexModel : PageModel
         //var self = await UserManager.FindByIdAsync(User.ClaimNameIdentifier());
         //await UserManager.AddClaimAsync(self, new System.Security.Claims.Claim("AccessRights", UserRoles.Administrator.ToString()));
         //UserManager.GetClaimsAsync
+
+        var x = UserClaims.Moderator;
+        //((int)x)
     }
 
 
