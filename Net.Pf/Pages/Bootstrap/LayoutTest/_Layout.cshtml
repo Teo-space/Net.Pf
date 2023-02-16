@@ -15,6 +15,48 @@
     .Addlink("NavBar1", "/Bootstrap/Navs/NavBar1")
     ;
 
+    SideBar
+    .AddSubmenu("Forms")//.SetShow()
+    .Addlink("Forms1", "/Bootstrap/Forms/Forms1")
+    .Addlink("Forms2", "/Bootstrap/Forms/Forms2")
+    .Addlink("Forms3", "/Bootstrap/Forms/Forms3")
+    .Addlink("FormsRange", "/Bootstrap/Forms/FormsRange")
+    .Addlink("FormsLists", "/Bootstrap/Forms/FormsLists")
+    .Addlink("FormsCheckbox", "/Bootstrap/Forms/FormsCheckbox")
+
+    ;
+
+    SideBar
+    .AddSubmenu("Elements")//.SetShow()
+    .Addlink("Card", "/Bootstrap/Elements/Card")
+    .Addlink("Breadcrumb", "/Bootstrap/Elements/Breadcrumb")
+    .Addlink("Accordion", "/Bootstrap/Elements/Accordion")
+    .Addlink("Alerts", "/Bootstrap/Elements/Alerts")
+    .Addlink("ListGroup", "/Bootstrap/Elements/ListGroup")
+    .Addlink("DropDowns", "/Bootstrap/Elements/DropDowns")
+    .Addlink("Pagination", "/Bootstrap/Elements/Pagination")
+    ;
+
+
+    SideBar
+        .AddSubmenu("Table").SetShow()
+        .Addlink("Table", "/Bootstrap/Tables/Table")
+        .Addlink("TablePagination", "/Bootstrap/Tables/TablePagination")
+        .Addlink("TableScrollableBody", "/Bootstrap/Tables/TableScrollableBody")
+        ;
+
+
+    SideBar
+        .AddSubmenu("Colors").SetShow()
+        .Addlink("Colors", "/Bootstrap/Colors")
+      ;
+
+    SideBar
+        .AddSubmenu("LayoutTest111").SetShow()
+        .Addlink("LayoutTest222", "/Bootstrap/LayoutTest/Index")
+      ;
+
+
 }
 
 
@@ -68,7 +110,7 @@
 
 
 
-                <div class="offset-1 col-1 navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link navbar-text" asp-area="" asp-page="/AdminPanel/Index">Admin</a>

@@ -51,6 +51,11 @@
         .Addlink("Colors", "/Bootstrap/Colors")
       ;
 
+    SideBar
+        .AddSubmenu("LayoutTest111").SetShow()
+        .Addlink("LayoutTest222", "/Bootstrap/LayoutTest/Index")
+      ;
+
 
 }
 
@@ -80,17 +85,11 @@
 <body class="mh-100 h-100 w-100 mw-100 overflow-hidden">
 
 
-
     <header class="sticky-top">
+        <nav class="container-fluid navbar navbar-expand-sm navbar-toggleable-sm
+                navbar-dark bg-dark text-light shadow border-dark border-bottom p-1 mb-3">
 
-        <nav class="container-fluid navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark shadow border-dark border-bottom p-1 mb-3">
-
-            <div class="container-fluid m-0 p-0">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
+            <div class="container-fluid">
 
                 <div class="row justify-content-start pt-1 pb-1 ps-3 pe-4">
                     <a class="navbar-brand  col m-0 p-0" asp-area="" asp-page="/Index">
@@ -98,33 +97,31 @@
                     </a>
                 </div>
 
-                <div class="container-fluid row justify-content-start col-sm-2">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">   . . .</li>
-                        <li class="nav-item">
-                            <a class="navbar-brand " asp-area="" asp-page="/Index">@AppName</a>
-                        </li>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">@AppName</a>
 
-                    </ul>
-                </div>
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                <div class="container-fluid offset-0  col-sm-2 navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link navbar-text" asp-area="" asp-page="/AdminPanel/Index">Admin</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link navbar-text" asp-area="" asp-page="/Bootstrap/Index">Bootstrap</a>
+                            <a class="nav-link" asp-area="" asp-page="/Bootstrap/Index">Bootstrap</a>
                         </li>
-
                     </ul>
 
                 </div>
 
-
-                <div class="container-fluid offset-0  col-sm-4  navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link navbar-text" asp-area="" asp-page="/Forum/Index">Forum</a>
@@ -132,18 +129,20 @@
                         <li class="nav-item">
                             <a class="nav-link navbar-text" asp-area="" asp-page="/HelpDesk/Index">HelpDesk</a>
                         </li>
-
                     </ul>
 
                 </div>
 
-                <partial name="_LoginPartial" />
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <partial name="_LoginPartial" />
+                </div>
+
+
             </div>
 
         </nav>
 
     </header>
-
 
 
     <!-------------------------------------------------------------------------------------------------------------->
