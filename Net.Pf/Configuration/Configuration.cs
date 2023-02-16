@@ -9,14 +9,19 @@ public static class Configuration
         builder.Services.AddDbContexts();
 
 
+        builder.Services.AddServices();
+        builder.Services.AddPagesAndControllers();
 
 
-        ConfigurationServices.Configure(builder);
 
 
-        ConfigurationPages.Configure(builder);
+
 
         ConfigurationRateLimiter.Configure(builder);
+
+
+
+
 
 
 

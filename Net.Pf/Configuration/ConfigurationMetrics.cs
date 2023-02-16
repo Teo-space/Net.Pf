@@ -2,7 +2,7 @@
 {
     public static class ConfigurationMetrics
     {
-        public static void Configure(this WebApplicationBuilder builder)
+        public static void Configure(this IServiceCollection services)
         {
 
             //ConfigureMiniProfiler(builder);
@@ -11,9 +11,9 @@
 
         }
 
-        static void ConfigureMiniProfiler(WebApplicationBuilder builder)
+        static void ConfigureMiniProfiler(this IServiceCollection services)
         {
-            builder.Services.AddMiniProfiler(options =>
+            services.AddMiniProfiler(options =>
             {
                 options.RouteBasePath = "/profiler";
                 options.TrackConnectionOpenClose = true;

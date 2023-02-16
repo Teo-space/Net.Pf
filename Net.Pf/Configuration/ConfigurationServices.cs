@@ -4,12 +4,14 @@ namespace Net.Pf.Configuration;
 
 public static class ConfigurationServices
 {
-    public static void Configure(this WebApplicationBuilder builder)
+    public static void AddServices(this IServiceCollection services)
     {
-        builder.Services.AddLogging();
-        builder.Services.AddCors();
 
-        builder.Services.AddSession(options =>
+
+        services.AddLogging();
+        services.AddCors();
+
+        services.AddSession(options =>
         {
             options.IdleTimeout = TimeSpan.FromHours(6);
             options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -21,15 +23,17 @@ public static class ConfigurationServices
 
 
 
-        builder.Services.AddFluentValidationAutoValidation();
-        builder.Services.AddFluentValidationClientsideAdapters();
-        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddFluentValidationAutoValidation();
+        services.AddFluentValidationClientsideAdapters();
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 
-        builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+        services.AddMediatR(Assembly.GetExecutingAssembly());
 
 
-        builder.Services.AddSwaggerGen();
+        services.AddSwaggerGen();
+
+
 
 
 

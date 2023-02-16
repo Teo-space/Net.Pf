@@ -7,16 +7,18 @@ namespace Net.Pf.Configuration;
 
 public static class ConfigurationPages
 {
-    public static void Configure(this WebApplicationBuilder builder)
+    public static void AddPagesAndControllers(this IServiceCollection services)
     {
-        builder.Services.AddControllersWithViews(options =>
+
+
+        services.AddControllersWithViews(options =>
         {
             options.Filters.Add(typeof(CounterAttribute));
             options.Filters.Add(typeof(CustomExceptionFilterAttribute));
         });
 
 
-        builder.Services.AddRazorPages(options =>
+        services.AddRazorPages(options =>
         {
             options.Conventions.ConfigureFilter(new ValidatorPageFilter());
             options.Conventions.ConfigureFilter(new CounterPageFilter());
