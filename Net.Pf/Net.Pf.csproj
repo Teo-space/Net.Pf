@@ -70,8 +70,4 @@
 	  
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\AdminPanel\Forum\" />
-  </ItemGroup>
-
 </Project>

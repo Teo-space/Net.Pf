@@ -1,5 +1,5 @@
-﻿using Net.Pf.Identity;
-using Net.Pf.Infrastructure.DataBases.Forum;
+﻿using Net.Pf.DataBases.Forum;
+using Net.Pf.Identity;
 
 namespace Net.Pf.Configuration;
 

@@ -1,25 +1,25 @@
-﻿using Net.Pf.Identity;
+﻿using Net.Pf.DataBases.Forum.Models;
+using Net.Pf.Identity;
 
-namespace Net.Pf.Infrastructure.DataBases.Forum;
+namespace Net.Pf.DataBases.Forum;
 
 public class ForumDbContext : DbContext
 {
-    //public DbSet<AppIdentityUser> Users { get; set; }
+    public DbSet<ForumFork> Forks { get; set; }
 
     public ForumDbContext(DbContextOptions<ForumDbContext> options) : base(options)
     {
         Database.EnsureCreated();
     }
 
-
-    /*
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
-    */
 
 
-    //ForumSections
+
 }
+
+
