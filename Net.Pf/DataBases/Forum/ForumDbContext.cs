@@ -6,6 +6,10 @@ namespace Net.Pf.DataBases.Forum;
 public class ForumDbContext : DbContext
 {
     public DbSet<ForumFork> Forks { get; set; }
+    public DbSet<ForumTopic> Topics { get; set; }
+    public DbSet<ForumPost> Posts { get; set; }
+
+
 
     public ForumDbContext(DbContextOptions<ForumDbContext> options) : base(options)
     {

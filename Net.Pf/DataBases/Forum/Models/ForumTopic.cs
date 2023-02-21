@@ -18,8 +18,14 @@ public class ForumTopic
     public int CountReplies { get; set; } = 0;
 
 
+    public Guid ForumForkId { get; set; }
+    public ForumFork forumFork { get; set; }
 
+
+
+    public List<ForumPost> forumPosts { get; set; } = new();
 }
+
 
 
 public class ForumTopicConfiguration : IEntityTypeConfiguration<ForumTopic>
@@ -39,7 +45,11 @@ public class ForumTopicConfiguration : IEntityTypeConfiguration<ForumTopic>
         builder.Property(x => x.CountReplies).IsRequired();
 
 
+        builder.HasOne(x => x.forumFork).WithMany(x => x.forumTopics).HasForeignKey(x => x.ForumForkId);
 
+        builder.HasMany(x => x.forumPosts).WithOne(x => x.forumTopic).HasForeignKey(x => x.ForumTopicId);
     }
+
+
 }
 

@@ -16,8 +16,8 @@ public class ForumPost
     public DateTime editedAt { get; set; }
 
 
-
-
+    public Guid ForumTopicId { get; set; }
+    public ForumTopic forumTopic { get; set; }
 }
 
 
@@ -37,7 +37,9 @@ public class ForumPostConfiguration : IEntityTypeConfiguration<ForumPost>
         builder.Property(x => x.addedAt).HasColumnType(nameof(DateTime)).IsRequired();
         builder.Property(x => x.editedAt).HasColumnType(nameof(DateTime)).IsRequired();
 
-
+        builder.HasOne(x => x.forumTopic).WithMany(x => x.forumPosts)
+            .HasForeignKey(x => x.ForumPostId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
 }

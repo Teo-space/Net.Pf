@@ -10,10 +10,10 @@ public class ForumFork
     public string Description { get; set; }
 
 
-
+    public List<ForumTopic> forumTopics { get; set; } = new();
 }
 
-
+//ForumTopic
 
 
 public class ForumForkConfiguration : IEntityTypeConfiguration<ForumFork>
@@ -27,5 +27,11 @@ public class ForumForkConfiguration : IEntityTypeConfiguration<ForumFork>
 
         builder.Property(x => x.Name).IsRequired();
         builder.Property(x =>x.Description).IsRequired();
+
+        builder.HasMany(x => x.forumTopics).WithOne(x => x.forumFork)
+            .HasForeignKey(x => x.ForumForkId)
+            //.OnDelete(DeleteBehavior.Cascade)
+            ;
     }
 }
+
