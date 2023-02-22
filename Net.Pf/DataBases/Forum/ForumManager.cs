@@ -33,18 +33,6 @@ public interface IForkManager
 
 
 
-//ForumFork
-//ForumTopic
-//ForumPost
-internal record ForkManager(ForumDbContext Context)
-
-    : IForkManager
-{
-    public IEnumerable<ForumFork> GetForks() => Context.Forks.ToList();
-
-
-
-}
 
 
 
