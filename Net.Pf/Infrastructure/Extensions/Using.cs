@@ -1,1 +1,1 @@
-﻿global using Extensions;
+﻿global using Net.Pf.Infrastructure.Extensions;

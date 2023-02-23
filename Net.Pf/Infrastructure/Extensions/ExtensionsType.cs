@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 
 
-namespace Extensions;
+namespace Net.Pf.Infrastructure.Extensions;
 
 
 public static class ExtensionsType

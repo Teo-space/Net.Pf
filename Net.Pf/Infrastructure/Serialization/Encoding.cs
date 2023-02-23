@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Infrastructure.Serialization;
+namespace Net.Pf.Infrastructure.Serialization;
 
 
 

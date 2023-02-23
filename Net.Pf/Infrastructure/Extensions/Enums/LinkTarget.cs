@@ -1,4 +1,4 @@
-﻿namespace Extensions;
+﻿namespace Net.Pf.Infrastructure.Extensions.Enums;
 
 public enum LinkTarget
 {

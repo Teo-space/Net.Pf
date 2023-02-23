@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace Extensions;
+namespace Net.Pf.Infrastructure.Extensions;
 
 
 public static class ExtensionsViewComponentHelper

@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Cryptography.Exceptions;
+﻿namespace Net.Pf.Infrastructure.Cryptography.Exceptions;
 
 
 internal class ArgumentIsNullOrEmptyException : ArgumentException

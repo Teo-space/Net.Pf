@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace Extensions;
+namespace Net.Pf.Infrastructure.Extensions;
 
 
 public static class ExtensionsClaims

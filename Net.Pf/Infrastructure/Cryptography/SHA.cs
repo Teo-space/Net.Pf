@@ -1,8 +1,8 @@
-﻿using Infrastructure.Cryptography.Exceptions;
+﻿using Net.Pf.Infrastructure.Cryptography.Exceptions;
 using System.Security.Cryptography;
 
 
-namespace Infrastructure.Cryptography;
+namespace Net.Pf.Infrastructure.Cryptography;
 
 
 public static class SHA

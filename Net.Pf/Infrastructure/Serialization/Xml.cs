@@ -2,7 +2,7 @@
 using System.Xml.Serialization;
 
 
-namespace Infrastructure.Serialization;
+namespace Net.Pf.Infrastructure.Serialization;
 
 
 internal static class Xml

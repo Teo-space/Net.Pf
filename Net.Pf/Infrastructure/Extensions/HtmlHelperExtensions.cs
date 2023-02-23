@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using HtmlTags;
+using Net.Pf.Infrastructure.Extensions.Enums;
 
-
-namespace Extensions;
+namespace Net.Pf.Infrastructure.Extensions;
 
 
 public static class HtmlHelperExtensions
@@ -86,7 +86,7 @@ public static class HtmlHelperExtensions
 
 */
     public static HtmlTag Table<T, TCollectionObject>
-        (this IHtmlHelper<T> helper, IEnumerable<TCollectionObject> collection) 
+        (this IHtmlHelper<T> helper, IEnumerable<TCollectionObject> collection)
         where TCollectionObject : class
     {
         var props = collection.Type().GetProperties();

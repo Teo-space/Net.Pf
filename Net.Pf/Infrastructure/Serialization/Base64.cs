@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Serialization;
+﻿namespace Net.Pf.Infrastructure.Serialization;
 
 
 internal static class Base64
