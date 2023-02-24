@@ -17,10 +17,10 @@ internal interface ITopicManager
         string ShortDescription,
         string Description);
 
-
     public void EditName(Guid TopicId, string Name);
     public void EditDescription(Guid TopicId, string Description);
     public void Delete(Guid Id);
+
 
 }
 

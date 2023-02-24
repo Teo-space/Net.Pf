@@ -5,9 +5,7 @@ namespace Infrastructure.DataBases.Forum.Managers.PostManager;
 internal interface IPostManager
 {
     public IReadOnlyList<ForumPost> GetPosts(Guid Id);
-
     public ForumPost? GetById(Guid Id);
-
     public bool Exists(Guid Id) => GetById(Id) != default;
 
 
@@ -17,4 +15,5 @@ internal interface IPostManager
 
 
 }
+
 

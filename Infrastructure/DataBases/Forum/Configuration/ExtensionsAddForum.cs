@@ -15,8 +15,8 @@ public static class ExtensionsAddForum
         services.AddDbContext<ForumDbContext>(options =>
         {
             //options.UseSqlServer(connectionString)
-            //options.UseInMemoryDatabase("IdentityDb");
-            options.UseSqlite($"Data Source=Infrastructure/DataBases/Forum/Data/ForumDbContext.db");
+            options.UseInMemoryDatabase("ForumDbContext.db");
+            //options.UseSqlite($"Data Source=Infrastructure/DataBases/Forum/Data/ForumDbContext.db");
         });
 
         services.AddUserAccessor();
