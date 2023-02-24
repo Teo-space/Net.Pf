@@ -1,6 +1,6 @@
-﻿using Net.Pf.Application.Filters.PageFilters;
-using Net.Pf.Application.Filters;
+﻿using Net.Pf.Filters.PageFilters;
 using Net.Pf.Identity;
+using Net.Pf.Filters;
 
 namespace Net.Pf.Configuration;
 

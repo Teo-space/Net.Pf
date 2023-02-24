@@ -16,7 +16,7 @@ public static class ConfigurationIdentity
         {
             //options.UseSqlServer(connectionString)
             //options.UseInMemoryDatabase("IdentityDb");
-            options.UseSqlite($"Data Source=Identity/IdentityDb.db");
+            options.UseSqlite($"Data Source=Identity/Data/IdentityDb.db");
         });
 
         services.AddDatabaseDeveloperPageExceptionFilter();

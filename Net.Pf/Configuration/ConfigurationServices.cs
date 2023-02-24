@@ -1,4 +1,5 @@
-﻿using FluentValidation.AspNetCore;
+﻿using Extensions.Configuration;
+using FluentValidation.AspNetCore;
 
 namespace Net.Pf.Configuration;
 
@@ -33,7 +34,7 @@ public static class ConfigurationServices
 
         services.AddSwaggerGen();
 
-
+        services.AddUserAccessor();
 
 
 
