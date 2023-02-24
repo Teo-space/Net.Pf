@@ -2,8 +2,10 @@
 
 namespace Api.Extensions;
 
+
 public static class ExtensionsMinimalApi
 {
+
     public record Get(IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern);
 
 

@@ -1,7 +1,6 @@
 using Api.Authorization;
 using Api.Extensions;
-using Microsoft.AspNetCore.Builder;
-using System.Diagnostics.CodeAnalysis;
+
 
 WebApplication
     .CreateBuilder(args)
@@ -38,10 +37,10 @@ public static class WebApplicationConfiguration
         app.UseAuthorization();
         app.MapControllers();
 
+
         //app.MapGet("Minimal api", () => $"xxx");
 
-        app.RouteGet("Minimal api")
-            .Request(() => $"xxx");
+        app.RouteGet("Minimal api").Request(() => $"xxx");
 
         return app;
     }
