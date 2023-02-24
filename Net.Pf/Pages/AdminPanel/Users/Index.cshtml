@@ -47,7 +47,7 @@
 
                         <ul class="dropdown-menu">
                             @foreach (var claim in Enum.GetNames(typeof(UserClaims))
-                           //.Where(x => x != UserClaims.Administrator.ToString())
+                           .Where(x => x != UserClaims.Administrator.ToString())
                            .ToList())
                             {
                                 <li>
@@ -74,7 +74,7 @@
 
                         <ul class="dropdown-menu">
                             @foreach (var claim in Enum.GetNames(typeof(UserClaims))
-                           //.Where(x => x != UserClaims.Administrator.ToString())
+                           .Where(x => x != UserClaims.Administrator.ToString())
                            .ToList())
                             {
                                 <li>
@@ -101,7 +101,7 @@
 
                         <ul class="dropdown-menu">
                             @foreach (var role in Enum.GetNames(typeof(UserRoles))
-                           //.Where(x => x != UserClaims.Administrator.ToString())
+                           .Where(x => x != UserClaims.Administrator.ToString())
                            .ToList())
                             {
                                 <li>
@@ -127,7 +127,7 @@
 
                         <ul class="dropdown-menu">
                             @foreach (var role in Enum.GetNames(typeof(UserRoles))
-                           //.Where(x => x != UserClaims.Administrator.ToString())
+                           .Where(x => x != UserClaims.Administrator.ToString())
                            .ToList())
                             {
                                 <li>

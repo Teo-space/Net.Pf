@@ -3,19 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Net.Pf.Identity;
 using System.Security.Claims;
-using static Net.Pf.Pages.AdminPanel.Users.RoleManagerModel;
 
 namespace Net.Pf.Pages.AdminPanel.Users
 {
     public class ClaimsManagerModel : PageModel
     {
-        UserManager<AppIdentityUser> UserManager;
+        readonly UserManager<AppIdentityUser> UserManager;
 
         readonly IMediator mediator;
 
-        public ClaimsManagerModel(
-            UserManager<AppIdentityUser> UserManager
-            ,IMediator mediator)
+        public ClaimsManagerModel(UserManager<AppIdentityUser> UserManager,IMediator mediator)
         {
             this.UserManager = UserManager;
             this.mediator = mediator;
@@ -45,15 +42,11 @@ namespace Net.Pf.Pages.AdminPanel.Users
             string claimType, string claimValue) 
             
             : IRequest<string>
-
         {
             public class Validator : AbstractValidator<AddClaimToUserCommand>
             {
-                static readonly List<string> UserClaimsList =
-                    Enum
-                    .GetNames(typeof(UserClaims))
-                    //.Where(x => x != UserClaims.Administrator.ToString())
-                    .ToList();
+                static readonly IReadOnlyList<string> UserClaimsList =
+                    Enum.GetNames(typeof(UserClaims)).Where(x => x != UserClaims.Administrator.ToString()).ToList();
 
                 public Validator()
                 {
@@ -78,9 +71,9 @@ namespace Net.Pf.Pages.AdminPanel.Users
                     var user = await UserManager.FindByIdAsync(command.UserId.ToString());
                     if (user == null)
                     {
-                        //Throw.UserNotExists(command.UserId);
                         throw new InvalidOperationException($"User Not Exists! User Id : {command.UserId}");
                     }
+
                     var claim = new Claim(command.claimType, command.claimValue);
 
                     var userClaims = (await UserManager.GetClaimsAsync(user))
@@ -136,17 +129,14 @@ namespace Net.Pf.Pages.AdminPanel.Users
         {
             public class Validator : AbstractValidator<DeleteClaimFromUserCommand>
             {
-                static readonly List<string> UserClaimsList =
-                    Enum
-                        .GetNames(typeof(UserClaims))
-                        //.Where(x => x != UserClaims.Administrator.ToString())
-                        .ToList();
+                static readonly IReadOnlyList<string> UserClaimsList =
+                    Enum.GetNames(typeof(UserClaims)).Where(x => x != UserClaims.Administrator.ToString()).ToList();
 
                 public Validator()
                 {
                     RuleFor(x => x.UserId).NotNull().NotEmpty();
                     RuleFor(x => x.claimType).NotNull().NotEmpty()
-                        //.Must(x => UserClaimsList.Contains(x.ToString()))
+                        .Must(x => UserClaimsList.Contains(x.ToString()))
                         ;
                 }
             }
@@ -164,7 +154,6 @@ namespace Net.Pf.Pages.AdminPanel.Users
 					var user = await UserManager.FindByIdAsync(command.UserId.ToString());
                     if (user == null)
                     {
-                        //Throw.UserNotExists(command.UserId);
                         throw new InvalidOperationException($"User Not Exists! User Id : {command.UserId}");
                     }
 
@@ -173,7 +162,7 @@ namespace Net.Pf.Pages.AdminPanel.Users
                                     .ToList();
                     if (userClaims.Count() == 0)
                     {
-                        throw new Exception($"The user has no such claims {command.claimType}");
+                        throw new InvalidOperationException($"The user has no such claims {command.claimType}");
                     }
 
                     var result = await UserManager.RemoveClaimsAsync(user, userClaims);
