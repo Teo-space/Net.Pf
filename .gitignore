@@ -363,3 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 /Net.Pf/Identity/IdentityDb.db-shm
 /Net.Pf/Identity/IdentityDb.db-wal
+*.db
+*.db-shm
+*.db-wal
+/Net.Pf/Identity/IdentityDb.db
