@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc
 @using Microsoft.AspNetCore.Mvc.Rendering
+@using StackExchange.Profiling
+
 
 @using global::Net.Pf
 @using global::Net.Pf.UiFacade
@@ -13,7 +15,14 @@
 @using global::Tools.Helpers
 
 
-@using StackExchange.Profiling
+@using global::Infrastructure
+@using global::Infrastructure.DataBases
+@using global::Infrastructure.DataBases.Forum
+@using global::Infrastructure.DataBases.Forum.Managers
+@using global::Infrastructure.DataBases.Forum.Managers.ForkManager
+@using global::Infrastructure.DataBases.Forum.Managers.PostManager
+@using global::Infrastructure.DataBases.Forum.Managers.TopicManager
+
 
 
 @namespace Net.Pf.Pages
