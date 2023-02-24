@@ -23,10 +23,8 @@ public static class ConfigurationPages
             options.Conventions.ConfigureFilter(new ValidatorPageFilter());
             options.Conventions.ConfigureFilter(new CounterPageFilter());
 
-            /*
+
             options.Conventions.AuthorizeFolder("/AdminPanel", UserClaims.Administrator.ToString());
-
-
             options.Conventions.AuthorizeFolder("/Infrastructure", UserClaims.Administrator.ToString());
 
             options.Conventions
@@ -34,7 +32,7 @@ public static class ConfigurationPages
             .AuthorizeFolder("/Bootstrap", UserClaims.Moderator.ToString())
             .AuthorizeFolder("/Bootstrap", UserClaims.SoftBootstrap.ToString())
             ;
-            */
+
 
 
 
