@@ -25,10 +25,10 @@ public class ForumForkConfiguration : IEntityTypeConfiguration<ForumFork>
         builder.HasIndex(x => x.Name).IsUnique();
 
 
-        builder.Property(x => x.Name).IsRequired();
-        builder.Property(x => x.Description).IsRequired();
+        builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
+        builder.Property(x => x.Description).IsRequired().HasMaxLength(255);
 
-        builder.HasMany(x => x.forumTopics).WithOne(x => x.forumFork)
+		builder.HasMany(x => x.forumTopics).WithOne(x => x.forumFork)
             .HasForeignKey(x => x.ForumForkId)
             //.OnDelete(DeleteBehavior.Cascade)
             ;
