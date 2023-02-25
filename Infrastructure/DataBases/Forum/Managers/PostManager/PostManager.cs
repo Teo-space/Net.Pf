@@ -13,22 +13,22 @@ internal record PostManager(ForumDbContext Context,
     : IPostManager
 {
 
-    public IReadOnlyList<ForumPost> GetPosts(Guid Id)
+    public IReadOnlyList<ForumPost> GetPosts(Guid TopicId)
     {
-        var Topic = GetById(Id);
+        var Topic = TopicManager.GetById(TopicId);
         if (Topic == default)
         {
             return new List<ForumPost>();
         }
 
-        return Context.Posts.Where(p => p.ForumTopicId == Id).ToList();
+        return Context.Posts.Where(p => p.ForumTopicId == TopicId).ToList();
     }
 
 
-    public ForumPost? GetById(Guid Id) => Context.Posts.Find(Id);
+    public ForumPost? GetById(Guid PostId) => Context.Posts.Find(PostId);
 
 
-    public bool Exists(Guid Id) => GetById(Id) != default;
+    public bool Exists(Guid PostId) => GetById(PostId) != default;
 
 
     public void Create(Guid TopicId, string Text)
