@@ -2,7 +2,7 @@
 
 namespace Infrastructure.DataBases.Forum.Managers.PostManager;
 
-internal interface IPostManager
+public interface IPostManager
 {
     public IReadOnlyList<ForumPost> GetPosts(Guid Id);
     public ForumPost? GetById(Guid Id);

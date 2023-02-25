@@ -5,7 +5,7 @@ using Infrastructure.DataBases.Forum.Models;
 namespace Infrastructure.DataBases.Forum.Managers.TopicManager;
 
 
-internal interface ITopicManager
+public interface ITopicManager
 {
     public IReadOnlyList<ForumTopic> GetTopics(Guid ForumForkId);
     public ForumTopic? GetById(Guid Id);
