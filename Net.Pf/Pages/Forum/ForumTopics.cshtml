@@ -1,32 +1,48 @@
 ﻿@page
 @model Net.Pf.Pages.Forum.ForumTopicsModel
-@{
-
-	//@Model.topicManager.GetTopics()
-}
-
 
 
 <div class="container">
-	<div class="row  ms-3 me-3">
-		<div class="col">
-			<h4>Topics:(@Model.Topics.Count())</h4>
-		</div>
-		<div class="col">
-			<a asp-page="ForumTopicCreate" asp-route-ForumForkId="@Model.ForumForkId" target="_blank">Create</a>
-		</div>
-	</div>
 
-	@if (Model.Topics.Count() > 0)
-	{
-		foreach (var t in Model.Topics)
-		{
-			<h6>@t.Name</h6>
-		}
-	}
+    <div class="row  m-2">
+
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-page="/Forum/Index">Home</a></li>
+                    <li class="breadcrumb-item active">@Model?.forumFork?.Name (@Model?.Topics.Count())</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="col col-sm-2 m-2">
+            <a class="btn active btn-outline-success" 
+            asp-page="ForumTopicCreate"
+               asp-route-ForumForkId="@Model?.ForumForkId" target="_blank">Create Topic</a>
+        </div>
+    </div>
+
+
+
+    @if (Model?.Topics.Count() > 0)
+    {
+        @foreach (var topic in Model.Topics)
+        {
+                <div class="p-1 mb-2 bg-light">
+                    <div class="m-1">
+                        <div class="row">
+                        <a class="nav-link link-dark fw-bold font-monospace" asp-page="ForumTopics" asp-route-ForumForkId="@topic.ForumForkId" target="_blank">
+                                <i class="bi bi-chat-right-text-fill m-1 me-2"></i>
+                            @topic.Name
+                        </a>
+                        </div>
+                        <div class="ms-3  text-muted font-monospace">
+                        <h7>@topic.ShortDescription</h7>
+                        </div>
+                    </div>
+                </div>
+        }
+    }
 
 </div>
-
-
-
 

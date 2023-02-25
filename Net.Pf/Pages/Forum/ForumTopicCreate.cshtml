@@ -1,11 +1,21 @@
 ﻿@page
 @model Net.Pf.Pages.Forum.ForumTopicCreateModel
-@{
-}
-<h4>@Model.Result</h4>
-<h4>@Model?.ForumForkId.ToString()</h4>
+
 
 <div class="container">
+	<div class="row  ms-3 me-3">
+		<div class="col">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a asp-page="/Forum/Index">Home</a></li>
+					<li class="breadcrumb-item"><a asp-page="/Forum/ForumTopics" asp-route-ForumForkId="@Model?.ForumForkId">Topics</a></li>
+					<li class="breadcrumb-item active">Create</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+
+
 
 	<form class="form-group" method="post" asp-antiforgery="true">
 		<div class="form-group m-2">
@@ -40,3 +50,16 @@
 	</form>
 
 </div>
+
+
+<h4>Result: @Model?.Result</h4>
+<h4>ForkId: @Model?.ForumForkId.ToString()</h4>
+
+
+
+
+
+
+
+
+

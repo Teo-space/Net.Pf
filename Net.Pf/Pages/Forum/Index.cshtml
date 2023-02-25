@@ -1,56 +1,46 @@
 ﻿@page
 @model Net.Pf.Pages.Forum.IndexModel
-@inject IForkManager forkManager
-
-@{
-	//forkManager.GetAll()
-
-	//forkManager.Create("Name", "Decsription");
-
-}
 
 
 <div class="container">
-    <div class="row  ms-3 me-3">
-        <div class="col">
-            <h4>Форумы</h4>
-        </div>
-        <div class="col">
-            <a class="nav-link text-muted font-monospace" asp-page="ForumForkCreate" target="_blank">Create</a>
-        </div>
-    </div>
-    
-    <div class="container m-2 p2">
-        <table class="table border-0 border-bottom-0 table-borderless" style="line-height: 1">
-            <thead class="table-primary" style="position: sticky;top: 0">
-                <tr>
-                    <th scope="col" class="text-dark font-monospace p-2">Раздел форума 1</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody style="max-height:30vh; line-height: 0.3">
-                @foreach (var fork in forkManager.GetAll())
-                {
-                    <tr>
-                        <th scope="row">
-                            <a class="nav-link text-muted font-monospace" asp-page="ForumTopics" asp-route-ForumForkId="@fork.ForumForkId" target="_blank">@fork.Name</a>
-                        </th>
-                        <td>Posts: 10</td>
-                        <td>Views: 300</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p class="nav-link text-dark font-monospace">@fork.Description</p>
-                        </td>
-                    </tr>
-                }
 
-            </tbody>
+    <div class="row  m-2">
 
-        </table>
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="col col-sm-2 m-2">
+            <a class="btn active btn-outline-success" asp-page="ForumForkCreate" target="_blank">Create Forum</a>
+        </div>
 
     </div>
+
+
+
+    @foreach (var fork in Model.forumForks)
+    {
+        <div class="p-1 mb-2 bg-light">
+            <div class="m-1">
+                <div class="row">
+                    <a class="nav-link link-dark fw-bold font-monospace" asp-page="ForumTopics" asp-route-ForumForkId="@fork.ForumForkId" target="_blank">
+                        <i class="bi bi-chat-right-text-fill m-1 me-2"></i>
+                        @fork.Name</a>
+                </div>
+                <div class="ms-3  text-muted font-monospace">
+                    <h7>@fork.Description</h7>
+                </div>
+            </div>
+        </div>
+    }
+
 
 </div>
+
+
+
 

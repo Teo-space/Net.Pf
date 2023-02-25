@@ -30,12 +30,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Site">
+
     <title>@AppName</title>
     <link rel="icon" href="/logo.png">
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Net.Pf.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Colors.css" />
+    <link rel="stylesheet" href="~/css/Colors.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/index.css" />
 
     <link rel="stylesheet" href=" https://use.fontawesome.com/releases/v5.0.6/css/all.css">
@@ -209,7 +211,7 @@
         string year = DateTime.Now.Year != 2023 ? @DateTime.Now.Year.ToString() : string.Empty;
     }
 
-    <footer class="border-top fixed-bottom">
+    <footer class="border-top fixed-bottom bg-light">
         <div class="container-fluid row ">
             <div class="col justify-content-start text-muted text-secondary font-Tangerine-20">&copy; 2023 @year - Teo</div>
         </div>

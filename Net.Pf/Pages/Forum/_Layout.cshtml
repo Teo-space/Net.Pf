@@ -14,12 +14,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Site">
+
     <title>@AppName</title>
-     <link rel="icon" href="/logo.png">
+    <link rel="icon" href="/logo.png">
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Net.Pf.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Colors.css" />
+
+    <link rel="stylesheet" href="~/css/Colors.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/index.css" />
 
     <link rel="stylesheet" href=" https://use.fontawesome.com/releases/v5.0.6/css/all.css">
@@ -29,7 +32,9 @@
 
 
 
-<body class="mh-100 h-100 w-100 mw-100 overflow-hidden">
+<body class="h-100 mh-100  vh-100 min-vh-100    w-100 mw-100 vw-100 min-vw-100
+bg-silver-25
+overflow-hidden">
 
     <header class="sticky-top">
         <nav class="container-fluid navbar navbar-expand-sm navbar-toggleable-sm
@@ -93,33 +98,13 @@
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
-    <!--Spacing Container-->
-    <div class="container-fluid mt-3 ml-0">
-
-        <!--Position Container-->
-        <div class="d-flex flex-row position-static border-1 border-dark">
-
-            <div class="col-sm-12" no-guttersrow overflow-auto ">
-
-                <div class="mh-100 mw-100 min-vh-100 overflow-auto  m-2">
-                    <main>
-                        <!--<div class="container-fluid m-2" style="max-height:84vh; max-width:164vh;">-->
-                        <div class="container-fluid" style="max-height:83vh; max-width:170vh;">
-                            @RenderBody()
-                        </div>
-                    </main>
-
-                </div>
-
-            </div>
-
-
-
+    <div class="position-static">
+        <div class="overflow-auto  m-1 mh-100 vh-100 min-vh-100">
+            <main>
+                @RenderBody()
+            </main>
         </div>
-
-
     </div>
-
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
@@ -127,7 +112,7 @@
         string year = DateTime.Now.Year != 2023 ? @DateTime.Now.Year.ToString() : string.Empty;
     }
 
-    <footer class="border-top fixed-bottom">
+    <footer class="border-top fixed-bottom bg-light">
         <div class="container-fluid row ">
             <div class="col justify-content-start text-muted text-secondary font-Tangerine-20">&copy; 2023 @year - Teo</div>
         </div>

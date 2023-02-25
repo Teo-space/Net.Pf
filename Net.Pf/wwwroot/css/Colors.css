@@ -117,6 +117,84 @@
 
 
 
+.bg-gray {
+	background-color: rgb(128, 128, 128, 1) !important;
+}
+.bg-gray-15 {
+	background-color: rgb(128, 128, 128, 0.15) !important;
+}
+.bg-gray-25 {
+	background-color: rgb(128, 128, 128, 0.25) !important;
+}
+.bg-gray-50 {
+	background-color: rgb(128, 128, 128, 0.50) !important;
+}
+.bg-gray-75 {
+	background-color: rgb(128, 128, 128, 0.75) !important;
+}
+
+
+
+
+
+
+
+.bg-silver {
+	background-color: rgb(192, 192, 192, 1) !important;
+}
+
+.bg-silver-15 {
+	background-color: rgb(192, 192, 192, 0.15) !important;
+}
+
+.bg-silver-25 {
+	background-color: rgb(192, 192, 192, 0.25) !important;
+}
+
+.bg-silver-50 {
+	background-color: rgb(192, 192, 192, 0.50) !important;
+}
+
+.bg-silver-75 {
+	background-color: rgb(192, 192, 192, 0.75) !important;
+}
+
+
+
+
+
+
+.bg-lightgray {
+	background-color: rgb(211, 211, 211, 1) !important;
+}
+
+.bg-lightgray-15 {
+	background-color: rgb(211, 211, 211, 0.15) !important;
+}
+
+.bg-lightgray-25 {
+	background-color: rgb(211, 211, 211, 0.25) !important;
+}
+
+.bg-lightgray-50 {
+	background-color: rgb(211, 211, 211, 0.50) !important;
+}
+
+.bg-lightgray-75 {
+	background-color: rgb(211, 211, 211, 0.75) !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
