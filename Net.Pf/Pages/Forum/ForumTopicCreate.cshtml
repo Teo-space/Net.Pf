@@ -1,19 +1,30 @@
 ﻿@page
-@model Net.Pf.Pages.Forum.ForumForkCreateModel
+@model Net.Pf.Pages.Forum.ForumTopicCreateModel
 @{
-	//@Html.ValidationMessageFor(m => m.command.Name)
-	//@Html.ValidationMessageFor(m => m.command.Description)
-	//<span asp-validation-for="command.Name" class="text-danger"></span>
-	//<span asp-validation-for="command.Description" class="text-danger"></span>
 }
+<h4>@Model.Result</h4>
+<h4>@Model?.ForumForkId.ToString()</h4>
 
 <div class="container">
+
 	<form class="form-group" method="post" asp-antiforgery="true">
+		<div class="form-group m-2">
+			<span asp-validation-for="command.ForumForkId" class="text-danger"></span>
+			<input type="text" class="form-control"
+				   asp-for="command.ForumForkId"
+				   value="@(Model?.ForumForkId.ToString() ?? "")" hidden>
+		</div>
+
 
 		<div class="form-group m-2">
 			<label asp-for="command.Name">Название</label>
 			<span asp-validation-for="command.Name" class="text-danger"></span>
 			<input type="text" class="form-control" asp-for="command.Name" value="@(Model?.command?.Name ?? "")">
+		</div>
+		<div class="form-group m-2">
+			<label asp-for="command.ShortDescription">Короткое описание</label>
+			<span asp-validation-for="command.ShortDescription" class="text-danger"></span>
+			<input type="text" class="form-control" asp-for="command.ShortDescription" value="@(Model?.command?.ShortDescription ?? "")">
 		</div>
 
 		<div class="form-group m-2">
@@ -21,6 +32,7 @@
 			<span asp-validation-for="command.Description" class="text-danger"></span>
 			<input type="text" class="form-control" asp-for="command.Description" value="@(Model?.command?.Description ?? "")">
 		</div>
+
 		<div class="form-group m-2">
 			<input type="submit" value="Создать" />
 		</div>
@@ -28,4 +40,3 @@
 	</form>
 
 </div>
-

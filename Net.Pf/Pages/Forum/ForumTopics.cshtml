@@ -5,5 +5,28 @@
 	//@Model.topicManager.GetTopics()
 }
 
-<h3>@Model.ForumForkId</h3>
+
+
+<div class="container">
+	<div class="row  ms-3 me-3">
+		<div class="col">
+			<h4>Topics:(@Model.Topics.Count())</h4>
+		</div>
+		<div class="col">
+			<a asp-page="ForumTopicCreate" asp-route-ForumForkId="@Model.ForumForkId" target="_blank">Create</a>
+		</div>
+	</div>
+
+	@if (Model.Topics.Count() > 0)
+	{
+		foreach (var t in Model.Topics)
+		{
+			<h6>@t.Name</h6>
+		}
+	}
+
+</div>
+
+
+
 

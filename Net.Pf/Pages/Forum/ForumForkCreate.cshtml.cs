@@ -6,9 +6,9 @@ namespace Net.Pf.Pages.Forum;
 public class ForumForkCreateModel : PageModel
 {
     private readonly IForkManager forkManager;
-		public ForumForkCreateModel(IForkManager forkManager) => this.forkManager = forkManager;
+	public ForumForkCreateModel(IForkManager forkManager) => this.forkManager = forkManager;
 
-		public record CreateForkCommand(string Name, string Description)
+	public record CreateForkCommand(string Name, string Description)
     {
         public class Validator : AbstractValidator<CreateForkCommand>
         {
@@ -19,7 +19,7 @@ public class ForumForkCreateModel : PageModel
             }
         }
 
-		}
+	}
     //[BindProperty]
     public CreateForkCommand command { get; set; }
 
@@ -29,7 +29,7 @@ public class ForumForkCreateModel : PageModel
         if(this.ModelState.IsValid)
         {
 				forkManager.Create(command.Name, command.Description);
-			}
+		}
     }
 
 
