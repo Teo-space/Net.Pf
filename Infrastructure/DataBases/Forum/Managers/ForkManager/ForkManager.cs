@@ -9,15 +9,15 @@ internal record ForkManager(ForumDbContext Context) : IForkManager
 {
     public IReadOnlyList<ForumFork> GetAll() => Context.Forks.ToList();
 
-    public ForumFork? GetById(Guid ForumForkId) => Context.Forks.Find(ForumForkId);
+    public ForumFork? GetById(Guid ForkId) => Context.Forks.Find(ForkId);
 
-    public bool Exists(Guid Id) => GetById(Id) != default;
+    public bool Exists(Guid ForkId) => GetById(ForkId) != default;
 
 
     public ForumFork Create(string Name, string Description)
     {
         ForumFork fork = new();
-        fork.Name = Name; ;
+        fork.Name = Name;
         fork.Description = Description;
 
         Context.Add(fork);
@@ -26,21 +26,21 @@ internal record ForkManager(ForumDbContext Context) : IForkManager
     }
 
 
-    public void Edit(Guid ForumForkId, string Name, string Description)
+    public void Edit(Guid ForkId, string Name, string Description)
     {
-        ForumFork fork = GetById(ForumForkId);
+        ForumFork fork = GetById(ForkId) ?? throw new InvalidOperationException($"Forum Fork {ForkId} not exists");
 
-        fork.Name = Name; ;
+        fork.Name = Name;
         fork.Description = Description;
 
         Context.SaveChanges();
     }
 
 
-    public void Delete(Guid ForumForkId)
+    public void Delete(Guid ForkId)
     {
-        ForumFork fork = GetById(ForumForkId);
-        Context.Forks.Remove(fork);
+        ForumFork fork = GetById(ForkId) ?? throw new InvalidOperationException($"Forum Fork {ForkId} not exists");
+		Context.Forks.Remove(fork);
         Context.SaveChanges();
     }
 
