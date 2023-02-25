@@ -7,7 +7,7 @@ namespace Infrastructure.DataBases.Forum.Managers.TopicManager;
 
 public interface ITopicManager
 {
-    public IReadOnlyList<ForumTopic> GetTopics(Guid ForumForkId);
+    public IReadOnlyList<ForumTopic> GetTopics(Guid ForkId);
     public ForumTopic? GetById(Guid Id);
     public bool Exists(Guid Id) => GetById(Id) != default;
 

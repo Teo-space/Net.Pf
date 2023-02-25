@@ -16,8 +16,8 @@ internal record TopicManager(ForumDbContext Context,
     : ITopicManager
 {
 
-    public IReadOnlyList<ForumTopic> GetTopics(Guid ForumForkId)
-        => Context.Topics.Where(topic => topic.ForumForkId == ForumForkId).ToList();
+    public IReadOnlyList<ForumTopic> GetTopics(Guid ForkId)
+        => Context.Topics.Where(topic => topic.ForumForkId == ForkId).ToList();
 
 
     public ForumTopic? GetById(Guid Id) => Context.Topics.Find(Id);
