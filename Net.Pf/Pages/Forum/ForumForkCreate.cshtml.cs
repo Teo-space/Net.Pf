@@ -1,33 +1,35 @@
 using Infrastructure.DataBases.Forum.Managers.ForkManager;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Net.Pf.Pages.Forum
+namespace Net.Pf.Pages.Forum;
+
+public class ForumForkCreateModel : PageModel
 {
-    public class ForumForkCreateModel : PageModel
+    private readonly IForkManager forkManager;
+		public ForumForkCreateModel(IForkManager forkManager) => this.forkManager = forkManager;
+
+		public record CreateForkCommand(string Name, string Description)
     {
-        private readonly IForkManager forkManager;
-
-		public ForumForkCreateModel(IForkManager forkManager)
+        public class Validator : AbstractValidator<CreateForkCommand>
         {
-            this.forkManager = forkManager;
+            public Validator()
+            {
+                RuleFor(x => x.Name).NotEmpty().MaximumLength(40);
+                RuleFor(x => x.Description).NotEmpty().MaximumLength(120);
+            }
         }
-		public void OnGet()
-		{
+
 		}
+    //[BindProperty]
+    public CreateForkCommand command { get; set; }
 
-
-		public record CreateForkCommand(string Name, string Description);
-        //[BindProperty]
-        public CreateForkCommand command { get; set; }
-
-        public void OnPost(CreateForkCommand command)
+    public void OnPost(CreateForkCommand command)
+    {
+        this.command = command;
+        if(this.ModelState.IsValid)
         {
-            this.command = command;
-            forkManager.Create(command.Name, command.Description);
-        }
-
-
+				forkManager.Create(command.Name, command.Description);
+			}
     }
 
 

@@ -20,7 +20,7 @@ public static class ConfigurationPages
 
         services.AddRazorPages(options =>
         {
-            options.Conventions.ConfigureFilter(new ValidatorPageFilter());
+            //options.Conventions.ConfigureFilter(new ValidatorPageFilter());
             options.Conventions.ConfigureFilter(new CounterPageFilter());
 
 

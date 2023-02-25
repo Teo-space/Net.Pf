@@ -1,4 +1,5 @@
 ﻿using Extensions.Configuration;
+using FluentValidation.AspNetCore;
 using Infrastructure.DataBases.Forum.DbContexts;
 using Infrastructure.DataBases.Forum.Managers.ForkManager;
 using Infrastructure.DataBases.Forum.Managers.PostManager;
@@ -15,8 +16,9 @@ public static class ExtensionsAddForum
         services.AddDbContext<ForumDbContext>(options =>
         {
             //options.UseSqlServer(connectionString)
-            options.UseInMemoryDatabase("ForumDbContext.db");
+            //options.UseInMemoryDatabase("ForumDbContext.db");
             //options.UseSqlite($"Data Source=Infrastructure/DataBases/Forum/Data/ForumDbContext.db");
+            options.UseSqlite($"Data Source=ForumDbContext.db");
         });
 
         services.AddUserAccessor();
@@ -24,7 +26,12 @@ public static class ExtensionsAddForum
         services.AddScoped<ITopicManager, TopicManager>();
         services.AddScoped<IForkManager, ForkManager>();
 
-        return services;
+
+		services.AddFluentValidationAutoValidation();
+		services.AddFluentValidationClientsideAdapters();
+		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+		return services;
     }
 
 

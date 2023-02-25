@@ -8,8 +8,18 @@
 	//forkManager.Create("Name", "Decsription");
 
 }
-<div class="container">
 
+
+<div class="container">
+    <div class="row  ms-3 me-3">
+        <div class="col">
+            <h4>Форумы</h4>
+        </div>
+        <div class="col">
+            <a asp-page="ForumForkCreate" target="_blank">Create</a>
+        </div>
+    </div>
+    
     <div class="container m-2 p2">
         <table class="table border-0 border-bottom-0 table-borderless" style="line-height: 0.8">
             <thead class="table-primary" style="position: sticky;top: 0">
@@ -23,7 +33,9 @@
                 @foreach (var fork in forkManager.GetAll())
                 {
                     <tr>
-                        <th scope="row">@fork.Name</th>
+                        <th scope="row">
+                            <a asp-page="ForumTopics" asp-route-ForumForkId="@fork.ForumForkId" target="_blank">@fork.Name</a>
+                        </th>
                         <td>Posts: 10</td>
                         <td>Views: 300</td>
                     </tr>
