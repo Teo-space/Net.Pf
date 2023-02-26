@@ -22,40 +22,55 @@ public class ForumPostsModel : PageModel
     }
 
 
+
     public Guid ForumTopicId { get; private set; }
     public ForumTopic? forumTopic { get; private set; }
+	public Guid ForumForkId { get; private set; }
+	public IReadOnlyList<ForumPost> Posts { get; private set; } = new List<ForumPost>();
 
-    public IReadOnlyList<ForumPost> Posts { get; private set; } = new List<ForumPost>();
 
-    public void OnGet(Guid ForumTopicId)
-    {
-        this.ForumTopicId = ForumTopicId;
-        this.forumTopic = topicManager.GetById(ForumTopicId);
-        this.Posts = postManager.GetPosts(ForumTopicId);
-    }
+    public void OnGet(Guid ForumTopicId) => Setup(ForumTopicId);
 
-    public record CreatePostCommand(string Text)
+	void Setup(Guid ForumTopicId)
+	{
+		this.ForumTopicId = ForumTopicId;
+		this.forumTopic = topicManager.GetById(ForumTopicId);
+        this.ForumForkId = this.forumTopic.ForumForkId;
+
+		this.Posts = postManager.GetPosts(ForumTopicId);
+	}
+
+
+
+
+
+	public CreatePostCommand createPostCommand { get; private set; }
+	public record CreatePostCommand(Guid TopicId, string Text)
     {
         public class Validator : AbstractValidator<CreatePostCommand>
         {
             public Validator() 
             {
-                RuleFor(x => x.Text).NotEmpty().MaximumLength(255);
+				RuleFor(x => x.TopicId).NotNull().NotEmpty();
+				RuleFor(x => x.Text).NotEmpty().MaximumLength(255);
             }
 		}
 
 	}
 
-    public CreatePostCommand createPostCommand { get; private set; }
-	public void OnPost(CreatePostCommand createPostCommand)
+	public async Task<ActionResult> OnPost(CreatePostCommand createPostCommand)
     {
-        this.createPostCommand = createPostCommand;
+        //this.createPostCommand = createPostCommand;
         if(this.ModelState.IsValid)
         {
+			postManager.Create(createPostCommand.TopicId, createPostCommand.Text);
+            //this.createPostCommand = default;
+			//return this.RedirectToPage(new { ForumTopicId = ForumTopicId });
+			Setup(createPostCommand.TopicId);
+		}
+		return Page();
+	}
 
-        }
-
-    }
 
 
 }

@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="~/Net.Pf.styles.css" asp-append-version="true" />
 
     <link rel="stylesheet" href="~/css/Colors.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Size.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/TextStyles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/index.css" />
 
     <link rel="stylesheet" href=" https://use.fontawesome.com/releases/v5.0.6/css/all.css">
@@ -38,6 +40,7 @@
 <body class="h-100 mh-100  vh-100 min-vh-100    w-100 mw-100 vw-100 min-vw-100
 bg-silver-25
 overflow-hidden">
+
 
     <header class="sticky-top">
         <nav class="container-fluid navbar navbar-expand-sm navbar-toggleable-sm
@@ -101,12 +104,12 @@ overflow-hidden">
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
-    <div class="position-static">
-        <div class="overflow-auto  m-1 mh-100 vh-100 min-vh-100">
-            <main>
+    <div class="overflow-scroll vh-90">
+        <main>
+            <div class="mb-5">
                 @RenderBody()
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->

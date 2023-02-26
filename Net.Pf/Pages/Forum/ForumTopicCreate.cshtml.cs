@@ -41,7 +41,7 @@ public class ForumTopicCreateModel : PageModel
 	}
 
 	public string Result = "";
-	public CreateTopicCommand? command { get; set; }
+	public CreateTopicCommand command { get; set; }
 
     public async Task<ActionResult> OnPost(CreateTopicCommand command)
 	{

@@ -15,7 +15,7 @@
 					</li>
 
 					<li class="breadcrumb-item active">
-						@Model?.forumTopic?.Name
+						@Model?.forumTopic?.Name (@Model?.Posts.Count())
 					</li>
 
 				</ol>
@@ -23,12 +23,49 @@
 		</div>
 	</div>
 
-    <div class="row  m-2">
 
-        <h4>ForumTopicId: @Model?.ForumTopicId</h4>
-        <h4>TopicName: @Model?.forumTopic?.Name</h4>
-        <h4>Posts.Count: @Model?.Posts.Count()</h4>
-    </div>
+
+	@if (@Model?.Posts.Count() > 0)
+	{
+		<div class="row">
+
+			@foreach (var post in @Model.Posts)
+			{
+				<div class="row m-1" style="min-height:12vh;">
+
+					<div class="col col-sm-3 m-1 bg-white rounded">
+						<div class="row m-2 overflow-hidden">
+							@post.CreatorUserName
+						</div>
+						<div class="row m-2">
+							ToDO: additional info
+						</div>
+					</div>
+
+					<div class="col m-1 bg-white rounded">
+						<div class="row m-1">
+							<small>At: @post.addedAt</small>
+						</div>
+						<div class="row m-1 text-muted font-monospace">
+							<span>@post.Text</span>
+						</div>
+					</div>
+					<div class="col col-sm-1 m-1 bg-white rounded">
+						<div class="row m-1">
+							<small>AdminOnly</small>
+						</div>
+						<div class="row m-1">
+							<small>Delete</small>
+						</div>
+					</div>
+
+				</div>
+
+			}
+
+		</div>
+	}
+
 
 
 	<div class="row">
@@ -38,6 +75,8 @@
 		</div>
 
 		<form class="form-group" method="post" asp-antiforgery="true">
+
+			<input type="text" asp-for="createPostCommand.TopicId" value="@(Model?.createPostCommand?.TopicId ?? Model?.ForumTopicId)" hidden>
 
 			<div class="form-group m-2">
 				<label asp-for="createPostCommand.Text">Ответить</label>
@@ -57,8 +96,8 @@
 	</div>
 
 
-</div>
 
+</div>
 
 
 
