@@ -33,27 +33,38 @@ internal record PostManager(ForumDbContext Context,
 
     public void Create(Guid TopicId, string Text)
     {
-        if (!TopicManager.Exists(TopicId))
-        {
-            throw new InvalidOperationException($"Forum Topic {TopicId} not exists");
-        }
+        var forumTopic = TopicManager.GetById(TopicId) ?? throw new InvalidOperationException($"Forum Topic {TopicId} not exists");
 
-        var post = new ForumPost();
-        post.Text = Text;
-        post.addedAt = DateTime.Now;
-        post.editedAt = DateTime.Now;
-        //Creator
-        post.CreatorUserId = userAccessor.UserId.NullCheck(nameof(userAccessor.UserId));
-        post.CreatorUserName = userAccessor.UserName.NullCheck(nameof(userAccessor.UserName));
-        //Parent
-        post.ForumTopicId = TopicId;
+		Guid UserId = userAccessor.UserId.NullCheck(nameof(userAccessor.UserId));
+		string UserName = userAccessor.UserName.NullCheck(nameof(userAccessor.UserName));
 
-        Context.Posts.Add(post);
-        Context.SaveChanges();
+		//Создать пост
+		{
+			var post = new ForumPost();
+			post.Text = Text;
+			post.addedAt = DateTime.Now;
+			post.editedAt = default;
+			//Creator
+			post.CreatorUserId = UserId;
+			post.CreatorUserName = UserName;
+			//Parent
+			post.ForumTopicId = TopicId;
+
+			Context.Posts.Add(post);
+		}
+		//пометить топик
+		{
+			forumTopic.LastReplied = DateTime.Now;
+			forumTopic.LastReplied_UserId = UserId;
+			forumTopic.LastReplied_UserName = UserName;
+			forumTopic.CountReplies += 1;
+		}
+
+		Context.SaveChanges();
     }
 
 
-    public void EditText(Guid PostId, string Text)
+	public void EditText(Guid PostId, string Text)
     {
         var post = GetById(PostId) ?? throw new InvalidOperationException($"Forum Post {PostId} not exists");
         post.Text = Text;
