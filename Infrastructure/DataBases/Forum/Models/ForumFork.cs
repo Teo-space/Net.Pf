@@ -13,7 +13,6 @@ public class ForumFork
     public List<ForumTopic> forumTopics { get; set; } = new();
 }
 
-//ForumTopic
 
 
 public class ForumForkConfiguration : IEntityTypeConfiguration<ForumFork>

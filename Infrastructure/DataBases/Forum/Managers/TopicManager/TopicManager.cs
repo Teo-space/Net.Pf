@@ -36,6 +36,7 @@ internal record TopicManager(ForumDbContext Context,
             throw new InvalidOperationException($"ForumFork {ForkId} not exists");
         }
 
+
         ForumTopic forumTopic = new();
         forumTopic.ForumForkId = ForkId;
 
