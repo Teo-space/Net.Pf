@@ -3,7 +3,9 @@ using Infrastructure.DataBases.Forum.Managers.TopicManager;
 using Infrastructure.DataBases.Forum.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 namespace Net.Pf.Pages.Forum;
+
 
 public class ForumTopicsModel : PageModel
 {

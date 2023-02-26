@@ -4,14 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Net.Pf.Extensions;
 
+
 namespace Net.Pf.Pages.Forum;
 
 
 public class ForumTopicCreateModel : PageModel
 {
 	public readonly ITopicManager topicManager;
-	public ForumTopicCreateModel(ITopicManager topicManager) 
-		=> this.topicManager = topicManager;
+	public ForumTopicCreateModel(ITopicManager topicManager)
+	{
+        this.topicManager = topicManager;
+    }
 
 	public Guid ForumForkId;
 	public void OnGet(Guid ForumForkId)
@@ -38,7 +41,7 @@ public class ForumTopicCreateModel : PageModel
 	}
 
 	public string Result = "";
-	public CreateTopicCommand command { get; set; }
+	public CreateTopicCommand? command { get; set; }
 
     public async Task<ActionResult> OnPost(CreateTopicCommand command)
 	{
