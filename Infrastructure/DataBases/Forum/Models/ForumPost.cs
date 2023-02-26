@@ -27,9 +27,12 @@ public class ForumPostConfiguration : IEntityTypeConfiguration<ForumPost>
     {
         builder.HasKey(x => x.ForumPostId);
 
-        builder.Property(x => x.Text).IsRequired();
+        builder.Property(x => x.Text).IsRequired().HasMaxLength(255);
+
+
         builder.Property(x => x.addedAt).HasColumnType(nameof(DateTime)).IsRequired();
         builder.Property(x => x.editedAt).HasColumnType(nameof(DateTime)).IsRequired();
+
 
         builder.Property(x => x.CreatorUserId).IsRequired();
         builder.Property(x => x.CreatorUserName).HasMaxLength(100).IsRequired();
