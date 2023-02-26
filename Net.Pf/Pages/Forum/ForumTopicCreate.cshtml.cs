@@ -1,6 +1,8 @@
 using Infrastructure.DataBases.Forum.Managers.TopicManager;
+using Infrastructure.DataBases.Forum.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Net.Pf.Extensions;
 
 namespace Net.Pf.Pages.Forum;
 
@@ -38,20 +40,19 @@ public class ForumTopicCreateModel : PageModel
 	public string Result = "";
 	public CreateTopicCommand command { get; set; }
 
-    //public async Task<ActionResult> OnPost(CreateTopicCommand command)
-    public  void OnPost(CreateTopicCommand command)
+    public async Task<ActionResult> OnPost(CreateTopicCommand command)
 	{
 		this.command = command;
 		if (this.ModelState.IsValid)
 		{
-			topicManager.Create(command.ForumForkId, command.Name, command.ShortDescription, command.Description);
+			var forumTopic = topicManager.Create(command.ForumForkId, command.Name, command.ShortDescription, command.Description);
 			Result = "Created";
-            //Redirect
+            return this.RedirectToPageByType<ForumPostsModel>(new { ForumTopicId = forumTopic.ForumTopicId });
         }
-		else
+        else
 		{
 			Result = "else";
-            //return RedirectToPage();
+            return Page();
         }
 	}
 

@@ -23,24 +23,23 @@
     </div>
 
 
-
     @if (Model?.Topics.Count() > 0)
     {
         @foreach (var topic in Model.Topics)
         {
-                <div class="p-1 mb-2 bg-light">
-                    <div class="m-1">
-                        <div class="row">
-                        <a class="nav-link link-dark fw-bold font-monospace" asp-page="ForumTopics" asp-route-ForumForkId="@topic.ForumForkId" target="_blank">
-                                <i class="bi bi-chat-right-text-fill m-1 me-2"></i>
+            <div class="p-1 mb-2 bg-light">
+                <div class="m-1">
+                    <div class="row">
+                        <a class="nav-link link-dark fw-bold font-monospace" asp-page="ForumPosts" asp-route-ForumTopicId="@topic.ForumTopicId">
+                            <i class="bi bi-chat-right-text-fill m-1 me-2"></i>
                             @topic.Name
                         </a>
-                        </div>
-                        <div class="ms-3  text-muted font-monospace">
-                        <h7>@topic.ShortDescription</h7>
-                        </div>
+                    </div>
+                    <div class="ms-3  text-muted font-monospace">
+                    <h7>@topic.ShortDescription</h7>
                     </div>
                 </div>
+            </div>
         }
     }
 

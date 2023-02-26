@@ -1,4 +1,6 @@
 ﻿@page
+@using Net.Pf.Extensions;
+@using Net.Pf.Pages.Forum;
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -9,12 +11,5 @@
         <h5>Name: @Model.userAccessor.User.ClaimName()</h5>
         <h5>Email: @Model.userAccessor.User.ClaimEmail()</h5>
 </div>
-
-
-
-
-
-
-
 
 

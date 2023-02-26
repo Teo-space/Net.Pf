@@ -1,6 +1,7 @@
 using Infrastructure.DataBases.Forum.Managers.ForkManager;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Net.Pf.Extensions;
 
 namespace Net.Pf.Pages.Forum;
 
@@ -30,9 +31,10 @@ public class ForumForkCreateModel : PageModel
         if(this.ModelState.IsValid)
         {
 			var forumFork = forkManager.Create(command.Name, command.Description);
-            return RedirectToPage("ForumTopics", new { ForumForkId = forumFork.ForumForkId });
+            //return RedirectToPage("/Forum/ForumTopicsModel", new { ForumForkId = forumFork.ForumForkId });
+            return this.RedirectToPageByType<ForumTopicsModel>(new { ForumForkId = forumFork.ForumForkId });
         }
-        return RedirectToPage();
+        return Page();
     }
 
 

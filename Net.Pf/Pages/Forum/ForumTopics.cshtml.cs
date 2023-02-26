@@ -26,7 +26,6 @@ public class ForumTopicsModel : PageModel
     public void OnGet(Guid ForumForkId)
     {
 		this.ForumForkId = ForumForkId;
-        //Topics = topicManager.GetTopics(ForumForkId);
         forumFork = this.forkManager.GetById(ForumForkId);
         Topics = this.forkManager.GetTopics(ForumForkId);
     }

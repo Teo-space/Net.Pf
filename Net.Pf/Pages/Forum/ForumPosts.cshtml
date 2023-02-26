@@ -1,4 +1,53 @@
 ﻿@page
 @model Net.Pf.Pages.Forum.ForumPostsModel
-@{
-}
+
+
+<div class="container">
+
+	<div class="row  ms-3 me-3">
+		<div class="col">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a asp-page="/Forum/Index">Home</a></li>
+
+					<li class="breadcrumb-item">
+						<a asp-page="/Forum/ForumTopics" asp-route-ForumForkId="@Model?.forumTopic?.ForumForkId">Topics</a>
+					</li>
+
+					<li class="breadcrumb-item active">
+						@Model?.forumTopic?.Name
+					</li>
+
+				</ol>
+			</nav>
+		</div>
+	</div>
+
+    <div class="row  m-2">
+
+        <h4>ForumTopicId: @Model?.ForumTopicId</h4>
+        <h4>TopicName: @Model?.forumTopic?.Name</h4>
+        <h4>Posts.Count: @Model?.Posts.Count()</h4>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
