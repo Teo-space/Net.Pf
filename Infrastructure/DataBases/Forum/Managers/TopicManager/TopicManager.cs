@@ -26,18 +26,18 @@ internal record TopicManager(ForumDbContext Context,
     public bool Exists(Guid Id) => GetById(Id) != default;
 
 
-    public ForumTopic Create(Guid ForumForkId,
+    public ForumTopic Create(Guid ForkId,
         string Name,
         string ShortDescription,
         string Description)
     {
-        if (!ForkManager.Exists(ForumForkId))
+        if (!ForkManager.Exists(ForkId))
         {
-            throw new InvalidOperationException($"ForumFork {ForumForkId} not exists");
+            throw new InvalidOperationException($"ForumFork {ForkId} not exists");
         }
 
         ForumTopic forumTopic = new();
-        forumTopic.ForumForkId = ForumForkId;
+        forumTopic.ForumForkId = ForkId;
 
         forumTopic.Name = Name;
         forumTopic.ShortDescription = ShortDescription;

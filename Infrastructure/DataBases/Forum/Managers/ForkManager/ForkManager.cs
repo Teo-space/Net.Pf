@@ -44,17 +44,5 @@ internal record ForkManager(ForumDbContext Context) : IForkManager
         Context.SaveChanges();
     }
 
-
-    public IReadOnlyList<ForumTopic> GetTopics(Guid ForkId)
-    {
-        var fork = GetById(ForkId) ?? throw new InvalidOperationException($"Forum Fork {ForkId} not exists");
-        if (fork == default)
-        {
-            return new List<ForumTopic>();
-        }
-        return Context.Topics.Where(topic => topic.ForumForkId == ForkId).ToList();
-    }
-
-
 }
 

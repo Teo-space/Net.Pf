@@ -13,8 +13,5 @@ public interface IForkManager
     public ForumFork Create(string Name, string Description);
     public void Edit(Guid ForumForkId, string Name, string Description);
     public void Delete(Guid ForumForkId);
-    public IReadOnlyList<ForumTopic> GetTopics(Guid ForumForkId);
-
-
 }
 

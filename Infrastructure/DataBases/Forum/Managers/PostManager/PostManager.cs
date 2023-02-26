@@ -44,7 +44,7 @@ internal record PostManager(ForumDbContext Context,
         post.editedAt = DateTime.Now;
         //Creator
         post.CreatorUserId = userAccessor.UserId.NullCheck(nameof(userAccessor.UserId));
-        post.CreatorUserName = userAccessor.UserName.NullCheck(userAccessor.UserName);
+        post.CreatorUserName = userAccessor.UserName.NullCheck(nameof(userAccessor.UserName));
         //Parent
         post.ForumTopicId = TopicId;
 
