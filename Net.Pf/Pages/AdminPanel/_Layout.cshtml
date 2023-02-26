@@ -1,7 +1,7 @@
 ﻿@inject IHostEnvironment hostEnvironment
 
 @{
-    DateTime starts = DateTime.Now;
+    DateTime startsAt = DateTime.Now;
 }
 
 @{
@@ -232,7 +232,7 @@
             <div class="col justify-content-start text-muted text-secondary font-Tangerine-20">&copy; 2023 @year - Teo</div>
 
             <div class="col col-1 offset-6 justify-content-end text-muted text-secondary font-Tangerine-20">
-                @((DateTime.Now - starts).TotalMicroseconds) m/s
+                @((DateTime.Now - startsAt).TotalMicroseconds) m/s
             </div>
 
         </div>

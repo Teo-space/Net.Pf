@@ -1,4 +1,7 @@
 ﻿@inject IHostEnvironment hostEnvironment
+@{
+    DateTime startsAt = DateTime.Now;
+}
 
 @{
     string AppName = "iTeo.space";
@@ -213,9 +216,15 @@
 
     <footer class="border-top fixed-bottom bg-light">
         <div class="container-fluid row ">
-            <div class="col justify-content-start text-muted text-secondary font-Tangerine-20">&copy; 2023 @year - Teo</div>
+            <div class="col justify-content-start text-muted text-secondary font-Tangerine-20">
+                &copy; 2023 @year - Teo
+            </div>
+            <div class="col col-1 offset-6 justify-content-end text-muted text-secondary font-Tangerine-20">
+                @((DateTime.Now - startsAt).TotalMicroseconds) m/s
+            </div>
         </div>
     </footer>
+
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
