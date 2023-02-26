@@ -29,7 +29,7 @@ public class ForumTopicsModel : PageModel
     {
 		this.ForumForkId = ForumForkId;
         forumFork = this.forkManager.GetById(ForumForkId);
-        Topics = this.forkManager.GetTopics(ForumForkId);
+        Topics = this.topicManager.GetTopics(ForumForkId);
     }
 
 

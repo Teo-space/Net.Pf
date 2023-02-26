@@ -34,6 +34,30 @@ public class ForumPostsModel : PageModel
         this.Posts = postManager.GetPosts(ForumTopicId);
     }
 
+    public record CreatePostCommand(string Text)
+    {
+        public class Validator : AbstractValidator<CreatePostCommand>
+        {
+            public Validator() 
+            {
+                RuleFor(x => x.Text).NotEmpty().MaximumLength(255);
+            }
+		}
+
+	}
+
+    public CreatePostCommand createPostCommand { get; private set; }
+	public void OnPost(CreatePostCommand createPostCommand)
+    {
+        this.createPostCommand = createPostCommand;
+        if(this.ModelState.IsValid)
+        {
+
+        }
+
+    }
+
+
 }
 
 
