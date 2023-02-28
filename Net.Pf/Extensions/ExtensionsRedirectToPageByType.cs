@@ -20,7 +20,9 @@ public static class ExtensionsRedirectToPageByType
     static string Path<TModel>() where TModel : PageModel => Path(typeof(TModel));
 
 
-    public static RedirectToPageResult RedirectToPageByType<TModel>(this PageModel model, object? routeValues)  where TModel : PageModel
+    public static RedirectToPageResult RedirectToPageByType<TModel>(this PageModel model, object? routeValues = default)  
+        
+        where TModel : PageModel
     {
         return model.RedirectToPage(Path<TModel>(), routeValues);
     }

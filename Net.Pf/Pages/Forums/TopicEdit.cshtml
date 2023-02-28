@@ -1,0 +1,77 @@
+﻿@page
+@model Net.Pf.Pages.Forums.EditTopicModel
+@{
+}
+
+
+<div class="container ">
+
+	<div class="m-3 p-3">
+
+		<div class="mb-5">
+
+			<div class="m-3 border-bottom border-1 row">
+
+				<div class="col h4">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a asp-page="/Forums/Index" aria-current="page">
+									Home
+								</a>
+							</li>
+							<li class="breadcrumb-item">
+								<a asp-page="/Forums/Index" aria-current="page">
+									Home
+								</a>
+							</li>
+							<li class="breadcrumb-item active" aria-current="page">Library</li>
+						</ol>
+					</nav>
+				</div>
+
+			</div>
+
+
+
+			<div class="container">
+
+				<form class="form-group" method="post" asp-antiforgery="true">
+
+					<input type="text" class="form-control" asp-for="command.TopicId" value="@Model?.command.TopicId" hidden>
+
+					<div class="form-group m-2">
+						<label asp-for="command.Name">Название</label>
+						<span asp-validation-for="command.Name" class="text-danger"></span>
+						<input type="text" class="form-control" asp-for="command.Name" value="@(Model?.command?.Name ?? "")">
+					</div>
+
+					<div class="form-group m-2">
+						<label asp-for="command.ShortDescription">Короткое описание</label>
+						<span asp-validation-for="command.ShortDescription" class="text-danger"></span>
+						<input type="text" class="form-control" asp-for="command.ShortDescription" value="@(Model?.command?.ShortDescription ?? "")">
+					</div>
+
+					<div class="form-group m-2">
+						<label asp-for="command.Description">Описание</label>
+						<span asp-validation-for="command.Description" class="text-danger"></span>
+						<input type="text" class="form-control" asp-for="command.Description" value="@(Model?.command?.Description ?? "")">
+					</div>
+
+					<div class="form-group m-2">
+						<input type="submit" value="Изменить" />
+					</div>
+
+				</form>
+
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+</div>
+
+

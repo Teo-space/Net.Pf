@@ -1,0 +1,111 @@
+﻿@page
+@model Net.Pf.Pages.Forums.TopicsModel
+
+
+
+<div class="container bg-white rounded rounded-3">
+
+    <div class="m-3 p-3">
+
+        <div class="mb-5">
+
+            <div class="m-3 border-bottom border-1 row">
+
+                <div class="col">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-page="/Forums/Index" d><h4>Home</h4></a>
+                         </li>
+                        <li class="breadcrumb-item">
+                            <h4 class="text-nowrap">@Model?.Forum?.Name</h4>
+                        </li>
+
+                    </ol>
+                </div>
+
+                <div class="col col-2">
+                    <a class="btn active btn-outline-info"
+                       asp-page="TopicCreate"
+                       asp-route-ForumId="@Model?.ForumId" 
+                       target="_blank">Create Topic</a>
+                </div>
+
+            </div>
+
+
+
+
+            @if (Model?.Topics.Count() > 0)
+            @foreach (var topic in Model.Topics)
+            {
+                <div class="m-2">
+                    <!--Форум-->
+                    <div class="row" style="min-height: 6vh">
+
+                        <div class="col">
+                            <div>
+                                <i class="bi bi-card-list"></i>
+                                <a class="link-info" asp-page="Posts" asp-route-TopicId="@topic.TopicId">@topic.Name</a>
+                            </div>
+                            <div>
+                                <small class="text-muted">
+                                    @topic.ShortDescription
+                                </small>
+                            </div>
+
+                        </div>
+
+                        <div class="col col-sm-1 row">
+                            <div class="row text-muted">
+                                <a class="link-info" target="_blank" 
+                                asp-page="TopicEdit"
+                                asp-all-route-data="@(topic.Adapt<Dictionary<string, string>>())">edit</a>
+                            </div>
+
+                            <div class="row text-muted text-center">
+                                <form class="form-group" method="post" asp-page="TopicDelete">
+                                    <input type="text" name="ForumId" value="@topic.ForumId" hidden>
+                                    <input type="text" name="TopicId" value="@topic.TopicId" hidden>
+                                    <button class="btn btn-link" type="submit">del</button>
+                                </form>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col col-sm-2 row">
+                            <div class="col">
+                                <div class="row text-muted">
+                                    <h5 class="text-center text-center">142</h5>
+                                </div>
+                                <div class="row text-muted text-center">
+                                    <small class="text-center">Topics</small>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="row text-muted">
+                                    <h5 class="text-center text-center">2384</h5>
+                                </div>
+                                <div class="row text-muted text-center">
+                                    <small class="text-center">Posts</small>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

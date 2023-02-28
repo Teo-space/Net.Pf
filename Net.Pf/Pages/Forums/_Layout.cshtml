@@ -6,22 +6,6 @@
 @{
     string AppName = "iTeo.space";
     int NavBarLogoSIze = 46;
-    bool SideBarEnabled = true;
-}
-
-@{
-    SideBar SideBar = new("Main");
-
-    SideBar
-    .AddSubmenu("Main")
-    .SetShow()
-    .Addlink("Link1", "/Index")
-    .Addlink("Link2", "/Index")
-    .Addlink("Link3", "/Index")
-    ;
-
-
-
 
 }
 
@@ -40,7 +24,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Net.Pf.styles.css" asp-append-version="true" />
+
     <link rel="stylesheet" href="~/css/Colors.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Size.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/TextStyles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/index.css" />
 
     <link rel="stylesheet" href=" https://use.fontawesome.com/releases/v5.0.6/css/all.css">
@@ -50,9 +37,9 @@
 
 
 
-<body class="mh-100 h-100 w-100 mw-100 overflow-hidden">
-
-    <mini-profiler />
+<body class="h-100 mh-100  vh-100 min-vh-100    w-100 mw-100 vw-100 min-vw-100
+bg-silver-25
+overflow-hidden">
 
 
     <header class="sticky-top">
@@ -61,9 +48,15 @@
 
             <div class="container-fluid">
 
-                <div class="row justify-content-start pt-1 pb-1 ps-3 pe-4">
+                @{
+                    var icons = new List<string> { "cat-spider.png", "cat-paw.png", "logo-cat-256.png", "logo.png" };
+                    Random r = new Random();
+                    var icon = icons[r.Next(0, icons.Count)];
+                }
+
+                <div class="row justify-content-start pt-1 pb-1 ps-2 pe-5">
                     <a class="navbar-brand  col m-0 p-0" asp-area="" asp-page="/Index">
-                        <img src="/logo.png" width=@NavBarLogoSIze height=@NavBarLogoSIze class="d-inline-block align-top m-0 p-0" alt="">
+                        <img src="/logo.png" class="d-inline-block align-top m-0 p-0" width=50 height="50" alt="">
                     </a>
                 </div>
 
@@ -96,9 +89,11 @@
                         <li class="nav-item">
                             <a class="nav-link navbar-text" asp-area="" asp-page="/Forum/Index">Forum</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link navbar-text" asp-area="" asp-page="/Forums/Index">Forums</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link navbar-text" asp-area="" asp-page="/Forums/Grouping">Forums.Grouping</a>
                         </li>
@@ -106,6 +101,7 @@
                         <li class="nav-item">
                             <a class="nav-link navbar-text" asp-area="" asp-page="/HelpDesk/Index">HelpDesk</a>
                         </li>
+
                     </ul>
 
                 </div>
@@ -121,99 +117,16 @@
 
     </header>
 
-
-
-
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
-    <!--Spacing Container-->
-    <div class="container-fluid mt-3 ml-0">
-
-        <!--Position Container-->
-        <div class="d-flex flex-row position-static border-1 border-dark">
-
-            @if (SideBarEnabled)
-            {
-                <!--Sidebar     border border-1 border-dark -->
-                <div class="col-sm-2">
-                    <nav class="nav position-fixed overflow-hidden col-sm-2  bg-light" style="max-height:86vh;">
-                        <div class="container-fluid overflow-scroll h-100 vh-100 mh-100 p-2">
-
-                            <h3>@SideBar.Name</h3>
-
-                            @foreach (var subMenu in SideBar.SubMenus())
-                            {
-                                var GeneratedId = $"{subMenu.GetHashCode()}";
-
-                                <div class="accordion  bg-light" id="SubmenuContainer_@GeneratedId">
-
-                                    <div class="accordion-item bg-light border-0">
-
-                                        <h2 class="accordion-header"
-                                    id="SubmenuHeading_@GeneratedId">
-                                            <button class="accordion-button bg-light text-black font-monospace "
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#SubmenuCollapse_@GeneratedId"
-                                            aria-expanded="true"
-                                            aria-controls="SubmenuCollapse @GeneratedId">
-                                                @subMenu.Name
-                                            </button>
-                                        </h2>
-
-                                        <div id="SubmenuCollapse_@GeneratedId"
-                                     class="accordion-collapse collapse @(subMenu.Show ? "show" : "")"
-                                     aria-labelledby="SubmenuHeading_@GeneratedId"
-                                     data-bs-parent="#SubmenuContainer_@GeneratedId">
-                                            <div class="accordion-body">
-                                                <ul class="flex-grow-1 text-dark">
-                                                    @foreach (var link in subMenu.GetLinks())
-                                                    {
-                                                        <li class="nav-item">
-                                                            <a class="text-dark text-decoration-none" asp-area="" asp-page="@link.Url">@link.Name</a>
-                                                        </li>
-                                                    }
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-
-
-                            <div class="container-fluid h-25">
-                            </div>
-
-                        </div>
-                    </nav>
-
-
-                </div>
-
-            }
-
-            <div class="@(SideBarEnabled ? "col-sm-10" : "col-sm-12") no-guttersrow overflow-auto ">
-
-                <div class="mh-100 mw-100 min-vh-100 overflow-auto  m-2">
-                    <main>
-                        <!--<div class="container-fluid m-2" style="max-height:84vh; max-width:164vh;">-->
-                        <div class="container-fluid" style="max-height:83vh; max-width:170vh;">
-                            @RenderBody()
-                        </div>
-                    </main>
-
-                </div>
-
+    <div class="overflow-scroll vh-90">
+        <main>
+            <div class="mb-5">
+                @RenderBody()
             </div>
-
-
-
-        </div>
-
-
+        </main>
     </div>
-
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
@@ -231,7 +144,6 @@
             </div>
         </div>
     </footer>
-
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------------------------->
@@ -239,6 +151,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/Scripts.js" asp-append-version="true"></script>
@@ -246,4 +159,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-

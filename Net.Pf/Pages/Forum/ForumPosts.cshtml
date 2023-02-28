@@ -2,7 +2,7 @@
 @model Net.Pf.Pages.Forum.ForumPostsModel
 
 
-<div class="container">
+<div class="container-fluid col-sm-11">
 
 	<div class="row  ms-3 me-3">
 		<div class="col">
@@ -25,11 +25,311 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="table table-borderless table-responsive card-1 p-4">
+		<thead>
+			<tr class="border-bottom">
+				<th>
+					<span class="ml-2">Time</span>
+				</th>
+				<th>
+					<span class="ml-2">Agent</span>
+				</th>
+				<th>
+					<span class="ml-2">Customer</span>
+				</th>
+				<th>
+					<span class="ml-2">Location</span>
+				</th>
+				<th>
+					<span class="ml-4">Action</span>
+				</th>
+			</tr>
+		</thead>
+
+
+
+		<tbody>
+			<tr class="border-bottom">
+				<td>
+					<div class="p-2 d-flex flex-row align-items-center mb-2">
+						<img src="https://i.imgur.com/ZSkeqnd.jpg" width="40" class="rounded-circle">
+						<div class="d-flex flex-column ml-2">
+							<span class="d-block font-weight-bold">Jennifer john</span>
+							<small class="text-muted">Jasmine Owner Reality group</small>
+						</div>
+					</div>
+
+				</td>
+
+				<td>
+					<div class="p-2">
+						<span class="font-weight-bold">Ammy Song</span>
+					</div>
+				</td>
+				<td>
+					<div class="p-2 d-flex flex-column">
+						<span>1 City point,#2A</span>
+						<span> Brooklyn,NY</span>
+					</div>
+				</td>
+				<td>
+					<div class="p-2 icons">
+						<i class="fa fa-phone text-danger"></i>
+						<i class="fa fa-adjust text-danger"></i>
+						<i class="fa fa-share"></i>
+					</div>
+				</td>
+			</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+		</tbody>
+	</table>
+
+
+
+
+
+	<table class="table table-borderless table-responsive card-1 p-4">
+		<thead>
+			<tr class="border-bottom">
+				<th>
+					<span class="ml-2">Time</span>
+				</th>
+
+			</tr>
+		</thead>
+
+
+
+		<tbody>
+			<tr class="border-bottom">
+				<td>
+					<div class="p-2 d-flex flex-row align-items-center mb-2">
+						<img src="https://i.imgur.com/ZSkeqnd.jpg" width="40" class="rounded-circle">
+
+						<div class="d-flex flex-column ml-2">
+							<span class="d-block font-weight-bold">Jennifer john</span>
+							<small class="text-muted">Jasmine Owner Reality group</small>
+						</div>
+
+					</div>
+
+				</td>
+
+				<td>
+					<div class="p-2">
+						<span class="font-weight-bold">Ammy Song</span>
+					</div>
+				</td>
+				<td>
+					<div class="p-2 d-flex flex-column">
+						<span>1 City point,#2A</span>
+						<span> Brooklyn,NY</span>
+					</div>
+				</td>
+				<td>
+					<div class="p-2 icons">
+						<i class="fa fa-phone text-danger"></i>
+						<i class="fa fa-adjust text-danger"></i>
+						<i class="fa fa-share"></i>
+					</div>
+				</td>
+			</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+		</tbody>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	@if (@Model?.Posts.Count() > 0)
+	{
+		<div class="row">
+			<table class="table" style="line-height: 0.7">
+				@foreach (var post in @Model.Posts.Take(0))
+				{
+					<thead class="table-primary" style="position: sticky;top: 0">
+						<tr>
+							<th scope="col">@post.CreatorUserName</th>
+							<th scope="col">@post.addedAt</th>
+						</tr>
+					</thead>
+
+					<tbody style="max-height:30vh;">
+						<tr>
+							<th scope="row">@post.Text</th>
+							<th scope="row">@post.Text</th>
+
+						</tr>
+						<tr>
+						</tr>
+					</tbody>
+					<tfoot>
+						XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+					</tfoot>
+
+				}
+
+
+
+			</table>
+
+
+
+
+		</div>
+	}
+
+
+
+
+
 	@if (@Model?.Posts.Count() > 0)
 	{
 		<div class="row">
 
-			@foreach (var post in @Model.Posts)
+			@foreach (var post in @Model.Posts.Take(0))
+			{
+				<div class="row m-2 bg-white rounded" style="min-height:13vh;">
+
+					<div class="row m-1 overflow-hidden " style="min-height:4vh;">
+						<div class="col col-sm-2 bg-blue">
+							@post.CreatorUserName
+						</div>
+						<div class="col bg-cyan">
+							@post.CreatorUserName
+						</div>
+						<div class="col col-sm-1 bg-blue">
+							Admin Only
+						</div>
+					</div>
+
+					<div class="row m-1 overflow-hidden " style="min-height:9vh;">
+						<div class="col col-sm-2 bg-blue">
+							@post.CreatorUserName
+						</div>
+						<div class="col bg-cyan">
+							@post.CreatorUserName
+						</div>
+						<div class="col col-sm-1 bg-blue">
+							delete
+						</div>
+					</div>
+
+
+				</div>
+
+			}
+
+		</div>
+	}
+
+
+
+	@if (@Model?.Posts.Count() > 0)
+	{
+		<div class="row">
+
+			@foreach (var post in @Model.Posts.Take(0))
+			{
+				<div class="row m-1" style="min-height:12vh;">
+
+					<div class="col col-sm-2 m-1 bg-white rounded">
+						<div class="row m-2 overflow-hidden">
+							@post.CreatorUserName
+						</div>
+						<div class="row m-2">
+							ToDO: additional info
+						</div>
+					</div>
+
+					<div class="col m-1 bg-white rounded">
+						<div class="row">
+
+							<div class="col m-1">
+								<div class="row m-1">
+									<small>At: @post.addedAt</small>
+								</div>
+								<div class="row m-1 text-muted font-monospace">
+									<span>@post.Text</span>
+									<span>@post.Text</span>
+									<span>@post.Text</span>
+									<span>@post.Text</span>
+									<span>@post.Text</span>
+									<span>@post.Text</span>
+								</div>
+							</div>
+
+							<div class="col col-sm-1 m-1">
+								<div class="row m-1">
+									<small>AdminOnly</small>
+								</div>
+								<div class="row m-1">
+									<small>Delete</small>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+			}
+
+		</div>
+	}
+
+	@if (@Model?.Posts.Count() > 0)
+	{
+		<div class="row">
+
+			@foreach (var post in @Model.Posts.Take(0))
 			{
 				<div class="row m-1" style="min-height:12vh;">
 
@@ -68,7 +368,7 @@
 
 
 
-	<div class="row">
+	<div class="container">
 
 		<div class="row text-center">
 			<h3>Ответ</h3>

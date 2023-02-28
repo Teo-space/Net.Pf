@@ -1,0 +1,103 @@
+﻿@page
+@model Net.Pf.Pages.Forums.IndexModel
+@{
+}
+
+
+
+<div class="container bg-white rounded rounded-3">
+
+    <div class="m-3 p-3">
+
+        <div class="mb-5">
+
+            @foreach (var group in Model.Forums)
+            {
+                <!--Раздел-->
+                <div class="m-3 border-bottom border-1">
+                    <h4 class="m-2">@group.Key</h4>
+                </div>
+
+
+                @foreach (var forum in group)
+                {
+                    <div class="m-2">
+                        <!--Форум-->
+                        <div class="row" style="min-height: 6vh">
+
+                            <div class="col">
+                                <div>
+                                    <i class="bi bi-card-list"></i>
+                                    <a asp-page="Topics" asp-route-ForumId="@forum.ForumId" class="link-info">@forum.Name</a>
+                                </div>
+                                <div>
+                                    <small class="text-muted">
+                                        @forum.Description
+                                    </small>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col col-sm-1 row">
+                                <div class="row text-muted">
+                                    <a class="link-info" target="_blank" asp-page="EditForum"
+                                        asp-all-route-data="@(forum.Adapt<Dictionary<string, string>>())">edit</a>
+                                </div>
+                                <div class="row text-muted">
+                                    <form class="form-group" method="post" asp-page="ForumDelete">
+                                        <input type="text" name="ForumId" value="@forum.ForumId" hidden>
+                                        <button class="btn btn-link" type="submit">del</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="col col-sm-2 row">
+
+                                <div class="col">
+                                    <div class="row text-muted">
+                                        <h5 class="text-center text-center">142</h5>
+                                    </div>
+                                    <div class="row text-muted text-center">
+                                        <small class="text-center">Topics</small>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col">
+                                    <div class="row text-muted">
+                                        <h5 class="text-center text-center">2384</h5>
+                                    </div>
+                                    <div class="row text-muted text-center">
+                                        <small class="text-center">Posts</small>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                }
+
+            }
+        </div>
+
+        <div class="">
+            <a class="btn active btn-outline-info" asp-page="ForumCreate" target="_blank">Create Forum</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+

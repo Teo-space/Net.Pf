@@ -65,8 +65,8 @@ public class ForumPostsModel : PageModel
         {
 			postManager.Create(createPostCommand.TopicId, createPostCommand.Text);
             //this.createPostCommand = default;
-			//return this.RedirectToPage(new { ForumTopicId = ForumTopicId });
-			Setup(createPostCommand.TopicId);
+			return this.RedirectToPage(new { ForumTopicId = createPostCommand.TopicId });
+			//Setup(createPostCommand.TopicId);
 		}
 		return Page();
 	}
