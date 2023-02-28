@@ -28,7 +28,18 @@
                             <div class="col">
                                 <div>
                                     <i class="bi bi-card-list"></i>
-                                    <a asp-page="Topics" asp-route-ForumId="@forum.ForumId" class="link-info">@forum.Name</a>
+                                    <a asp-page="Topics" asp-route-ForumId="@forum.ForumId" class="link-info">
+                                        @forum.Name
+                                    </a>
+
+
+                                    <a class="link-info" target="_blank" asp-page="EditForum" asp-all-route-data="@(forum.Adapt<Dictionary<string, string>>())">
+                                        <i class="bi bi-pencil-square fa-1x text-muted text-secondary"></i>
+                                    </a>
+                                    <a class="link-info" target="_blank" asp-page="ForumDelete" asp-route-ForumId="@forum.ForumId">
+                                        <i class="bi bi-file-excel fa-1x text-muted text-secondary"></i>
+                                    </a>
+
                                 </div>
                                 <div>
                                     <small class="text-muted">
@@ -37,19 +48,6 @@
                                 </div>
 
 
-                            </div>
-
-                            <div class="col col-sm-1 row">
-                                <div class="row text-muted">
-                                    <a class="link-info" target="_blank" asp-page="EditForum"
-                                        asp-all-route-data="@(forum.Adapt<Dictionary<string, string>>())">edit</a>
-                                </div>
-                                <div class="row text-muted">
-                                    <form class="form-group" method="post" asp-page="ForumDelete">
-                                        <input type="text" name="ForumId" value="@forum.ForumId" hidden>
-                                        <button class="btn btn-link" type="submit">del</button>
-                                    </form>
-                                </div>
                             </div>
 
                             <div class="col col-sm-2 row">
@@ -85,9 +83,7 @@
             }
         </div>
 
-        <div class="">
-            <a class="btn active btn-outline-info" asp-page="ForumCreate" target="_blank">Create Forum</a>
-        </div>
+
 
     </div>
 

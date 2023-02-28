@@ -14,12 +14,23 @@ namespace Net.Pf.Pages.Forums
             this.forumManager = forumManager;
         }
 
+
+        public async Task<ActionResult> OnGet(Guid ForumId)
+        {
+            await forumManager.Delete(ForumId);
+            return this.RedirectToPageByType<IndexModel>();
+        }
+
+
         public async Task<ActionResult> OnPost(Guid ForumId)
         {
             await forumManager.Delete(ForumId);
             return this.RedirectToPageByType<IndexModel>();
         }
 
+
     }
+
 }
+
 

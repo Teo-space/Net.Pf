@@ -5,34 +5,70 @@
 
 
 
-
-
-
 <div class="container">
 
-
-	<h3>@Model.Posts.Count()</h3>
-
-
-	@if (@Model.Posts.Count() > 0)
+	@for (int i = 0; i < 10; i++)
 	{
-		@foreach (var post in @Model.Posts)
-		{
-			<h3>@post.Text</h3>
-		}
+
+		<table class="table table-borderless table-responsive card-1 p-4">
+			<thead>
+				<tr class="border-bottom">
+					<th>
+						<span class="ml-2">2023-02-28 12:41:23</span>
+					</th>
+
+				</tr>
+			</thead>
+
+
+
+			<tbody>
+				<tr class="border-bottom">
+
+					<td>
+						<div class="p-2 d-flex flex-row align-items-center mb-2">
+							<img src="https://i.imgur.com/ZSkeqnd.jpg" width="40" class="rounded-circle">
+
+							<div class="d-flex flex-column ml-2">
+								<span class="d-block font-weight-bold">Jennifer john</span>
+								<small class="text-muted">Jasmine Owner Reality group</small>
+							</div>
+
+						</div>
+
+					</td>
+
+					<td>
+						<div class="p-2">
+							<span class="font-weight-bold">
+								Talk about sports, entertainment, music, movies, your favorite color, talk about enything.
+								Talk about sports, entertainment, music, movies, your favorite color, talk about enything.
+								Talk about sports, entertainment, music, movies, your favorite color, talk about enything.
+								Talk about sports, entertainment, music, movies, your favorite color, talk about enything.
+								Talk about sports, entertainment, music, movies, your favorite color, talk about enything.
+							</span>
+						</div>
+					</td>
+
+					<td>
+						<div class="p-2 icons">
+							<i class="bi bi-pencil-square fa-1x text-muted text-secondary"></i>
+							<i class="bi bi-file-excel fa-1x text-muted text-secondary"></i>
+						</div>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+
 	}
-
-
-
-
-
-
 
 
 	<div class="container">
 
 		<div class="row text-center">
-			<h3>Ответ</h3>
+			<h3>Answer</h3>
 		</div>
 
 		<form class="form-group" method="post" asp-antiforgery="true">
@@ -40,7 +76,7 @@
 			<input type="text" asp-for="createPostCommand.TopicId" value="@(Model?.createPostCommand?.TopicId ?? Model?.TopicId)" hidden>
 
 			<div class="form-group m-2">
-				<label asp-for="createPostCommand.Text">Ответить</label>
+				<label asp-for="createPostCommand.Text">Answer</label>
 				<span asp-validation-for="createPostCommand.Text" class="text-danger"></span>
 
 				<textarea class="form-control" rows="5" asp-for="createPostCommand.Text">
@@ -56,4 +92,20 @@
 
 	</div>
 
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -80,4 +80,8 @@
     <ProjectReference Include="..\Tools\Tools.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\News\" />
+  </ItemGroup>
+
 </Project>

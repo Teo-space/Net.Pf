@@ -46,6 +46,16 @@
                             <div>
                                 <i class="bi bi-card-list"></i>
                                 <a class="link-info" asp-page="Posts" asp-route-TopicId="@topic.TopicId">@topic.Name</a>
+
+                                    <a class="link-info" target="_blank" asp-page="TopicForum"
+                                        asp-all-route-data="@(topic.Adapt<Dictionary<string, string>>())">
+                                    <i class="bi bi-pencil-square fa-1x text-muted text-secondary"></i>
+                                </a>
+                                    <a class="link-info" target="_blank" asp-page="TopicDelete"
+                                        asp-route-ForumId="@topic.ForumId"
+                                        asp-route-TopicId="@topic.TopicId">
+                                    <i class="bi bi-file-excel fa-1x text-muted text-secondary"></i>
+                                </a>
                             </div>
                             <div>
                                 <small class="text-muted">
@@ -54,24 +64,6 @@
                             </div>
 
                         </div>
-
-                        <div class="col col-sm-1 row">
-                            <div class="row text-muted">
-                                <a class="link-info" target="_blank" 
-                                asp-page="TopicEdit"
-                                asp-all-route-data="@(topic.Adapt<Dictionary<string, string>>())">edit</a>
-                            </div>
-
-                            <div class="row text-muted text-center">
-                                <form class="form-group" method="post" asp-page="TopicDelete">
-                                    <input type="text" name="ForumId" value="@topic.ForumId" hidden>
-                                    <input type="text" name="TopicId" value="@topic.TopicId" hidden>
-                                    <button class="btn btn-link" type="submit">del</button>
-                                </form>
-                            </div>
-
-                        </div>
-
 
                         <div class="col col-sm-2 row">
                             <div class="col">

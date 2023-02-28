@@ -21,7 +21,11 @@
                     asp-page="/Account/Logout" 
 	                asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
 
-                <button type="submit" class="nav-link btn btn-outline-primary navbar-text">Logout</button>
+                <!--<button type="submit" class="nav-link btn btn-outline-primary navbar-text">Logout</button>-->
+
+                <button type="submit" class="nav-link btn navbar-text">
+                    <i class="bi bi-box-arrow-in-right fa-1x"></i>
+                </button>
             </form>
         </li>
     }
