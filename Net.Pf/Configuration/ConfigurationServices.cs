@@ -1,6 +1,5 @@
 ﻿using Extensions.Configuration;
 using FluentValidation.AspNetCore;
-using Infrastructure.DataBases.Forum.Configuration;
 using Infrastructure.Forums.Configuration;
 
 namespace Net.Pf.Configuration;
@@ -37,7 +36,6 @@ public static class ConfigurationServices
         services.AddSwaggerGen();
 
         services.AddUserAccessor();
-        services.AddForum();
         services.AddForums();
 
 

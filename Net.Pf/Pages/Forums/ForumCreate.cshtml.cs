@@ -1,11 +1,9 @@
-using Infrastructure.DataBases.Forum.Managers.ForkManager;
 using Infrastructure.Forums;
 using Infrastructure.Forums.Managers.ForumManager;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Net.Pf.Extensions;
-using Net.Pf.Pages.Forum;
-using static Net.Pf.Pages.Forum.ForumForkCreateModel;
+
 
 namespace Net.Pf.Pages.Forums;
 

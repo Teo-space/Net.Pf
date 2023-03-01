@@ -1,5 +1,4 @@
-﻿using Infrastructure.DataBases.Forum.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Forums.Models;
 
@@ -28,7 +27,7 @@ public class PostConfiguration : IEntityTypeConfiguration<Post>
     {
         builder.HasKey(x => x.PostId);
 
-        builder.Property(x => x.Text).IsRequired().HasMaxLength(255);
+        builder.Property(x => x.Text).IsRequired().HasMaxLength(1000);
 
 
         builder.Property(x => x.addedAt).HasColumnType(nameof(DateTime)).IsRequired();

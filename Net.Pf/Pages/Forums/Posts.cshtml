@@ -7,7 +7,7 @@
 
 <div class="container">
 
-	@for (int i = 0; i < 10; i++)
+	@foreach (var post in Model.Posts)
 	{
 
 		<table class="table table-borderless table-responsive card-1 p-4">
@@ -30,8 +30,8 @@
 							<img src="https://i.imgur.com/ZSkeqnd.jpg" width="40" class="rounded-circle">
 
 							<div class="d-flex flex-column ml-2">
-								<span class="d-block font-weight-bold">Jennifer john</span>
-								<small class="text-muted">Jasmine Owner Reality group</small>
+								<span class="d-block font-weight-bold">@post.CreatorUserName</span>
+								<small class="text-muted">Owner Reality group</small>
 							</div>
 
 						</div>
@@ -41,11 +41,7 @@
 					<td>
 						<div class="p-2">
 							<small>
-								Talk about sports, entertainment, music, movies, your favorite color, talk about enything.
-								Talk about sports, entertainment, music, movies, your favorite color, talk about enything.
-								Talk about sports, entertainment, music, movies, your favorite color, talk about enything.
-								Talk about sports, entertainment, music, movies, your favorite color, talk about enything.
-								Talk about sports, entertainment, music, movies, your favorite color, talk about enything.
+								@post.Text
 							</small>
 						</div>
 					</td>

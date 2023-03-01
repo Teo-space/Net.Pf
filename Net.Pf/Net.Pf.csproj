@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Forum\**" />
+    <Content Remove="Pages\Forum\**" />
+    <EmbeddedResource Remove="Pages\Forum\**" />
+    <None Remove="Pages\Forum\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
   </ItemGroup>
 

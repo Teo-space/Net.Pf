@@ -1,5 +1,4 @@
-﻿using Infrastructure.DataBases.Forum.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
 namespace Infrastructure.Forums.Models;

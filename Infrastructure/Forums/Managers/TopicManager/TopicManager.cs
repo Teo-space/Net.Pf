@@ -1,6 +1,4 @@
 ﻿using Extensions.Configuration;
-using Infrastructure.DataBases.Forum.Managers.ForkManager;
-using Infrastructure.DataBases.Forum.Models;
 using Infrastructure.Forums.DbContexts;
 using Infrastructure.Forums.Managers.ForumManager;
 using Infrastructure.Forums.Models;

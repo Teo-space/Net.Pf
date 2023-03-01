@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="DataBases\**" />
+    <EmbeddedResource Remove="DataBases\**" />
+    <None Remove="DataBases\**" />
+  </ItemGroup>
+
 
 
 
@@ -56,13 +62,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Extensions\Extensions.csproj" />
-	</ItemGroup>
-
-
-
-
-	<ItemGroup>
-	  <Folder Include="DataBases\Forum\Data\" />
 	</ItemGroup>
 	
 	

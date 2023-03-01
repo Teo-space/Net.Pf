@@ -38,7 +38,7 @@ namespace Net.Pf.Pages.Forums
 				public Validator()
 				{
 					RuleFor(x => x.TopicId).NotNull().NotEmpty();
-					RuleFor(x => x.Text).NotEmpty().MaximumLength(255);
+					RuleFor(x => x.Text).NotEmpty().MaximumLength(1000);
 				}
 			}
 
